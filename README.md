@@ -50,6 +50,8 @@ There you go you have your media Library which sources files from Drive.
 
 ### **📋 Notes** :
 
+- Does not support GOIndex and Maple's GDindex for now 
+
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
 
 - For Now, sub-folders of current folder aren't searched for files(Searching recursively would take a ton of time but is possible)
