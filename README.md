@@ -18,6 +18,10 @@ There you go you have your media Library which sources files from Drive.
 
 ### **📱 Screenshots** :
 
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Home.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails1.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 
 ### **🔥 Features** :
 
