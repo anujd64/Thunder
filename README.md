@@ -3,6 +3,9 @@
 An Android app to stream and download your media stored in Google Drive in an Awesome way !!
 
 (Just Movies for now)
+<p align="center">
+<a href="https://github.com/anujd64/Thunder/releases"><img src="https://img.shields.io/github/downloads/anujd64/Thunder/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
+</p>
 
 *Haven't finalized the name yet I'm open to suggestions
 
@@ -15,6 +18,7 @@ What you need to do is :
 3. Add the index link to movies folder link ( and username/password if you configured that for index ) in the settings tab, wait until it's done adding  
 
 There you go you have your media Library which sources files from Drive.
+(Probably will add video demo soon)
 
 ### **📱 Screenshots** :
 
@@ -71,8 +75,7 @@ There you go you have your media Library which sources files from Drive.
 		└───📂Subfolder <- this folder will not be scanned
 		
 
-Uses TMDB Api to fetch info.
-Dependencies:
+## Dependencies:
 - Room DB
 - Exoplayer
 - BlurView
@@ -87,5 +90,12 @@ Set the "TMDB_API_KEY" in Constants class to your key
 All contributions are welcome also request new features and report any bugs or issue at discord/telegram.
 [Discord](https://discord.gg/Y8h26bAm) & [Telegram](https://t.me/+qbLDmvEgC65lMWI1)
 
+## DISCLAIMER
+
+* Thunder only scrapes links from various drive indexes provided by user. 
+
+* Thunder or its developer doesn't host any of the contents, it uses TMDB Api to fetch info. 
+
+
 ![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=anujd64.Thunder)
-![GitHub all releases](https://img.shields.io/github/downloads/anujd64/Thunder/total)
+
