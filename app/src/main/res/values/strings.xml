@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Thunder</string>
+    <string name="save">Save</string>
+    <string name="enter_index_details">Enter Index Details</string>
+    <string name="index_link">Index Link</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="todo">TODO</string>
+    <string name="index_details">Index Details</string>
+    <string name="overview">Overview</string>
+    <string name="download">Download</string>
+    <string name="play">Play</string>
+    <string name="available_files">Link</string>
+</resources>

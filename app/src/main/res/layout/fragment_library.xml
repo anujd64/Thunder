@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.theflexproject.thunder.fragments.LibraryFragment">
+
+    <TextView
+        android:id="@+id/libraryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        android:fontFamily="@font/jost_medium"
+        android:text="Library"
+        android:textColor="@color/white"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclernewmovies"
+        android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/movie_item_recycler"/>
+
+
+</FrameLayout>

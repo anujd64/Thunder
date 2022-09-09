@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    tools:context="com.theflexproject.thunder.fragments.SearchFragment">
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        android:fontFamily="@font/jost_medium"
+        android:text="Search"
+        android:textColor="@color/white"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/search_button"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/jost_regular"
+        android:orientation="horizontal"
+        app:backgroundTint="#1C1C1C"
+        app:icon="@drawable/ic_search_fill0_wght300_grad0_opsz24"
+        app:iconGravity="textEnd"/>
+
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_toStartOf="@+id/search_button"
+        android:gravity="center_horizontal"
+        android:backgroundTint="#F93434"
+        android:fontFamily="@font/jost_regular"
+        android:inputType="textPersonName"
+        android:textColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/scrollview"
+        android:layout_marginTop="110dp"
+        android:paddingBottom="90dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclersearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/movie_item_recycler" />
+    </ScrollView>
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/scrollview2"-->
+<!--        android:layout_marginTop="110dp"-->
+<!--        android:paddingBottom="90dp">-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerGenres"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scrollbars="vertical"-->
+<!--            tools:listitem="@layout/genreforsearch"/>-->
+<!--    </ScrollView>-->
+
+
+
+</RelativeLayout>
