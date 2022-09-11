@@ -50,9 +50,9 @@ There you go you have your media Library which sources files from Drive.
 
 ### **📋 Notes** :
 
-- Currently video is only hardware decoded (I think) That's why HEVC content might not play at all
+- Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if files aren't added)
 
-- Does not support GOIndex and Maple's GDindex for now 
+- Currently video is only hardware decoded (I think) That's why HEVC content might not play at all
 
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
 
@@ -82,6 +82,8 @@ There you go you have your media Library which sources files from Drive.
 		
 
 ## Dependencies:
+- Glide
+- [FuzzyWuzzy](https://github.com/xdrop/fuzzywuzzy)
 - Room DB
 - Exoplayer
 - BlurView
