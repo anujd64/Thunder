@@ -50,6 +50,8 @@ There you go you have your media Library which sources files from Drive.
 
 ### **📋 Notes** :
 
+- Currently video is only hardware decoded (I think) That's why HEVC content might not play at all
+
 - Does not support GOIndex and Maple's GDindex for now 
 
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
@@ -75,6 +77,8 @@ There you go you have your media Library which sources files from Drive.
 		└───movie.returns.2069.2160p.whatever
 		└───movie.returns.again.?.2099.2160p.whatever
 		└───📂Subfolder <- this folder will not be scanned
+		
+- If you want to request a feature create an issue with request feature tag
 		
 
 ## Dependencies:
