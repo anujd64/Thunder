@@ -88,7 +88,9 @@ There you go you have your media Library which sources files from Drive.
 - Exoplayer
 - BlurView
 
-Special Thanks to [Google Drive Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index)
+Special Thanks to:  
+[Google Drive Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index)  
+[Bhadoo-Index-Scraper](https://github.com/sanjit-sinha/Bhadoo-Index-Scraper)
 
 To build your Own:
 Set the "TMDB_API_KEY" in Constants class to your key
