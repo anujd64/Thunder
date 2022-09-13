@@ -52,11 +52,11 @@ There you go you have your media Library which sources files from Drive.
 
 - Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if files aren't added)
 
-- Currently video is only hardware decoded (I think) That's why HEVC content might not play at all
+- Currently video is only hardware decoded (I think) That's why HEVC content might or might not play at all
 
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
 
-- For Now, sub-folders of current folder aren't searched for files(Searching recursively would take a ton of time but is possible)
+- Sub-folders of current folder are searched now but if the folder has too many sub folders it will take longer to scan (This feature is not perfect yet but works fine for 100 or so folders)
 
 - Naming of the files does matter it's better if your files are named like this
 	```
@@ -76,7 +76,7 @@ There you go you have your media Library which sources files from Drive.
 		└───movie.name.2049.2160p.garbage
 		└───movie.returns.2069.2160p.whatever
 		└───movie.returns.again.?.2099.2160p.whatever
-		└───📂Subfolder <- this folder will not be scanned
+		└───📂Subfolder <- this folder will scanned too
 		
 - If you want to request a feature create an issue with request feature tag
 		
