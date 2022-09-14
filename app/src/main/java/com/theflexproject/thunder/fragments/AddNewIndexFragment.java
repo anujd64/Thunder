@@ -1,5 +1,9 @@
 package com.theflexproject.thunder.fragments;
 
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGoIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestMapleIndex;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,23 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 
 import com.theflexproject.thunder.MainActivity;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.IndexLink;
-import com.theflexproject.thunder.utils.SendPostRequest;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 
 
-public class AddNewIndexFragment extends Fragment {
+public class AddNewIndexFragment extends BaseFragment {
 
     public static final String TAG = "ActionBottomDialog";
     private EditText indexLinkView;
@@ -32,6 +38,8 @@ public class AddNewIndexFragment extends Fragment {
     private Button save;
     private TextView refreshSuggest;
 
+    private RadioGroup radioIndexTypeGroup;
+    private RadioButton radioIndexTypeButton;
 
     public static AddNewIndexFragment newInstance(){
         return new AddNewIndexFragment();
@@ -46,9 +54,7 @@ public class AddNewIndexFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_add_index, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_add_index, container, false);
     }
 
 
@@ -59,6 +65,9 @@ public class AddNewIndexFragment extends Fragment {
         passWordView = view.findViewById(R.id.password);
         save = view.findViewById(R.id.save);
         refreshSuggest = view.findViewById(R.id.suggestRefresh);
+
+        radioIndexTypeGroup=(RadioGroup)mActivity.findViewById(R.id.rb_group);
+
 
 
 
@@ -71,18 +80,34 @@ public class AddNewIndexFragment extends Fragment {
                 indexLink.setLink(indexLinkView.getText().toString());
                 indexLink.setUsername(userNameView.getText().toString());
                 indexLink.setPassword(passWordView.getText().toString());
-                if(indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
-                    userNameView.setVisibility(View.GONE);
-                    passWordView.setVisibility(View.GONE);
-                }
 
+
+
+                int selectedId=radioIndexTypeGroup.getCheckedRadioButtonId();
+                radioIndexTypeButton= mActivity.findViewById(selectedId);
+                try{
+                    if(indexLink.getLink().length()<1){
+                        refreshSuggest.setVisibility(View.VISIBLE);
+                        refreshSuggest.setText("Enter Index Link");
+                    }
+
+                    if(radioIndexTypeButton ==null){
+                    refreshSuggest.setVisibility(View.VISIBLE);
+                    refreshSuggest.setText("Select Index Type");
+                    }
+                    if(indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
+                            userNameView.setVisibility(View.GONE);
+                            passWordView.setVisibility(View.GONE);
+                    }
+
+                    indexLink.setType(radioIndexTypeButton.getText().toString());
 
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
                             if(DatabaseClient.getInstance(MainActivity.mCtx).getAppDatabase().indexLinksDao().find(indexLink.getLink())!=null){
                                 //refresh instead
-                                getActivity().runOnUiThread(new Runnable() {
+                                mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         refreshSuggest.setVisibility(View.VISIBLE);
@@ -90,37 +115,47 @@ public class AddNewIndexFragment extends Fragment {
                                 });
                             }else {
                                 DatabaseClient.getInstance(MainActivity.mCtx).getAppDatabase().indexLinksDao().insert(indexLink);
-                                SendPostRequest snd = new SendPostRequest();
                                 save.setText("Adding");
-                                try {
-                                    if(indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
-                                        snd.postRequest(indexLink.getLink());
+                                switch(radioIndexTypeButton.getText().toString()){
+                                    //Case statements
+                                    case "GDIndex":
+                                        try {
+                                            postRequestGDIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
+                                    case "GoIndex":
+                                        try {
+                                            postRequestGoIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
+                                        } catch (IOException | JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
+                                    case "MapleIndex":
+                                        try {
+                                            postRequestMapleIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
                                     }
-                                    else {
-                                        snd.postRequest(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
-                                    }
-                                    save.setText("Done");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                save.setText("Done");
                             }
 
                         }
                     });
-                thread.start();
-                if(save.getText().equals("Done")){
-                    getActivity().getSupportFragmentManager().popBackStack();
+                    thread.start();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
                 }
 
-
-
+                if(save.getText().equals("Done")){
+                        mActivity.getSupportFragmentManager().popBackStack();
+                    }
 
             }
         });
-
-
-
-
     }
 
 }

@@ -8,7 +8,7 @@ import com.theflexproject.thunder.model.File;
 import com.theflexproject.thunder.model.IndexLink;
 import com.theflexproject.thunder.model.ResFormat;
 
-@Database(entities = {ResFormat.class, File.class, IndexLink.class}, version = 10)
+@Database(entities = {ResFormat.class, File.class, IndexLink.class}, version = 14)
 @TypeConverters({Converters.class})
 
 public abstract class AppDatabase extends RoomDatabase {

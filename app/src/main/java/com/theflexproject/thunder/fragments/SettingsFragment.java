@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,12 +22,7 @@ import com.theflexproject.thunder.model.IndexLink;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BaseFragment {
     List<IndexLink> list;
     private RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
@@ -64,7 +58,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void run() {
                 list = DatabaseClient.getInstance(mCtx).getAppDatabase().indexLinksDao().getAll();
-                                getActivity().runOnUiThread(new Runnable() {
+                                mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         recyclerView = view.findViewById(R.id.recyclerviewindexes);
@@ -85,16 +79,16 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AddNewIndexFragment nextFrag= new AddNewIndexFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containersettings, nextFrag).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.containersettings, nextFrag).addToBackStack(null).commit();
             }
         });
 
-        info = getActivity().findViewById(R.id.about);
+        info = mActivity.findViewById(R.id.about);
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AboutFragment fragment = new AboutFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containersettings,fragment).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.containersettings,fragment).addToBackStack(null).commit();
             }
         });
 

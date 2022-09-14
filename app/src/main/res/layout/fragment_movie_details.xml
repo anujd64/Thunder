@@ -74,59 +74,80 @@
 <!--            android:layout_margin="20dp"-->
 <!--            app:srcCompat="@drawable/dummyposter" />-->
 
-        <TextView
-            android:id="@+id/videoQuality"
-            style="@style/sizelabel"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/labels"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_text"
-            android:layout_toStartOf="@+id/year_text"
-            android:background="@drawable/rounded_corner_labels"
-            android:fontFamily="@font/jost_medium"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            tools:text="1080p" />
+            android:layout_below="@id/title_text">
 
-        <TextView
-            android:id="@+id/year_text"
-            style="@style/sizelabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_text"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rounded_corner_labels"
-            android:fontFamily="@font/jost_medium"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            tools:text="2099" />
+            <TextView
+                android:id="@+id/videoQuality"
+                style="@style/sizelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/year_text"
+                android:background="@drawable/rounded_corner_labels"
+                android:fontFamily="@font/jost_medium"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/year_text"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="1080p" />
 
-        <TextView
-            android:id="@+id/size"
-            style="@style/sizelabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_text"
-            android:layout_toEndOf="@+id/year_text"
-            android:background="@drawable/rounded_corner_labels"
-            android:fontFamily="@font/jost_medium"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            tools:text="32 GB" />
+            <TextView
+                android:id="@+id/year_text"
+                style="@style/sizelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/rounded_corner_labels"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/size"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/videoQuality"
+                tools:text="2099" />
+
+            <TextView
+                android:id="@+id/size"
+                style="@style/sizelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/year_text"
+                android:background="@drawable/rounded_corner_labels"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/year_text"
+                tools:text="32 GB" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/play"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@+id/size"
+            android:layout_below="@+id/labels"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/jost_regular"
             android:orientation="horizontal"
             android:padding="10dp"
             android:text="@string/play"
+            android:textColor="@color/white"
             app:backgroundTint="#1C1C1C"
             app:icon="@drawable/ic_baseline_play_arrow_24"
             app:iconGravity="textStart">
@@ -145,6 +166,7 @@
             app:icon="@drawable/ic_baseline_save_alt_24"
             app:iconGravity="textStart"
             android:text="@string/download"
+            android:textColor="@color/white"
             android:fontFamily="@font/jost_regular">
 
         </com.google.android.material.button.MaterialButton>

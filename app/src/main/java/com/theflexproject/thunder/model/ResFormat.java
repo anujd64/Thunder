@@ -13,6 +13,16 @@ public class ResFormat{
     public Data data;
     public String nextPageToken;
     public String curPageIndex;
+    public int code;
+
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public String getNextPageToken() {
         return nextPageToken;

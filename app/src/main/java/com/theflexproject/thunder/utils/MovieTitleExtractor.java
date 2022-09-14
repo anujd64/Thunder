@@ -16,13 +16,14 @@ public class MovieTitleExtractor {
         // singleton
     }
 
-    public static String getTitleYear(String matchString) {
+    public static String[] getTitleYear(String matchString) {
         Matcher m = NAME_YEAR_SCENE_PATTERN.matcher(matchString);
         if (m.matches()) {
             String name = StringUtils.replaceAll(m.group(1), " ", JUNK_PATTERN);
             name = ParseUtils.removeInnerAndOutterSeparatorJunk(name);
             String year = m.group(2);
-            return name;
+            String[] nameYear = {name,year};
+            return nameYear;
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.theflexproject.thunder.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,20 +21,21 @@ import com.theflexproject.thunder.model.File;
 
 import java.util.List;
 
-public class LibraryFragment extends Fragment {
+public class LibraryFragment extends BaseFragment {
 
     RecyclerView recyclerView;
     MovieRecyclerAdapterLibrary movieRecyclerAdapterLibrary;
     List<File> newmovieList;
     MovieRecyclerAdapter.OnItemClickListener listener;
+    public static Context context;
+
     public LibraryFragment() {
         // Required empty public constructor
     }
 
     public static LibraryFragment newInstance(String param1, String param2) {
-        LibraryFragment fragment = new LibraryFragment();
 
-        return fragment;
+        return new LibraryFragment();
     }
 
     @Override
@@ -48,8 +49,8 @@ public class LibraryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_library, container, false);
+        View view = inflater.inflate(R.layout.fragment_library, container, false);
+        return view;
     }
 
     @Override
@@ -72,12 +73,12 @@ public class LibraryFragment extends Fragment {
                         .getAppDatabase()
                         .fileDao()
                         .getAll();
-                getActivity().runOnUiThread(new Runnable() {
+                mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Log.i(" ", newmovieList.toString());
-                        recyclerView = getView().findViewById(R.id.recyclernewmovies);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                        recyclerView = mActivity.findViewById(R.id.recyclerLibrary);
+                        recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
                         recyclerView.setHasFixedSize(true);
                         movieRecyclerAdapterLibrary = new MovieRecyclerAdapterLibrary(getContext(),newmovieList,listener);
                         recyclerView.setAdapter(movieRecyclerAdapterLibrary);
@@ -93,8 +94,8 @@ public class LibraryFragment extends Fragment {
         listener = new MovieRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName(),1);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
+                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
     }

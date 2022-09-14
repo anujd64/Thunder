@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.theflexproject.thunder.Constants;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.model.File;
 import com.theflexproject.thunder.utils.sizetoReadablesize;
-import com.theflexproject.thunder.Constants;
 
 import java.util.List;
 

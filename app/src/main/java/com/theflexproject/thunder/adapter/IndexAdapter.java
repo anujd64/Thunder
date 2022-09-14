@@ -1,5 +1,9 @@
 package com.theflexproject.thunder.adapter;
 
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGoIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestMapleIndex;
+
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -13,9 +17,10 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theflexproject.thunder.R;
-import com.theflexproject.thunder.utils.SendPostRequest;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.IndexLink;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +29,6 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
 
     private Context mCtx;
     private List<IndexLink> indexLinkList;
-
 
 
     public IndexAdapter(Context mCtx, List<IndexLink> indexLinkList) {
@@ -44,6 +48,8 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
         holder.textViewLink.setText(t.getLink());
         holder.textViewUsername.setText(t.getUsername());
         holder.textViewPassword.setText(t.getPassword());
+
+
 
         if(t.getUsername().length()>0 && t.getPassword().length()>0){
             holder.textViewUsername.setVisibility(View.VISIBLE);
@@ -101,16 +107,23 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void run() {
-                    SendPostRequest snd = new SendPostRequest();
                     try {
                         DatabaseClient.getInstance(null).getAppDatabase().fileDao().deleteAllFromthisIndex(textViewLink.getText().toString());
-                        if(textViewUsername.getText().toString().length()<1 && textViewUsername.toString().length()<1){
-                            snd.postRequest(textViewLink.getText().toString());
+                        String link = textViewLink.getText().toString();
+                        IndexLink indexLink =DatabaseClient.getInstance(null).getAppDatabase().indexLinksDao().find(link);
+                        switch (indexLink.getType()) {
+                            case "GDIndex":
+                                postRequestGDIndex(textViewLink.getText().toString(), textViewUsername.getText().toString(), textViewPassword.getText().toString());
+                                break;
+                            case "GoIndex":
+                                postRequestGoIndex(textViewLink.getText().toString(), textViewUsername.getText().toString(), textViewPassword.getText().toString());
+
+                                break;
+                            case "MapleIndex":
+                                postRequestMapleIndex(textViewLink.getText().toString(), textViewUsername.getText().toString(), textViewPassword.getText().toString());
+                                break;
                         }
-                        else {
-                            snd.postRequest(textViewLink.getText().toString(),textViewUsername.getText().toString(), textViewPassword.getText().toString());
-                        }
-                    } catch (IOException e) {
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }

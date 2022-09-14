@@ -10,7 +10,6 @@ public class MovieQualityExtractor {
         if(Pattern.compile(Pattern.quote("HDR"), Pattern.CASE_INSENSITIVE).matcher(name).find() && name.contains("1080")) return "1080p HDR";
 
         if(Pattern.compile(Pattern.quote("Dolby Vision"), Pattern.CASE_INSENSITIVE).matcher(name).find() ||
-                Pattern.compile(Pattern.quote("DV"), Pattern.CASE_INSENSITIVE).matcher(name).find() ||
                 Pattern.compile(Pattern.quote("DVSUX"), Pattern.CASE_INSENSITIVE).matcher(name).find()) return "Dolby Vision";
 
         if(name.contains("2160")) return "2160p";
