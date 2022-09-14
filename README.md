@@ -23,9 +23,9 @@ There you go you have your media Library which sources files from Drive.
 ### **📱 Screenshots** :
 
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Home1.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails1.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails1.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 
 ### **🔥 Features** :
 
@@ -52,22 +52,22 @@ There you go you have your media Library which sources files from Drive.
 
 - Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if files aren't added)
 
-- Currently video is only hardware decoded (I think) That's why HEVC content might or might not play at all
+- Currently video is only hardware decoded (I think) That's why HEVC content may or nay not play at all
 
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
 
-- Sub-folders of current folder are searched now but if the folder has too many sub folders it will take longer to scan (This feature is not perfect yet but works fine for 100 or so folders)
+- Sub-folders of current folder are searched now but if the folder has too many sub folders it will take longer to scan
+
+- Even if your files aren't correctly named there is an alternative algorithm which might just extract necessary info
+
+- Media files with no TMDB info are also shown in the library
+
+- Rarely some files may be mislabled if there is another movie of same name on TMDB
 
 - Naming of the files does matter it's better if your files are named like this
 	```
 	movie.2049.2160p.whatever
 	movie.returns.2099.2160p.whatever
-
-- Even if your files aren't correctly named there is an alternative algorithm which might just extract necessary info.
-
-- Media files with no TMDB info are also shown in the library.
-
-- Rarely some files might be mislabled if there is another movie of same name on TMDB.
 
 - Ideally your folder should contain movie files only like
 
@@ -76,7 +76,7 @@ There you go you have your media Library which sources files from Drive.
 		└───movie.name.2049.2160p.garbage
 		└───movie.returns.2069.2160p.whatever
 		└───movie.returns.again.?.2099.2160p.whatever
-		└───📂Subfolder <- this folder will scanned too
+		└───📂Subfolder <- this folder will be scanned too
 		
 - If you want to request a feature create an issue with request feature tag
 		
