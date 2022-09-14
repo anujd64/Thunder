@@ -279,7 +279,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void showControls() {
-        debugRootView.setVisibility(View.VISIBLE);
+
     }
 
     private void showToast(int messageId) {
@@ -307,7 +307,6 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
                 player.seekToDefaultPosition();
                 player.prepare();
             } else {
-
                 showControls();
             }
         }

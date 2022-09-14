@@ -23,7 +23,7 @@ public class MovieTitleExtractor2 {
     }
 
 
-     public static String getTitle2(String input) {
+     public static String[] getTitle2(String input) {
         String name = input;
 
         // extract the last year from the string
@@ -61,7 +61,8 @@ public class MovieTitleExtractor2 {
         name = cutOffBeforeFirstMatch(name, GARBAGE_LOWERCASE);
 
         name = name.trim();
-        return name;
+        String[] nameYear2 ={name,year};
+        return nameYear2;
     }
 
     // Common garbage in movies names to determine where the garbage starts in the name

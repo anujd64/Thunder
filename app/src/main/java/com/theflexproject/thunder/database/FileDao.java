@@ -14,11 +14,8 @@ public interface FileDao {
     @Query("SELECT * FROM File")
     List<File> getAll();
 
-    @Query("SELECT * FROM file WHERE title LIKE :name")
-    File getbyName(String name);
-
-    @Query("SELECT * FROM file WHERE name LIKE '%' || :fileName || '%'")
-    List<File> getSearchQuery(String fileName);
+    @Query("SELECT * FROM file WHERE name LIKE '%' || :string || '%' OR title like '%' || :string || '%' OR urlString like '%' || :string || '%' or overview like '%' || :string || '%'")
+    List<File> getSearchQuery(String string);
 
     @Query("SELECT * FROM file WHERE name LIKE :fileName")
     File getByFileName(String fileName);

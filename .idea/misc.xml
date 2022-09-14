@@ -56,13 +56,13 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_styled_player_view.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_styled_settings_list.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_about.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index2.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_first.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_library.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_library.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_main.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_details.xml" value="0.264" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_details.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_second.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_settings.xml" value="0.23008849557522124" />
@@ -72,7 +72,7 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/item_feed_header.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_banner.xml" value="0.2375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_layout.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_library.xml" value="0.536" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_library.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_recycler.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/my_activity_player.xml" value="0.2375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/player_controller.xml" value="0.1" />

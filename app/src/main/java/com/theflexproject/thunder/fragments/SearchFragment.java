@@ -3,17 +3,18 @@ package com.theflexproject.thunder.fragments;
 import static com.theflexproject.thunder.MainActivity.mCtx;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,9 +25,11 @@ import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.File;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseFragment {
     RecyclerView recyclerView;
     RecyclerView recyclerViewGenres;
     List<Integer> genreList;
@@ -34,7 +37,7 @@ public class SearchFragment extends Fragment {
     List<File> newmovieList;
     MovieRecyclerAdapter.OnItemClickListener listener;
 
-    TextView searchBox;
+    EditText searchBox;
     Button search;
     ScrollView scrollview;
 
@@ -67,6 +70,9 @@ public class SearchFragment extends Fragment {
         searchBox = view.findViewById(R.id.search_input);
         search = view.findViewById(R.id.search_button);
         scrollview= view.findViewById(R.id.scrollview);
+        recyclerView = mActivity.findViewById(R.id.recyclersearch);
+        scrollview.setVisibility(View.VISIBLE);
+        showSearchResults();
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,40 +86,59 @@ public class SearchFragment extends Fragment {
 
     void showSearchResults(){
         setOnClickListner();
+        try{
+            searchBox.addTextChangedListener(
+                    new TextWatcher() {
+                        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                scrollview.setVisibility(View.VISIBLE);
-            }
-        });
+                        private Timer timer = new Timer();
+                        private final long DELAY = 500; // milliseconds
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(" ", "in thread");
-                newmovieList = DatabaseClient
-                        .getInstance(mCtx)
-                        .getAppDatabase()
-                        .fileDao()
-                        .getSearchQuery(searchBox.getText().toString());
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i(" ", newmovieList.toString());
-                        recyclerView = getView().findViewById(R.id.recyclersearch);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-                        recyclerView.setHasFixedSize(true);
-                        movieRecyclerAdapterLibrary = new MovieRecyclerAdapterLibrary(getContext(),newmovieList,listener);
-                        recyclerView.setAdapter(movieRecyclerAdapterLibrary);
-                        movieRecyclerAdapterLibrary.notifyDataSetChanged();
+                        @Override
+                        public void afterTextChanged(final Editable s) {
+                            timer.cancel();
+                            timer = new Timer();
+                            timer.schedule(
+                                    new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            Thread thread = new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Log.i(" ", "in thread");
+                                                    newmovieList = DatabaseClient
+                                                            .getInstance(mCtx)
+                                                            .getAppDatabase()
+                                                            .fileDao()
+                                                            .getSearchQuery(searchBox.getText().toString());
+                                                    mActivity.runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Log.i(" ", newmovieList.toString());
+                                                            recyclerView.setLayoutManager(new GridLayoutManager(mActivity , 3));
+                                                            recyclerView.setHasFixedSize(true);
+                                                            movieRecyclerAdapterLibrary = new MovieRecyclerAdapterLibrary(mActivity,newmovieList,listener);
+                                                            recyclerView.setAdapter(movieRecyclerAdapterLibrary);
+                                                            movieRecyclerAdapterLibrary.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                                }});
+                                            thread.start();
+                                        }
+                                    },
+                                    DELAY
+                            );
+                        }
                     }
-                });
-            }});
-        thread.start();
+            );
+        }catch (Exception e){
+            Log.i(e.toString(),"Exception");
+        }
 
     }
 
+    /** To-Do */
     void showbyGenre(){
 //        Thread thread = new Thread(new Runnable() {
 //            @Override
@@ -144,8 +169,8 @@ public class SearchFragment extends Fragment {
         listener = new MovieRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName(),1);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
+                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
     }

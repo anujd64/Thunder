@@ -61,17 +61,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indexlink" />
 
+    <RadioGroup
+        android:id="@+id/rb_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <RadioButton
+            android:id="@+id/rb_gd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:text="GDIndex"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rb_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:text="GoIndex"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rb_maple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:text="MapleIndex"
+            android:textColor="@color/white" />
+
+    </RadioGroup>
+
     <EditText
         android:id="@+id/indexlink"
         android:layout_width="275dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/rb_group"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#FFFF2020"
         android:ems="10"
         android:hint="@string/index_link"
@@ -81,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/rb_group" />
 
     <TextView
         android:id="@+id/textView2"
@@ -94,11 +133,12 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="60dp"
-        android:textColor="@color/white"
         android:text="@string/enter_index_details"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/save"
@@ -113,8 +153,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="40dp"
-        android:text="@string/save"
         android:background="@drawable/rounded_corner_labels"
+        android:text="@string/save"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"

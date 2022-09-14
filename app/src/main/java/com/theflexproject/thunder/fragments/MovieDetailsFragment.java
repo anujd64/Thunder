@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.theflexproject.thunder.R;
@@ -31,9 +30,8 @@ import com.theflexproject.thunder.player.PlayerActivity;
 import com.theflexproject.thunder.utils.MovieQualityExtractor;
 import com.theflexproject.thunder.utils.sizetoReadablesize;
 
-public class MovieDetailsFragment extends Fragment{
-    String movieTitle;
-    int flag;
+public class MovieDetailsFragment extends BaseFragment{
+    String movieFileName;
     TextView titleText;
     TextView yearText;
     TextView size;
@@ -48,19 +46,14 @@ public class MovieDetailsFragment extends Fragment{
     public MovieDetailsFragment() {
         // Required empty public constructor
     }
-    public MovieDetailsFragment(String title){
-        movieTitle=title;
+    public MovieDetailsFragment(String name){
+        movieFileName =name;
     }
-    public MovieDetailsFragment(String title, int flag){
-        // if object created using this constructor then get file details
-        movieTitle=title;
-        this.flag =flag;
-    }
+
 
     public static MovieDetailsFragment newInstance(String param1, String param2) {
-        MovieDetailsFragment fragment = new MovieDetailsFragment();
 
-        return fragment;
+        return new MovieDetailsFragment();
     }
 
 
@@ -93,30 +86,27 @@ public class MovieDetailsFragment extends Fragment{
         play = view.findViewById(R.id.play);
         download = view.findViewById(R.id.download);
 
-        if (flag == 1) {
-            loadDetailsFile();
-        }else {
-            loadDetails();
-        }
-
-
+        loadDetails();
         //Play video
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DatabaseClient.getInstance(getContext()).getAppDatabase().fileDao().updatePlayed(movieDetails.getName());
+                        }
+                    });
+                    thread.start();
 
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        DatabaseClient.getInstance(getContext()).getAppDatabase().fileDao().updatePlayed(movieDetails.getName());
-                    }
-                });
-                thread.start();
-
-                Intent in = new Intent(getActivity(), PlayerActivity.class);
-                in.putExtra("url",movieDetails.getUrlstring());
-                startActivity(in);
-                Toast.makeText(getContext(),"Play",Toast.LENGTH_LONG).show();
+                    Intent in = new Intent(getActivity(), PlayerActivity.class);
+                    in.putExtra("url",movieDetails.getUrlstring());
+                    startActivity(in);
+                    Toast.makeText(getContext(),"Play",Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -124,7 +114,7 @@ public class MovieDetailsFragment extends Fragment{
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DownloadManager manager = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+                DownloadManager manager = (DownloadManager) mActivity.getSystemService(DOWNLOAD_SERVICE);
                 Uri uri = Uri.parse(movieDetails.getUrlstring());
                 DownloadManager.Request request = new DownloadManager.Request(uri);
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
@@ -137,76 +127,47 @@ public class MovieDetailsFragment extends Fragment{
     }
 
     void loadDetails(){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(" ", "in thread");
-                movieDetails = DatabaseClient
-                        .getInstance(mCtx)
-                        .getAppDatabase()
-                        .fileDao()
-                        .getbyName(movieTitle);
-                Log.i("details ", movieDetails.toString());
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        titleText.setText(movieDetails.getTitle());
-                        String year = movieDetails.getRelease_date();
-                        yearText.setText(year.substring(0,year.indexOf('-')));
-                        videoQuality.setText(MovieQualityExtractor.extractQualtiy(movieDetails.getName()));
-                        size.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(movieDetails.getSize())));
-                        overview.setText(movieDetails.getOverview());
-                        listOfFiles.setText(movieDetails.getUrlstring());
-                        Glide.with(getContext())
-                                .load(TMDB_IMAGE_BASE_URL+movieDetails.getPoster_path())
-                                .placeholder(new ColorDrawable(Color.BLACK))
-                                .into(poster);
-                    }
-                });
-            }});
-        thread.start();
+       try {
+           Thread thread = new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   movieDetails = DatabaseClient
+                           .getInstance(mCtx)
+                           .getAppDatabase()
+                           .fileDao()
+                           .getByFileName(movieFileName);
+
+                   Log.i("title",movieDetails.toString());
+                   mActivity.runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           if(movieDetails.getTitle()!=null){
+                               titleText.setText(movieDetails.getTitle());
+                           }else {
+                               titleText.setText(movieDetails.getName());
+                               titleText.setTextSize(25);
+                               yearText.setText("N/A");
+                           }
+                           String year = movieDetails.getRelease_date();
+                           if(movieDetails.getRelease_date()!=null && movieDetails.getRelease_date().length()>1) {yearText.setText(year.substring(0,year.indexOf('-')));}else {yearText.setText("N/A");}
+                           if(movieDetails.getOverview()!=null){overview.setText(movieDetails.getOverview());}
+                           if(movieDetails.getPoster_path()!=null) {
+                               Glide.with(mActivity)
+                                       .load(TMDB_IMAGE_BASE_URL + movieDetails.getPoster_path())
+                                       .placeholder(new ColorDrawable(Color.BLACK))
+                                       .into(poster);
+                           }
+                           String quality = MovieQualityExtractor.extractQualtiy(movieDetails.getName());
+                           if(quality!=null){
+                               videoQuality.setText(quality);
+                           }
+                           size.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(movieDetails.getSize())));
+                           listOfFiles.setText(movieDetails.getUrlstring());
+                       }
+                   });
+               }});
+           thread.start();
+       }catch (NullPointerException exception){Log.i("Error",exception.toString());}
     }
-
-
-    private void loadDetailsFile() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(" ", "in thread");
-                movieDetails = DatabaseClient
-                        .getInstance(mCtx)
-                        .getAppDatabase()
-                        .fileDao()
-                        .getByFileName(movieTitle);
-                Log.i("details ", movieDetails.toString());
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if(movieDetails.getTitle()!=null){
-                            titleText.setText(movieDetails.getTitle());
-                            String year = movieDetails.getRelease_date();
-                            yearText.setText(year.substring(0,year.indexOf('-')));
-                            overview.setText(movieDetails.getOverview());
-                            Glide.with(getContext())
-                                    .load(TMDB_IMAGE_BASE_URL+movieDetails.getPoster_path())
-                                    .placeholder(new ColorDrawable(Color.BLACK))
-                                    .into(poster);
-                        }else {
-                            titleText.setText(movieDetails.getName());
-                            titleText.setTextSize(25);
-                            yearText.setText("N/A");
-                        }
-                        videoQuality.setText(MovieQualityExtractor.extractQualtiy(movieDetails.getName()));
-                        size.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(movieDetails.getSize())));
-                        listOfFiles.setText(movieDetails.getUrlstring());
-
-                    }
-                });
-            }});
-        thread.start();
-    }
-
-
 
 }
