@@ -1,12 +1,9 @@
 package com.theflexproject.thunder.fragments;
 
-import static com.theflexproject.thunder.MainActivity.mCtx;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,18 +19,16 @@ import com.theflexproject.thunder.model.IndexLink;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class SettingsFragment extends BaseFragment {
+public class ManageIndexesFragment extends BaseFragment{
     List<IndexLink> list;
     private RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
-    ImageButton info;
-
-    public SettingsFragment() {
+    public ManageIndexesFragment() {
         // Required empty public constructor
     }
 
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
+    public static ManageIndexesFragment newInstance(String param1, String param2) {
+        ManageIndexesFragment fragment = new ManageIndexesFragment();
         Bundle args = new Bundle();
 
         return fragment;
@@ -48,7 +43,7 @@ public class SettingsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_manage_indexes , container, false);
     }
 
     @Override
@@ -57,14 +52,14 @@ public class SettingsFragment extends BaseFragment {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                list = DatabaseClient.getInstance(mCtx).getAppDatabase().indexLinksDao().getAll();
+                list = DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().getAll();
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         recyclerView = view.findViewById(R.id.recyclerviewindexes);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                                         recyclerView.setHasFixedSize(true);
-                                        IndexAdapter indexAdapter = new IndexAdapter(mCtx,list);
+                                        IndexAdapter indexAdapter = new IndexAdapter(mActivity,list);
                                         recyclerView.setAdapter(indexAdapter);
 
                                     }
@@ -83,18 +78,8 @@ public class SettingsFragment extends BaseFragment {
             }
         });
 
-        info = mActivity.findViewById(R.id.about);
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AboutFragment fragment = new AboutFragment();
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.containersettings,fragment).addToBackStack(null).commit();
-            }
-        });
-
-
-
-
-
     }
+
+
+
 }

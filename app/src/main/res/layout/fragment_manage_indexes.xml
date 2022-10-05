@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/containersettings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.theflexproject.thunder.fragments.SettingsFragment">
+    tools:context="com.theflexproject.thunder.fragments.ManageIndexesFragment">
 
     <TextView
-        android:id="@+id/libraryTitle"
+        android:id="@+id/SettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/jost_medium"
-        android:text="Settings"
+        android:text="Indexes"
         android:textColor="@color/white"
         android:textSize="25sp" />
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:id="@+id/about"
-        android:background="#00000000"
-        android:src="@drawable/ic_baseline_info_24" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewindexes"
@@ -41,12 +34,15 @@
         android:scrollbars="horizontal"
         tools:listitem="@layout/activity_recycler_view_layout" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|right"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="100dp"
         android:backgroundTint="#FE2222"
         android:clickable="true"
@@ -57,4 +53,4 @@
         tools:ignore="RtlHardcoded" />
 
 
-</FrameLayout>
+</RelativeLayout>

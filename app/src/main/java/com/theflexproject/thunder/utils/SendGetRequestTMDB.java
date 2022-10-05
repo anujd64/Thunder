@@ -239,6 +239,7 @@ public class SendGetRequestTMDB {
                         file.setPopularity(tmdbResponse.results.get(finalIndex).getPopularity());
                         file.setPoster_path(tmdbResponse.results.get(finalIndex).getPoster_path());
                         file.setRelease_date(tmdbResponse.results.get(finalIndex).getRelease_date());
+
                         Log.i("sendGet: " , tmdbResponse.results.get(finalIndex).toString());
                     }
                 } catch (JsonSyntaxException | NoSuchElementException elementException) {

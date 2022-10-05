@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +30,9 @@ public class MovieRecyclerAdapterLibrary extends RecyclerView.Adapter<MovieRecyc
 
     Context context;
     List<File> movieList;
-    private MovieRecyclerAdapter.OnItemClickListener listener;
-    public MovieRecyclerAdapterLibrary(Context context, List<File> movieList, MovieRecyclerAdapter.OnItemClickListener listener) {
+    private MovieRecyclerAdapterLibrary.OnItemClickListener listener;
+
+    public MovieRecyclerAdapterLibrary(Context context, List<File> movieList, MovieRecyclerAdapterLibrary.OnItemClickListener listener) {
         this.context = context;
         this.movieList = movieList;
         this.listener= listener;
@@ -53,11 +56,15 @@ public class MovieRecyclerAdapterLibrary extends RecyclerView.Adapter<MovieRecyc
                     .into(holder.poster);
         }else{
             holder.name.setText(movieList.get(position).getName());
+            Glide.with(context).clear(holder.poster);
         }
         holder.textSize.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(movieList.get(position).getSize())));
 
+        setAnimation(holder.itemView,position);
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -79,11 +86,18 @@ public class MovieRecyclerAdapterLibrary extends RecyclerView.Adapter<MovieRecyc
             itemView.setOnClickListener(this);
         }
 
-
-
         @Override
         public void onClick(View v) {
             listener.onClick(v,getAbsoluteAdapterPosition());
         }
+    }
+    public interface OnItemClickListener {
+        public void onClick(View view, int position);
+    }
+
+
+    private void setAnimation(View itemView , int position){
+        Animation popIn = AnimationUtils.loadAnimation(context,R.anim.pop_in);
+        itemView.startAnimation(popIn);
     }
 }

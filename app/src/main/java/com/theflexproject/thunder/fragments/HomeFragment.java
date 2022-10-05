@@ -1,7 +1,5 @@
 package com.theflexproject.thunder.fragments;
 
-import static com.theflexproject.thunder.MainActivity.mCtx;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +57,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -86,7 +83,7 @@ public class HomeFragment extends BaseFragment {
             public void run() {
                 Log.i(" ", "in thread");
                 bannerList = DatabaseClient
-                        .getInstance(mCtx)
+                        .getInstance(mActivity)
                         .getAppDatabase()
                         .fileDao()
                         .getrecentlyadded();
@@ -113,7 +110,7 @@ public class HomeFragment extends BaseFragment {
             public void run() {
                 Log.i(" ", "in thread");
                 newmovieList = DatabaseClient
-                        .getInstance(mCtx)
+                        .getInstance(mActivity)
                         .getAppDatabase()
                         .fileDao()
                         .getrecentreleases();
@@ -144,7 +141,7 @@ public class HomeFragment extends BaseFragment {
             public void run() {
                 Log.i(" ", "in thread");
                 topRatedList = DatabaseClient
-                        .getInstance(mCtx)
+                        .getInstance(mActivity)
                         .getAppDatabase()
                         .fileDao()
                         .getTopRated();
@@ -178,7 +175,7 @@ public class HomeFragment extends BaseFragment {
             public void run() {
                 Log.i(" ", "in thread");
                 lastPlayedList = DatabaseClient
-                        .getInstance(mCtx)
+                        .getInstance(mActivity)
                         .getAppDatabase()
                         .fileDao()
                         .getPlayed();
@@ -214,28 +211,36 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View view, int position) {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
         listener2 = new BannerRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(bannerList.get(position).getName());
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
         listener3 = new MovieRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(topRatedList.get(position).getName());
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
         listener4 = new MovieRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(lastPlayedList.get(position).getName());
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                mActivity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
     }

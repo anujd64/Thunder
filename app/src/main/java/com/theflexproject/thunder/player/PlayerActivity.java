@@ -5,15 +5,15 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.theflexproject.thunder.R;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -30,6 +30,7 @@ import com.google.android.exoplayer2.ui.StyledPlayerControlView;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.util.EventLogger;
+import com.theflexproject.thunder.R;
 
 public class PlayerActivity extends AppCompatActivity implements View.OnClickListener, StyledPlayerView.ControllerVisibilityListener {
 
@@ -52,6 +53,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private int startItemIndex;
     private long startPosition;
 
+    private ImageButton buttonAspectRatio;
     int uiOptions;
     View decorView;
     @Override
@@ -91,9 +93,6 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
             trackSelectionParameters = new TrackSelectionParameters.Builder(/* context= */ this).build();
             clearStartPosition();
         }
-
-
-
 
 }
 
@@ -204,6 +203,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
             Intent intent = getIntent();
             String urlString = intent.getStringExtra("url");
             Uri uri = Uri.parse(urlString);
+            Log.i("Inside Player",uri.toString());
             mediaItem = MediaItem.fromUri(uri);
 
             ExoPlayer.Builder playerBuilder =
@@ -289,7 +289,6 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
-
 
     private class PlayerEventListener implements Player.Listener {
 

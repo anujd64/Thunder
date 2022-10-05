@@ -27,6 +27,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
     Context context;
     List<File> movieList;
     private OnItemClickListener listener;
+
     public MovieRecyclerAdapter(Context context, List<File> movieList,OnItemClickListener listener) {
         this.context = context;
         this.movieList = movieList;
@@ -59,13 +60,10 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
         return (movieList==null)?0:movieList.size();
     }
 
-    public interface OnItemClickListener {
-        public void onClick(View view, int position);
-    }
-
     public class MovieRecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView name;
+
         ImageView poster;
         public MovieRecyclerHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,10 +73,13 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
         }
 
 
-
         @Override
         public void onClick(View v) {
             listener.onClick(v,getAbsoluteAdapterPosition());
         }
+
+    }
+    public interface OnItemClickListener {
+        public void onClick(View view, int position);
     }
 }

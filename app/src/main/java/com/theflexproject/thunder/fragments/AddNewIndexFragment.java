@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.theflexproject.thunder.MainActivity;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.IndexLink;
@@ -105,7 +104,7 @@ public class AddNewIndexFragment extends BaseFragment {
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            if(DatabaseClient.getInstance(MainActivity.mCtx).getAppDatabase().indexLinksDao().find(indexLink.getLink())!=null){
+                            if(DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().find(indexLink.getLink())!=null){
                                 //refresh instead
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
@@ -114,7 +113,7 @@ public class AddNewIndexFragment extends BaseFragment {
                                     }
                                 });
                             }else {
-                                DatabaseClient.getInstance(MainActivity.mCtx).getAppDatabase().indexLinksDao().insert(indexLink);
+                                DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().insert(indexLink);
                                 save.setText("Adding");
                                 switch(radioIndexTypeButton.getText().toString()){
                                     //Case statements

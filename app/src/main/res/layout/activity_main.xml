@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:animateLayoutChanges="true"
     tools:context="com.theflexproject.thunder.MainActivity">
 
     <FrameLayout
@@ -14,7 +15,7 @@
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="8dp"

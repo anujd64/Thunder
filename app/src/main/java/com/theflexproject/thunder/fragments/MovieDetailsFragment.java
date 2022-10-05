@@ -2,14 +2,16 @@ package com.theflexproject.thunder.fragments;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static com.theflexproject.thunder.Constants.TMDB_IMAGE_BASE_URL;
-import static com.theflexproject.thunder.MainActivity.mCtx;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class MovieDetailsFragment extends BaseFragment{
     TextView listOfFiles;
     Button play;
     Button download;
+    Button externalPlayer;
     ImageView poster;
     File movieDetails;
 
@@ -74,6 +77,13 @@ public class MovieDetailsFragment extends BaseFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initWidgets(view);
+        loadDetails();
+        setMyOnClickLiseners();
+
+    }
+
+    private void initWidgets(View view) {
         titleText = view.findViewById(R.id.title_text);
         yearText = view.findViewById(R.id.year_text);
         videoQuality = view.findViewById(R.id.videoQuality);
@@ -81,49 +91,22 @@ public class MovieDetailsFragment extends BaseFragment{
         overview = view.findViewById(R.id.overviewdesc);
         listOfFiles = view.findViewById(R.id.listoffiles);
         poster = view.findViewById(R.id.moviePosterInDetails);
+        DisplayMetrics displayMetrics = mActivity.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        if(dpWidth < 600f){poster.setScaleType(ImageView.ScaleType.CENTER_CROP);}
+        else{poster.setScaleType(ImageView.ScaleType.CENTER_INSIDE);}
+
+
 //        backdrop = view.findViewById(R.id.backdrop);
 
         play = view.findViewById(R.id.play);
         download = view.findViewById(R.id.download);
+        externalPlayer = view.findViewById(R.id.externalPlayer);
 
-        loadDetails();
-        //Play video
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            DatabaseClient.getInstance(getContext()).getAppDatabase().fileDao().updatePlayed(movieDetails.getName());
-                        }
-                    });
-                    thread.start();
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        boolean savedEXT = sharedPreferences.getBoolean("EXTERNAL_SETTING", false);
 
-                    Intent in = new Intent(getActivity(), PlayerActivity.class);
-                    in.putExtra("url",movieDetails.getUrlstring());
-                    startActivity(in);
-                    Toast.makeText(getContext(),"Play",Toast.LENGTH_LONG).show();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        //Start download
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DownloadManager manager = (DownloadManager) mActivity.getSystemService(DOWNLOAD_SERVICE);
-                Uri uri = Uri.parse(movieDetails.getUrlstring());
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-                        .setDescription("Downloading");
-                long reference = manager.enqueue(request);
-                Toast.makeText(getContext(),"Download Started",Toast.LENGTH_LONG).show();
-            }
-        });
-
+        if(!savedEXT){externalPlayer.setVisibility(View.GONE);}
     }
 
     void loadDetails(){
@@ -132,7 +115,7 @@ public class MovieDetailsFragment extends BaseFragment{
                @Override
                public void run() {
                    movieDetails = DatabaseClient
-                           .getInstance(mCtx)
+                           .getInstance(mActivity)
                            .getAppDatabase()
                            .fileDao()
                            .getByFileName(movieFileName);
@@ -168,6 +151,59 @@ public class MovieDetailsFragment extends BaseFragment{
                }});
            thread.start();
        }catch (NullPointerException exception){Log.i("Error",exception.toString());}
+    }
+
+    private void setMyOnClickLiseners(){
+        //Play video
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    addToLastPlayed();
+                    Intent in = new Intent(getActivity(), PlayerActivity.class);
+                    in.putExtra("url",movieDetails.getUrlstring());
+                    startActivity(in);
+                    Toast.makeText(getContext(),"Play",Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //Start download
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DownloadManager manager = (DownloadManager) mActivity.getSystemService(DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse(movieDetails.getUrlstring());
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                        .setDescription("Downloading");
+                long reference = manager.enqueue(request);
+                Toast.makeText(getContext(),"Download Started",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //External Player
+        externalPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToLastPlayed();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(movieDetails.getUrlstring()));
+                intent.setDataAndType(Uri.parse(movieDetails.getUrlstring()), "video/*");
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addToLastPlayed() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseClient.getInstance(getContext()).getAppDatabase().fileDao().updatePlayed(movieDetails.getName());
+            }
+        });
+        thread.start();
     }
 
 }
