@@ -46,4 +46,22 @@ public interface FileDao {
 
     @Query("Update file set played = 1 where name like :filename")
     void updatePlayed(String filename);
+
+    @Query("SELECT * FROM File ORDER BY urlString")
+    List<File> sortByIndex();
+
+    @Query("SELECT * FROM File ORDER BY cast(size as unsigned) desc")
+    List<File> sortBySize();
+
+    @Query("SELECT * FROM File ORDER BY release_date desc")
+    List<File> sortByRelease();
+
+    @Query("SELECT * FROM File ORDER BY modifiedTime desc")
+    List<File> sortByTime();
+
+    @Query("SELECT * FROM File ORDER BY name")
+    List<File> sortByFileName();
+
+    @Query("SELECT * FROM File ORDER BY title")
+    List<File> sortByTitle();
 }

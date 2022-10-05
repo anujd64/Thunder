@@ -1,10 +1,10 @@
 package com.theflexproject.thunder.fragments;
 
-import static com.theflexproject.thunder.MainActivity.mCtx;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theflexproject.thunder.R;
-import com.theflexproject.thunder.adapter.MovieRecyclerAdapter;
 import com.theflexproject.thunder.adapter.MovieRecyclerAdapterLibrary;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.File;
@@ -35,7 +34,7 @@ public class SearchFragment extends BaseFragment {
     List<Integer> genreList;
     MovieRecyclerAdapterLibrary movieRecyclerAdapterLibrary;
     List<File> newmovieList;
-    MovieRecyclerAdapter.OnItemClickListener listener;
+    MovieRecyclerAdapterLibrary.OnItemClickListener listener;
 
     EditText searchBox;
     Button search;
@@ -108,15 +107,21 @@ public class SearchFragment extends BaseFragment {
                                                 public void run() {
                                                     Log.i(" ", "in thread");
                                                     newmovieList = DatabaseClient
-                                                            .getInstance(mCtx)
+                                                            .getInstance(mActivity)
                                                             .getAppDatabase()
                                                             .fileDao()
                                                             .getSearchQuery(searchBox.getText().toString());
                                                     mActivity.runOnUiThread(new Runnable() {
                                                         @Override
                                                         public void run() {
+                                                            DisplayMetrics displayMetrics = mActivity.getResources().getDisplayMetrics();
+                                                            float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+                                                            int noOfItems;
+                                                            if(dpWidth < 600f){noOfItems = 3;}
+                                                            else if(dpWidth < 840f){noOfItems = 6;}
+                                                            else {noOfItems = 8; }
                                                             Log.i(" ", newmovieList.toString());
-                                                            recyclerView.setLayoutManager(new GridLayoutManager(mActivity , 3));
+                                                            recyclerView.setLayoutManager(new GridLayoutManager(mActivity , noOfItems));
                                                             recyclerView.setHasFixedSize(true);
                                                             movieRecyclerAdapterLibrary = new MovieRecyclerAdapterLibrary(mActivity,newmovieList,listener);
                                                             recyclerView.setAdapter(movieRecyclerAdapterLibrary);
@@ -166,12 +171,11 @@ public class SearchFragment extends BaseFragment {
     }
 
     private void setOnClickListner() {
-        listener = new MovieRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
-                mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
-            }
+        listener = (view , position) -> {
+            MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
+            mActivity.getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                    .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
         };
     }
 }

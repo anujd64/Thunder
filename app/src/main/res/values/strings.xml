@@ -11,4 +11,19 @@
     <string name="download">Download</string>
     <string name="play">Play</string>
     <string name="available_files">Link</string>
+
+    <string-array name="sort_methods">
+        <item>FileName</item>
+        <item>Title</item>
+        <item>TimeModified</item>
+        <item>ReleaseDate</item>
+        <item>Size</item>
+        <item>IndexLink</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_available">Update Available</string>
+    <string name="update">update</string>
+    <string name="not_now">Not Now</string>
+    <string name="sort_by">Sort By</string>
 </resources>

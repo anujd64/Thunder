@@ -5,18 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="4dp"
     app:cardCornerRadius="15dp"
-    android:layout_marginHorizontal="10dp"
-    android:layout_gravity="center_vertical">
-
-
-
+    android:layout_gravity="center_vertical"
+    app:cardUseCompatPadding="true"
+    android:layout_centerInParent="true">
 
 <RelativeLayout
     android:id="@+id/addindexcontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:background="#1D1D25"
+    android:background="#111111"
     >
 
     <EditText
@@ -33,6 +30,7 @@
         android:ems="10"
         android:textColor="@color/white"
         android:hint="@string/password"
+        android:fontFamily="@font/jost_regular"
         android:backgroundTint="#FE3232"
         android:textColorHint="#878787"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +52,7 @@
         android:backgroundTint="#FFFF2020"
         android:ems="10"
         android:hint="@string/username"
+        android:fontFamily="@font/jost_regular"
         android:textColor="@color/white"
         android:textColorHint="#878787"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +79,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
             android:text="GDIndex"
+            android:fontFamily="@font/jost_regular"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
             android:text="GoIndex"
+            android:fontFamily="@font/jost_regular"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -96,6 +97,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
             android:text="MapleIndex"
+            android:fontFamily="@font/jost_regular"
             android:textColor="@color/white" />
 
     </RadioGroup>
@@ -114,6 +116,7 @@
         android:backgroundTint="#FFFF2020"
         android:ems="10"
         android:hint="@string/index_link"
+        android:fontFamily="@font/jost_regular"
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="#878787"
@@ -134,6 +137,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="60dp"
         android:text="@string/enter_index_details"
+        android:fontFamily="@font/jost_regular"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,6 +159,7 @@
         android:layout_marginBottom="40dp"
         android:background="@drawable/rounded_corner_labels"
         android:text="@string/save"
+        android:fontFamily="@font/jost_regular"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -170,6 +175,7 @@
         android:layout_alignParentBottom="false"
         android:layout_marginBottom="40dp"
         android:text="Already added, try refreshing"
+        android:fontFamily="@font/jost_regular"
         android:visibility="gone"
         android:textColor="@color/white" />
 

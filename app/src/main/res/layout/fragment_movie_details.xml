@@ -148,7 +148,7 @@
             android:padding="10dp"
             android:text="@string/play"
             android:textColor="@color/white"
-            app:backgroundTint="#1C1C1C"
+            app:backgroundTint="#111111"
             app:icon="@drawable/ic_baseline_play_arrow_24"
             app:iconGravity="textStart">
 
@@ -161,7 +161,7 @@
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
-            app:backgroundTint="#1C1C1C"
+            app:backgroundTint="#111111"
             android:layout_below="@id/play"
             app:icon="@drawable/ic_baseline_save_alt_24"
             app:iconGravity="textStart"
@@ -170,12 +170,30 @@
             android:fontFamily="@font/jost_regular">
 
         </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/externalPlayer"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_below="@id/download"
+            android:fontFamily="@font/jost_regular"
+            android:orientation="horizontal"
+            android:text="Play In External Player"
+            android:textColor="@color/white"
+            app:backgroundTint="#111111"
+            app:icon="@drawable/ic_baseline_play_arrow_24"
+            app:iconGravity="textStart">
+
+        </com.google.android.material.button.MaterialButton>
         <TextView
             android:id="@+id/overviewtext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_medium"
-            android:layout_below="@id/download"
+            android:layout_below="@id/externalPlayer"
             android:text="@string/overview"
             android:textColor="@color/white"
             android:textSize="18sp">

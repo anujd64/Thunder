@@ -30,7 +30,6 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     private Context mCtx;
     private List<IndexLink> indexLinkList;
 
-
     public IndexAdapter(Context mCtx, List<IndexLink> indexLinkList) {
         this.mCtx = mCtx;
         this.indexLinkList = indexLinkList;

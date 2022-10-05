@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home_fill0_wght300_grad0_opsz24"
         android:title="Home" />
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_fill0_wght300_grad0_opsz24"
         android:title="Search" />
     <item
-        android:id="@+id/library"
+        android:id="@+id/libraryFragment"
         android:icon="@drawable/ic_baseline_video_library_24"
         android:title="Library" />
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings_fill0_wght300_grad0_opsz24"
         android:title="Settings" />
 </menu>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textViewSortMethod"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:fontFamily="@font/jost_regular"
+    android:textColor="@color/white"
+    android:background="#000000"
+    android:textSize="18sp"
+    android:textStyle="bold" />
