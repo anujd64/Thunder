@@ -92,74 +92,74 @@
                 app:iconSize="24dp"
                 app:iconTint="@color/white" />
 
-            <View
+            <View android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="-16dp"
                 android:layout_marginEnd="-16dp"
                 android:background="#393838" />
 
-<!--            <Button-->
-<!--                android:id="@+id/importIndex"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="55dp"-->
-<!--                android:layout_marginStart="-32dp"-->
-<!--                android:layout_marginEnd="-32dp"-->
-<!--                android:background="@color/black"-->
-<!--                android:fontFamily="@font/jost_regular"-->
-<!--                android:insetTop="0dp"-->
-<!--                android:insetBottom="0dp"-->
-<!--                android:paddingStart="32dp"-->
-<!--                android:paddingEnd="32dp"-->
-<!--                android:text="Import"-->
-<!--                android:letterSpacing="0.001"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:cornerRadius="0dp"-->
-<!--                app:icon="@drawable/ic_baseline_navigate_next_24"-->
-<!--                app:iconPadding="16dp"-->
-<!--                app:iconSize="24dp"-->
-<!--                app:iconTint="@color/white" />-->
+            <Button android:visibility="gone"
+                android:id="@+id/importDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="-32dp"
+                android:layout_marginEnd="-32dp"
+                android:background="@color/black"
+                android:fontFamily="@font/jost_regular"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="Import Database"
+                android:letterSpacing="0.001"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="0dp"
+                app:icon="@drawable/ic_baseline_navigate_next_24"
+                app:iconPadding="16dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/white" />
 
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="1dp"-->
-<!--                android:layout_marginStart="-16dp"-->
-<!--                android:layout_marginEnd="-16dp"-->
-<!--                android:background="#393838" />-->
+            <View android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginEnd="-16dp"
+                android:background="#393838" />
 
-<!--            <Button-->
-<!--                android:id="@+id/export"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="55dp"-->
-<!--                android:layout_marginStart="-32dp"-->
-<!--                android:layout_marginEnd="-32dp"-->
-<!--                android:background="@color/black"-->
-<!--                android:fontFamily="@font/jost_regular"-->
-<!--                android:insetTop="0dp"-->
-<!--                android:insetBottom="0dp"-->
-<!--                android:paddingStart="32dp"-->
-<!--                android:paddingEnd="32dp"-->
-<!--                android:text="Export"-->
-<!--                android:letterSpacing="0.001"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:cornerRadius="0dp"-->
-<!--                app:icon="@drawable/ic_baseline_navigate_next_24"-->
-<!--                app:iconPadding="16dp"-->
-<!--                app:iconSize="24dp"-->
-<!--                app:iconTint="@color/white" />-->
+            <Button android:visibility="gone"
+                android:id="@+id/exportDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="-32dp"
+                android:layout_marginEnd="-32dp"
+                android:background="@color/black"
+                android:fontFamily="@font/jost_regular"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="Export Database"
+                android:letterSpacing="0.001"
+                android:textSize="16sp"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="0dp"
+                app:icon="@drawable/ic_baseline_navigate_next_24"
+                app:iconPadding="16dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/white" />
 
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="1dp"-->
-<!--                android:layout_marginStart="-16dp"-->
-<!--                android:layout_marginEnd="-16dp"-->
-<!--                android:background="#393838" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginEnd="-16dp"
+                android:background="#393838" />
 
 <!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
 <!--                android:id="@+id/castButtonVisibility"-->
@@ -204,7 +204,7 @@
                 android:drawablePadding="16dp"
                 android:fontFamily="@font/jost_regular"
                 android:minHeight="64dp"
-                android:text="Show External Player"
+                android:text="Use External Player"
                 android:textSize="16sp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/white"

@@ -1,9 +1,6 @@
 package com.theflexproject.thunder.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,33 +9,28 @@ import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
 import com.theflexproject.thunder.R;
-import com.theflexproject.thunder.adapter.MovieRecyclerAdapterLibrary;
-import com.theflexproject.thunder.database.DatabaseClient;
-import com.theflexproject.thunder.model.File;
-
-import java.util.List;
+import com.theflexproject.thunder.adapter.FragmentViewPagerAdapter;
 
 public class LibraryFragment extends BaseFragment {
 
-    RecyclerView recyclerView;
-    MovieRecyclerAdapterLibrary movieRecyclerAdapterLibrary;
-    List<File> newmovieList;
-    MovieRecyclerAdapterLibrary.OnItemClickListener listener;
-    public static Context context;
+
+
 
     AutoCompleteTextView autoCompleteTextView;
     String[] sort_methods;
     ArrayAdapter<String> arrayAdapter;
 
+    TabLayout tabLayout ;
+    ViewPager2 viewPagerLibrary;
+    FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
     public LibraryFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,15 +46,59 @@ public class LibraryFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initWidgets();
+        tabLayout = mActivity.findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Movies"));
+        tabLayout.addTab(tabLayout.newTab().setText("TV Shows"));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPagerLibrary.setCurrentItem(tab.getPosition());
+            }
 
-        sort_methods = mActivity.getResources().getStringArray(R.array.sort_methods);
-        arrayAdapter = new ArrayAdapter<>(mActivity,R.layout.dropdown_item,sort_methods);
-        autoCompleteTextView = mActivity.findViewById(R.id.AutoCompleteTextview);
-        autoCompleteTextView.setAdapter(arrayAdapter);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-        showLibrary();
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        viewPagerLibrary.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+
+    }
+
+    private void initWidgets() {
+
+//        sort_methods = mActivity.getResources().getStringArray(R.array.sort_methods);
+//        arrayAdapter = new ArrayAdapter<>(mActivity,R.layout.dropdown_item,sort_methods);
+//        autoCompleteTextView = mActivity.findViewById(R.id.AutoCompleteTextview);
+//        autoCompleteTextView.setAdapter(arrayAdapter);
+
+        tabLayout = mActivity.findViewById(R.id.tabLayout);
+        viewPagerLibrary = mActivity.findViewById(R.id.viewPagerLibrary);
+        fragmentViewPagerAdapter = new FragmentViewPagerAdapter(this);
+        viewPagerLibrary.setSaveEnabled(false);
+        viewPagerLibrary.setAdapter(fragmentViewPagerAdapter);
+
+
+    }
+
+
+
+
+
+
+
 //
-//        Thread threadmovielist = new Thread(new Runnable() {
+//        Thread threadmediaList = new Thread(new Runnable() {
 //            @Override
 //            public void run() {
 //                autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,56 +127,8 @@ public class LibraryFragment extends BaseFragment {
 //
 //            }
 //        });
-//        threadmovielist.setPriority(10);
-//        threadmovielist.start();
-
-
-
-    }
-
-    private void setOnClickListner() {
-        listener = (view , position) -> {
-            MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(newmovieList.get(position).getName());
-            mActivity.getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                    .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
-        };
-    }
-
-    void showLibrary(){
-        setOnClickListner();
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(" " , "in thread");
-                newmovieList = DatabaseClient
-                        .getInstance(mActivity)
-                        .getAppDatabase()
-                        .fileDao()
-                        .getAll();
-                showRecycler(newmovieList);
-            }
-        });
-        thread.start();
-    }
-
-    private void showRecycler(List<File> newmovieList) {
-        mActivity.runOnUiThread(() -> {
-            DisplayMetrics displayMetrics = mActivity.getResources().getDisplayMetrics();
-            float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-            int noOfItems;
-            if(dpWidth < 600f){noOfItems = 3;}
-            else if(dpWidth < 840f){noOfItems = 6;}
-            else {noOfItems = 8; }
-            Log.i(" " , newmovieList.toString());
-            recyclerView = mActivity.findViewById(R.id.recyclerLibrary);
-            recyclerView.setLayoutManager(new GridLayoutManager(context , noOfItems));
-            recyclerView.setHasFixedSize(true);
-            movieRecyclerAdapterLibrary = new MovieRecyclerAdapterLibrary(mActivity , newmovieList , listener);
-            recyclerView.setAdapter(movieRecyclerAdapterLibrary);
-            movieRecyclerAdapterLibrary.notifyDataSetChanged();
-        });
-    }
+//        threadmediaList.setPriority(10);
+//        threadmediaList.start();
 
 //    void sortName(){
 //        setOnClickListner(); /**set this every time*/
@@ -149,12 +137,12 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString().trim();
 //                Log.i("Method",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                        .getInstance(mActivity)
 //                        .getAppDatabase()
 //                        .fileDao()
 //                        .sortByFileName();
-//                showRecycler(newmovieList);
+//                showRecycler(newmediaList);
 //            }
 //        });
 //
@@ -167,13 +155,13 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString().trim();
 //                Log.i("inside sort function",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                        .getInstance(mActivity)
 //                        .getAppDatabase()
 //                        .fileDao()
 //                        .sortByRelease();
-//                Log.i("inside sort function",newmovieList.toString());
-//                showRecycler(newmovieList);
+//                Log.i("inside sort function",newmediaList.toString());
+//                showRecycler(newmediaList);
 //            }
 //        });
 //
@@ -185,12 +173,12 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString().trim();
 //                Log.i("Method",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                                .getInstance(mActivity)
 //                                .getAppDatabase()
 //                                .fileDao()
 //                                .sortBySize();
-////                showRecycler(newmovieList);
+////                showRecycler(newmediaList);
 //            }
 //        });
 //
@@ -202,12 +190,12 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString().trim();
 //                Log.i("Method",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                        .getInstance(mActivity)
 //                        .getAppDatabase()
 //                        .fileDao()
 //                        .sortByIndex();
-////                showRecycler(newmovieList);
+////                showRecycler(newmediaList);
 //            }
 //        });
 //
@@ -220,12 +208,12 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString();
 //                Log.i("Method",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                        .getInstance(mActivity)
 //                        .getAppDatabase()
 //                        .fileDao()
 //                        .sortByTime();
-////                showRecycler(newmovieList);
+////                showRecycler(newmediaList);
 //            }
 //        });
 //
@@ -237,12 +225,12 @@ public class LibraryFragment extends BaseFragment {
 //            public void run() {
 //                String methodChosen = autoCompleteTextView.getText().toString().trim();
 //                Log.i("Method",methodChosen);
-//                newmovieList = DatabaseClient
+//                newmediaList = DatabaseClient
 //                        .getInstance(mActivity)
 //                        .getAppDatabase()
 //                        .fileDao()
 //                        .sortByTitle();
-////                showRecycler(newmovieList);
+////                showRecycler(newmediaList);
 //            }
 //        });
 //

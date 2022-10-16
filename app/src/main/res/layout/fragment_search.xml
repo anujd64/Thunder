@@ -6,57 +6,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     tools:context="com.theflexproject.thunder.fragments.SearchFragment">
+
     <TextView
         android:id="@+id/searchTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:textSize="25sp"
         android:fontFamily="@font/jost_medium"
         android:text="Search"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/search_button"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/searchTitle"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/jost_regular"
         android:orientation="horizontal"
         app:backgroundTint="#1C1C1C"
         app:icon="@drawable/ic_search_fill0_wght300_grad0_opsz24"
-        app:iconGravity="textEnd"/>
+        app:iconGravity="textEnd" />
 
     <EditText
         android:id="@+id/search_input"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/searchTitle"
         android:layout_alignParentStart="true"
         android:layout_gravity="start"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
         android:layout_toStartOf="@+id/search_button"
-        android:gravity="center_horizontal"
         android:backgroundTint="#F93434"
         android:fontFamily="@font/jost_regular"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:textColor="@color/white" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/scrollview"
-        android:layout_marginTop="110dp"
-        android:paddingBottom="90dp">
+        android:visibility="visible"
+        android:layout_below="@id/search_input"
+        android:id="@+id/scrollview">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclersearch"
@@ -65,6 +63,7 @@
             android:scrollbars="vertical"
             tools:listitem="@layout/movie_item_recycler" />
     </ScrollView>
+
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->

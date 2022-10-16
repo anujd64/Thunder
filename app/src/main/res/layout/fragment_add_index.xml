@@ -12,7 +12,7 @@
 <RelativeLayout
     android:id="@+id/addindexcontainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#111111"
     >
 
@@ -60,14 +60,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indexlink" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/jost_regular"
+        android:text="Type Of Index :"
+        android:textColor="@color/white" />
     <RadioGroup
         android:id="@+id/rb_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
+        android:layout_below="@+id/textView4"
         android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,8 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
-            android:text="GDIndex"
             android:fontFamily="@font/jost_regular"
+            android:text="GDIndex"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -87,8 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
-            android:text="GoIndex"
             android:fontFamily="@font/jost_regular"
+            android:text="GoIndex"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -96,17 +110,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
-            android:text="MapleIndex"
             android:fontFamily="@font/jost_regular"
+            android:text="MapleIndex"
             android:textColor="@color/white" />
 
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rb_group"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/jost_regular"
+        android:text="Folder contains :"
+        android:textColor="@color/white" />
+    <RadioGroup
+        android:id="@+id/folderTypeRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_movies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:fontFamily="@font/jost_regular"
+            android:text="Movies"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rb_TVShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:fontFamily="@font/jost_regular"
+            android:text="TVShows"
+            android:textColor="@color/white" />
     </RadioGroup>
 
     <EditText
         android:id="@+id/indexlink"
         android:layout_width="275dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/rb_group"
+        android:layout_below="@+id/folderTypeRadioGroup"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
@@ -136,8 +193,8 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="60dp"
-        android:text="@string/enter_index_details"
         android:fontFamily="@font/jost_regular"
+        android:text="@string/enter_index_details"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
