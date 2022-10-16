@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.theflexproject.thunder.fragments.LibraryFragment">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/libraryTitle"
@@ -16,46 +15,22 @@
         android:fontFamily="@font/jost_medium"
         android:text="Library"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/SortBox"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="25sp"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:id="@+id/SortBox"
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/sort_by"
-        app:boxBackgroundColor="@color/black"
-        android:layout_marginTop="5dp"
-        app:endIconDrawable="@drawable/ic_baseline_play_arrow_24"
-        app:endIconTint="@color/white"
-        android:textColorHint="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/libraryTitle">
+        android:id="@+id/tabLayout"
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="#FE2222"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/libraryTitle"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/AutoCompleteTextview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="none"
-            android:background="@color/black"
-            android:textColor="@color/white"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerLibrary"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerLibrary"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SortBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/movie_item_recycler" />
+        android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

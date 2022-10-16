@@ -11,4 +11,12 @@ public class Data {
                 "files=" + files +
                 '}';
     }
+
+    public ArrayList<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(ArrayList<File> files) {
+        this.files = files;
+    }
 }

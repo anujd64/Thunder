@@ -1,6 +1,7 @@
 package com.theflexproject.thunder.fragments;
 
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndexTVShow;
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGoIndex;
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestMapleIndex;
 
@@ -40,6 +41,9 @@ public class AddNewIndexFragment extends BaseFragment {
     private RadioGroup radioIndexTypeGroup;
     private RadioButton radioIndexTypeButton;
 
+    private RadioGroup radioFolderTypeGroup;
+    private RadioButton radioFolderTypeButton;
+
     public static AddNewIndexFragment newInstance(){
         return new AddNewIndexFragment();
     }
@@ -66,6 +70,7 @@ public class AddNewIndexFragment extends BaseFragment {
         refreshSuggest = view.findViewById(R.id.suggestRefresh);
 
         radioIndexTypeGroup=(RadioGroup)mActivity.findViewById(R.id.rb_group);
+        radioFolderTypeGroup=(RadioGroup)mActivity.findViewById(R.id.folderTypeRadioGroup);
 
 
 
@@ -82,24 +87,28 @@ public class AddNewIndexFragment extends BaseFragment {
 
 
 
-                int selectedId=radioIndexTypeGroup.getCheckedRadioButtonId();
-                radioIndexTypeButton= mActivity.findViewById(selectedId);
+                int indexTypeButtonSelectedId=radioIndexTypeGroup.getCheckedRadioButtonId();
+                int folderTypeButtonSelectedId=radioFolderTypeGroup.getCheckedRadioButtonId();
+                radioIndexTypeButton= mActivity.findViewById(indexTypeButtonSelectedId);
+                radioFolderTypeButton= mActivity.findViewById(folderTypeButtonSelectedId);
+
+
                 try{
                     if(indexLink.getLink().length()<1){
                         refreshSuggest.setVisibility(View.VISIBLE);
                         refreshSuggest.setText("Enter Index Link");
                     }
-
-                    if(radioIndexTypeButton ==null){
+                    if(radioIndexTypeButton ==null || radioFolderTypeButton == null){
                     refreshSuggest.setVisibility(View.VISIBLE);
-                    refreshSuggest.setText("Select Index Type");
+                    refreshSuggest.setText("Select Index and Folder Type");
                     }
                     if(indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
                             userNameView.setVisibility(View.GONE);
                             passWordView.setVisibility(View.GONE);
                     }
 
-                    indexLink.setType(radioIndexTypeButton.getText().toString());
+                    indexLink.setIndexType(radioIndexTypeButton.getText().toString());
+                    indexLink.setFolderType(radioFolderTypeButton.getText().toString());
 
                     Thread thread = new Thread(new Runnable() {
                         @Override
@@ -115,31 +124,61 @@ public class AddNewIndexFragment extends BaseFragment {
                             }else {
                                 DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().insert(indexLink);
                                 save.setText("Adding");
-                                switch(radioIndexTypeButton.getText().toString()){
-                                    //Case statements
-                                    case "GDIndex":
-                                        try {
-                                            postRequestGDIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        break;
-                                    case "GoIndex":
-                                        try {
-                                            postRequestGoIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
-                                        } catch (IOException | JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        break;
-                                    case "MapleIndex":
-                                        try {
-                                            postRequestMapleIndex(indexLink.getLink(),indexLink.getUsername(),indexLink.getPassword());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        break;
+                                if(radioFolderTypeButton.getText().toString().equals("Movies")) {
+                                    switch (radioIndexTypeButton.getText().toString()) {
+                                        //Case statements
+                                        case "GDIndex":
+                                            try {
+                                                postRequestGDIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
+                                        case "GoIndex":
+                                            try {
+                                                postRequestGoIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+                                            } catch (IOException | JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
+                                        case "MapleIndex":
+                                            try {
+                                                postRequestMapleIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
                                     }
-                                save.setText("Done");
+                                    save.setText("Done");
+                                }else {
+                                        switch (radioIndexTypeButton.getText().toString()) {
+                                            //Case statements
+                                            case "GDIndex":
+                                                try {
+                                                    postRequestGDIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                break;
+//                                            case "GoIndex":
+//                                                try {
+//                                                    postRequestGoIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+//                                                } catch (IOException | JSONException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                                break;
+//                                            case "MapleIndex":
+//                                                try {
+//                                                    postRequestMapleIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
+//                                                } catch (IOException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                                break;
+                                        }
+                                        save.setText("Done");
+                                }
+
+
                             }
 
                         }
