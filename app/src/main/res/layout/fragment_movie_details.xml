@@ -5,97 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
-    tools:ignore="UnusedAttribute"
-    android:id="@+id/container"
-    tools:targetApi="m">
+    android:background="@color/black">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/moviePosterInDetails"
+            android:id="@+id/movieBackdrop"
             android:layout_width="match_parent"
-            android:layout_height="475dp"
+            android:layout_height="450dp"
             android:background="@color/black"
             android:scaleType="centerCrop"
             tools:src="@drawable/dummyposter" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="460dp"
             android:orientation="vertical">
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.3"
                 android:background="@drawable/gradient_top_bottom_bg" />
-
         </LinearLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="500dp"-->
+<!--            android:orientation="vertical">-->
+<!--            <eightbitlab.com.blurview.BlurView-->
+<!--                android:id="@+id/blurView4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:fadingEdge="vertical"-->
+<!--                android:fadingEdgeLength="240dp"-->
+<!--                android:requiresFadingEdge="vertical"-->
+<!--                android:background="#00000000"-->
+<!--                android:clipChildren="false"-->
+<!--                android:elevation="8dp">-->
 
+
+<!--            </eightbitlab.com.blurview.BlurView>-->
+
+
+<!--        </RelativeLayout>-->
     </RelativeLayout>
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="100dp">
+        android:layout_height="wrap_content">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp">
+        android:layout_marginHorizontal="20dp">
 
+
+        <ImageView
+            android:id="@+id/moviePosterInDetails"
+            android:layout_width="133dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dummyposter" />
 
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_above="@+id/labels"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="390dp"
-            android:layout_marginBottom="12dp"
-            android:paddingHorizontal="13dp"
+            android:layout_toEndOf="@+id/moviePosterInDetails"
             android:fontFamily="@font/jost_medium"
-            android:gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             tools:text="Movie Title" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/moviePosterInDetails"-->
-<!--            android:layout_width="126dp"-->
-<!--            android:layout_height="190dp"-->
-<!--            android:layout_below="@id/title_text"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:layout_margin="20dp"-->
-<!--            app:srcCompat="@drawable/dummyposter" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/labels"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_text">
+            android:layout_above="@id/play"
+            android:layout_toEndOf="@id/moviePosterInDetails">
 
-            <TextView
-                android:id="@+id/videoQuality"
-                style="@style/sizelabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/year_text"
-                android:background="@drawable/rounded_corner_labels"
-                android:fontFamily="@font/jost_medium"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/year_text"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="1080p" />
 
             <TextView
                 android:id="@+id/year_text"
@@ -103,44 +101,75 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/rounded_corner_labels"
                 android:fontFamily="@font/jost_medium"
                 android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/size"
+                android:textColor="#CCCCCC"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/ratings"
+                app:layout_constraintEnd_toStartOf="@+id/RuntimeText"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/videoQuality"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="2099" />
 
+                <TextView
+                    android:id="@+id/RuntimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/sizelabel"
+                    android:textColor="#CCCCCC"
+                    android:visibility="gone"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/ratings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="10sp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/year_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="1h 30m" />
+
+            <ImageView
+                android:id="@+id/ratings"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/tmdb"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
-                android:id="@+id/size"
+                android:id="@+id/ratingsText"
                 style="@style/sizelabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/year_text"
-                android:background="@drawable/rounded_corner_labels"
                 android:fontFamily="@font/jost_medium"
                 android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="#CCCCCC"
+                android:textSize="13sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/year_text"
-                tools:text="32 GB" />
+                app:layout_constraintStart_toEndOf="@+id/ratings"
+                tools:text="86 %" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/play"
             style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
+            android:layout_width="133dp"
             android:layout_height="48dp"
-            android:layout_below="@+id/labels"
+            android:layout_below="@id/moviePosterInDetails"
+            android:layout_marginTop="15dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/jost_regular"
@@ -150,88 +179,214 @@
             android:textColor="@color/white"
             app:backgroundTint="#111111"
             app:icon="@drawable/ic_baseline_play_arrow_24"
-            app:iconGravity="textStart">
+            app:iconGravity="textStart" />
 
-        </com.google.android.material.button.MaterialButton>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/download"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="50dp"
             android:layout_height="48dp"
+            android:layout_below="@id/labels"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/play"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
-            app:backgroundTint="#111111"
-            android:layout_below="@id/play"
             app:icon="@drawable/ic_baseline_save_alt_24"
-            app:iconGravity="textStart"
-            android:text="@string/download"
-            android:textColor="@color/white"
-            android:fontFamily="@font/jost_regular">
+            app:iconGravity="textStart" />
 
-        </com.google.android.material.button.MaterialButton>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/externalPlayer"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_below="@id/download"
-            android:fontFamily="@font/jost_regular"
-            android:orientation="horizontal"
-            android:text="Play In External Player"
-            android:textColor="@color/white"
-            app:backgroundTint="#111111"
-            app:icon="@drawable/ic_baseline_play_arrow_24"
-            app:iconGravity="textStart">
-
-        </com.google.android.material.button.MaterialButton>
-        <TextView
-            android:id="@+id/overviewtext"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jost_medium"
-            android:layout_below="@id/externalPlayer"
-            android:text="@string/overview"
-            android:textColor="@color/white"
-            android:textSize="18sp">
+            android:orientation="vertical"
+            android:layout_below="@id/play">
+            <TextView
+                android:id="@+id/overviewtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_medium"
+                android:text="@string/overview"
+                android:textColor="@color/white"
+                android:textSize="18sp">
 
-        </TextView>
-        <TextView
-            android:id="@+id/overviewdesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/jost_regular"
-            android:textSize="14sp"
-            android:layout_below="@id/overviewtext"
-            android:clickable="true"
-            android:focusable="true"
-            tools:text="Basically the whole plot of movie" />
-        <TextView
-            android:id="@+id/linktitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textSize="18sp"
-            android:layout_below="@+id/overviewdesc"
-            android:fontFamily="@font/jost_medium"
-            android:text="@string/available_files"
-            android:textColor="@color/white">
+            </TextView>
+            <TextView
+                android:id="@+id/overviewdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/jost_regular"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                tools:text="Basically the whole plot of movie" />
 
-        </TextView>
+            <TableLayout
+                android:id="@+id/detailsTable"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:id="@+id/Director"
+                    android:padding="5dp"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:text="Director :" />
 
-        <TextView
-            android:id="@+id/listoffiles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linktitle"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/jost_regular"
-            android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/DirectorText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                </TableRow>
+                <TableRow android:visibility="gone"
+                    android:id="@+id/WrittenBy"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/jost_regular"
+                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Written By :" />
+                    <TextView
+                        android:id="@+id/WrittenByText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                </TableRow>
+                <TableRow android:id="@+id/Genres" android:visibility="gone"
+                    android:padding="5dp">
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/jost_regular"
+                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Genres :" />
+                    <TextView
+                        android:id="@+id/GenresText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+<!--                <TableRow-->
+<!--                    android:padding="5dp">-->
+<!--                    <TextView-->
+<!--                    android:id="@+id/Budget"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/videoQualityText"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="true"-->
+<!--                    android:fontFamily="@font/jost_regular"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="14sp"-->
+<!--                    tools:text="Budget :" />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/BudgetText"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/videoQualityText"-->
+<!--                        android:layout_toEndOf="@id/Budget"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"-->
+<!--                        android:fontFamily="@font/jost_regular"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="14sp"-->
+<!--                        tools:text="THE DIRECTOR" />-->
+<!--                </TableRow>-->
+<!--                <TableRow-->
+<!--                    android:padding="5dp">-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/Revenue"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/Budget"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"-->
+<!--                        android:fontFamily="@font/jost_regular"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="14sp"-->
+<!--                        tools:text="Revenue :" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/RevenueText"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/Budget"-->
+<!--                        android:layout_toEndOf="@id/Revenue"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"-->
+<!--                        android:fontFamily="@font/jost_regular"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="14sp"-->
+<!--                        tools:text="THE DIRECTOR" />-->
+<!--                </TableRow>-->
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/linktitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/jost_medium"
+                android:text="Available Files"
+                android:textColor="@color/white">
+
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerAvailableMovieFiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"
+                android:paddingBottom="85dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="5"
+                tools:listitem="@layout/file_item"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

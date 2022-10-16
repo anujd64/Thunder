@@ -1,9 +1,9 @@
 package com.theflexproject.thunder.model;
 
 import java.util.ArrayList;
-public class TMDBResponse{
+public class MoviesResponseFromTMDB {
     public int page;
-    public ArrayList<File> results;
+    public ArrayList<Movie> results;
     public int total_pages;
 
     @Override

@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.theflexproject.thunder.model.File;
+import com.theflexproject.thunder.model.Movie;
 import com.theflexproject.thunder.R;
 
 import java.util.List;
@@ -26,11 +26,11 @@ import java.util.List;
 public class BannerRecyclerAdapter extends RecyclerView.Adapter<BannerRecyclerAdapter.MovieViewHolder> {
 
     Context context;
-    List<File> movieList;
+    List<Movie> mediaList;
     private BannerRecyclerAdapter.OnItemClickListener listener;
-    public BannerRecyclerAdapter(Context context, List<File> movieList, BannerRecyclerAdapter.OnItemClickListener listener) {
+    public BannerRecyclerAdapter(Context context, List<Movie> mediaList, BannerRecyclerAdapter.OnItemClickListener listener) {
         this.context = context;
-        this.movieList = movieList;
+        this.mediaList = mediaList;
         this.listener = listener;
     }
 
@@ -43,10 +43,10 @@ public class BannerRecyclerAdapter extends RecyclerView.Adapter<BannerRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        if(movieList.get(position).getBackdrop_path()!=null){
-            holder.name.setText(movieList.get(position).getTitle());
+        if(mediaList.get(position).getBackdrop_path()!=null){
+            holder.name.setText(mediaList.get(position).getTitle());
             Glide.with(context)
-                    .load(TMDB_IMAGE_BASE_URL +movieList.get(position).getBackdrop_path())
+                    .load(TMDB_IMAGE_BASE_URL +mediaList.get(position).getBackdrop_path())
                     .placeholder(new ColorDrawable(Color.BLACK))
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners(14)))
                     .into(holder.poster);
@@ -55,7 +55,7 @@ public class BannerRecyclerAdapter extends RecyclerView.Adapter<BannerRecyclerAd
 
     @Override
     public int getItemCount() {
-        return (movieList==null)?0:movieList.size();
+        return (mediaList==null)?0:mediaList.size();
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -35,6 +35,9 @@ public class ParseUtils {
     // i.e. movieName (1969) garbage -> movieName () garbage -> movieName
     private static final Pattern EMPTY_PARENTHESIS_PATTERN = Pattern.compile("(.*)[\\s\\p{Punct}]+([(][)])");
 
+    private static final Pattern COUNTRY_OF_ORIGIN = Pattern.compile("(.*)[\\s\\p{Punct}]+\\(((US|UK|FR))\\)");
+
+    private static final Pattern PARENTHESIS_YEAR_PATTERN = Pattern.compile("(.*)[\\s\\p{Punct}]+\\(((?:19|20)\\d{2})\\)");
 
     public static String removeNumbering(String input) {
         return StringUtils.replaceAll(input, "", LEADING_NUMBERING);
@@ -101,6 +104,16 @@ public class ParseUtils {
         }
         Log.i("ERROR","twoPatternExtractor output: " + input + " isolated: " + isolated);
         return new Pair<>(input, isolated);
+    }
+
+    public static Pair<String, String> getCountryOfOrigin(String input) {
+        String countryOfOrigin = null;
+
+        return twoPatternExtractor2(input, COUNTRY_OF_ORIGIN);
+    }
+
+    public static Pair<String, String> parenthesisYearExtractor(String input) {
+        return twoPatternExtractor2(input, PARENTHESIS_YEAR_PATTERN);
     }
 
 }

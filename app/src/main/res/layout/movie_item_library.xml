@@ -6,7 +6,7 @@
     android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:id="@+id/movieCard"
-    app:cardBackgroundColor="#000000"
+    app:cardBackgroundColor="#00000000"
     android:layout_margin="10dp">
 
     <RelativeLayout
@@ -21,30 +21,34 @@
             app:srcCompat="@drawable/dummyposter" />
 
         <TextView
-            android:id="@+id/text_size"
-            style="@style/sizelabel"
-            android:layout_alignBottom="@+id/moviePoster2"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="56dp"
-            android:layout_marginBottom="122dp"
-            android:background="@drawable/rounded_controls_background"
-            tools:text="size" />
-
-        <TextView
             android:id="@+id/movieName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/moviePoster2"
             android:layout_alignStart="@+id/moviePoster2"
             android:layout_alignEnd="@+id/moviePoster2"
-            android:layout_gravity="center"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="0dp"
+            android:paddingTop="5dp"
+            android:layout_centerInParent="true"
             android:fontFamily="@font/jost_regular"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@+id/moviePoster2" />
+
+        <TextView
+            android:id="@+id/movieYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieName"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/jost_regular"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#cccccc"
+            android:visibility="gone"
+            android:textSize="10sp"
             app:layout_constraintTop_toBottomOf="@+id/moviePoster2" />
     </RelativeLayout>
 
