@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/stillInEpisodeDetails"
+            android:layout_width="match_parent"
+            android:layout_height="475dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/dummyposter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/gradient_top_bottom_bg" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+
+
+            <ImageView
+                android:id="@+id/tvShowPosterInEpisodeDetails"
+                android:layout_width="133dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummyposter" />
+
+            <TextView
+                android:id="@+id/tvShowTitleInEpisodeDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@id/episodeNameInEpisodeDetails"
+                android:layout_toEndOf="@+id/tvShowPosterInEpisodeDetails"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Show Title" />
+
+            <TextView
+                android:id="@+id/episodeNameInEpisodeDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/labelsInEpisodeDetails"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/tvShowPosterInEpisodeDetails"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center"
+                android:paddingHorizontal="15dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:text="Episode Title" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/labelsInEpisodeDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/playInEpisodeDetails"
+                android:layout_toEndOf="@id/tvShowPosterInEpisodeDetails">
+
+                <TextView
+                    android:id="@+id/seasonNumberInEpisodeDetails"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@id/ratingsInEpisodeDetails"
+                    app:layout_constraintEnd_toStartOf="@+id/runtimeInEpisodeDetails"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Season 1" />
+
+                <TextView
+                    android:id="@+id/runtimeInEpisodeDetails"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/seasonNumberInEpisodeDetails"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:visibility="visible"
+                    android:text="54mins"
+                    app:layout_constraintBottom_toTopOf="@id/ratingsInEpisodeDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/seasonNumberInEpisodeDetails"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/ratingsInEpisodeDetails"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/tmdb"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.4"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+                <TextView
+                    android:id="@+id/ratingsTextInEpisodeDetails"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="13sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ratingsInEpisodeDetails"
+                    tools:text="86 %" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playInEpisodeDetails"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="133dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/tvShowPosterInEpisodeDetails"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/jost_regular"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:text="@string/play"
+                android:textColor="@color/white"
+                app:backgroundTint="#111111"
+                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:iconGravity="textStart" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/playInEpisodeDetails"
+                android:orientation="vertical"
+                android:paddingBottom="70dp">
+
+                <TextView
+                    android:id="@+id/overviewInEpisodeDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="@string/overview"
+                    android:textColor="@color/white"
+                    android:textSize="18sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/overviewDescInEpisodeDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:text="Basically the whole plot of movie" />
+
+                <TableLayout
+                    android:id="@+id/detailsTableTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:id="@+id/episodeAirDate"
+                        android:padding="5dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight=".4"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:text="Released :"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/episodeAirDateText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight=".6"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/availableFilesRecyclerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="Available Files"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerAvailableEpisodeFiles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/file_item" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
