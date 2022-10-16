@@ -1,5 +1,6 @@
 package com.theflexproject.thunder;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     ViewGroup rootView;
     View decorView;
 
+    public static Context context;
+
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,56 +56,107 @@ public class MainActivity extends AppCompatActivity {
         decorView = getWindow().getDecorView();
         rootView = decorView.findViewById(android.R.id.content);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        context = getApplicationContext();
 
         blurBottom();
 //        verifyStoragePermissions(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container , homeFragment).commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.homeFragment:
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container, homeFragment)
+//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                            .replace(R.id.container , homeFragment)
                             .commit();
                     return true;
                 case R.id.searchFragment:
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container, searchFragment)
+//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                            .replace(R.id.container , searchFragment)
                             .commit();
                     return true;
                 case R.id.libraryFragment:
-
-                    getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right).replace(R.id.container, libraryFragment).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                            .replace(R.id.container , libraryFragment)
+                            .commit();
                     return true;
                 case R.id.settingsFragment:
-                    getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right).replace(R.id.container, settingsFragment).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                            .replace(R.id.container , settingsFragment)
+                            .commit();
                     return true;
             }
             return false;
         });
 
 
-        //Build Database
-        Executors.newSingleThreadExecutor().execute(() -> {
-            AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                    AppDatabase.class, "ResDB").fallbackToDestructiveMigration().build();
-        });
+//        //if backup exists
+//        verifyStoragePermissions(this);
+//
+//        File backup = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Thunder" , "ThunderBackup.db");
+//        File database = getDatabasePath("MyToDos");
+//
+//        System.out.println("paths" + backup + "\npath2 " + database);
+//
+//        try {
+//            if (backup.exists()) {
+//                System.out.println("backup exists true");
+//
+//                FileChannel src = new FileInputStream(backup).getChannel();
+//                FileChannel dst = new FileOutputStream(database).getChannel();
+//                dst.transferFrom(src , 0 , src.size());
+//                src.close();
+//                dst.close();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext() ,
+                        AppDatabase.class , "ResDB")
+                .fallbackToDestructiveMigration()
+                .build();
+
+
+//                AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+//                                AppDatabase.class, "ResDB")
+//                        .createFromFile(backup)
+//                        .fallbackToDestructiveMigration()
+//                        .build();
+//            }
+//        else {
+//                AppDatabase.buildDatabase(this);
+//
+//                //Build Database
+////                Executors.newSingleThreadExecutor().execute(() -> {
+////                    AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+////                            AppDatabase.class, "ResDB").fallbackToDestructiveMigration().build();
+////                });
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
         //Check For Update
+
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 try {
                     GitHubResponse[] gitHubResponses = new CheckForUpdates().checkForUpdates();
-                    if(gitHubResponses!=null){
+                    if (gitHubResponses != null) {
                         UpdateAppFragment updateAppFragment = new UpdateAppFragment(gitHubResponses);
-                        getSupportFragmentManager().beginTransaction().add(R.id.container,updateAppFragment).addToBackStack(null).commit();
+                        getSupportFragmentManager().beginTransaction().add(R.id.container , updateAppFragment).addToBackStack(null).commit();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -111,24 +165,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
-
     //Blur BottomViewNavigation
-    void blurBottom(){
-    getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-    getWindow().setStatusBarColor(Color.TRANSPARENT);
-    final float radius = 14f;
-    final Drawable windowBackground = getWindow().getDecorView().getBackground();
+    void blurBottom() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS , WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        final float radius = 14f;
+        final Drawable windowBackground = getWindow().getDecorView().getBackground();
 
-    blurView.setupWith(rootView, new RenderScriptBlur(this))
-            .setFrameClearDrawable(windowBackground)
-            .setBlurRadius(radius);
-    blurView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
-    blurView.setClipToOutline(true);
-}
+        blurView.setupWith(rootView , new RenderScriptBlur(this))
+                .setFrameClearDrawable(windowBackground)
+                .setBlurRadius(radius);
+        blurView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+        blurView.setClipToOutline(true);
+    }
 
     // Storage Permissions
 //    private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -150,7 +202,16 @@ public class MainActivity extends AppCompatActivity {
 //            );
 //        }
 //    }
-
+//
+//    public static void addToRealm(TVShowSeasonDetails tvShowSeasonDetails) {
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(@NonNull Realm realm) {
+//
+//                realm.copyToRealm(tvShowSeasonDetails);
+//            }
+//        });
+//    }
 }
 
 

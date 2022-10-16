@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tvShowBackdropInSeason"
+            android:layout_width="match_parent"
+            android:layout_height="475dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/dummyposter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/gradient_top_bottom_bg" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+
+
+            <ImageView
+                android:id="@+id/seasonPosterInDetails"
+                android:layout_width="133dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummyposter" />
+
+            <TextView
+                android:id="@+id/tvShowTitleInSeason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/seasonTitle"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/seasonPosterInDetails"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Show Title" />
+
+            <TextView
+                android:id="@+id/seasonTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/labelsInSeason"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/seasonPosterInDetails"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center"
+                android:visibility="gone"
+                android:paddingHorizontal="15dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Season Title" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/labelsInSeason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/playInSeasonDetails"
+                android:layout_toEndOf="@id/seasonPosterInDetails">
+
+                <TextView
+                    android:id="@+id/seasonNumber"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/noOfEpisodesInSeason"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Season 2099" />
+
+                <TextView
+                    android:id="@+id/noOfEpisodesInSeason"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/seasonNumber"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:text="9090"
+                    android:textColor="#CCCCCC"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/seasonNumber"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playInSeasonDetails"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="133dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/seasonPosterInDetails"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/jost_regular"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:text="@string/play"
+                android:textColor="@color/white"
+                app:backgroundTint="#111111"
+                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:iconGravity="textStart" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/playInSeasonDetails"
+                android:orientation="vertical"
+                android:paddingBottom="70dp">
+
+                <TextView
+                    android:id="@+id/overviewTextInSeason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="@string/overview"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:visibility="gone">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/overviewDescSeason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    tools:text="Basically the whole plot of movie" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="Episodes"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerEpisodes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="80dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="14dp"
+                    android:scrollbars="vertical"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/episode_item"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

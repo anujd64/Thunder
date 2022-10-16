@@ -26,4 +26,6 @@
     <string name="update">update</string>
     <string name="not_now">Not Now</string>
     <string name="sort_by">Sort By</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
 </resources>

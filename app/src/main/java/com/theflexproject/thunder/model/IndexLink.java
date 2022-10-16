@@ -13,14 +13,23 @@ public class IndexLink{
     public String link;
     public String username;
     public String password;
-    public String type;
+    public String indexType;
+    public String folderType;
 
-    public String getType() {
-        return type;
+    public String getIndexType() {
+        return indexType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setIndexType(String indexType) {
+        this.indexType = indexType;
+    }
+
+    public String getFolderType() {
+        return folderType;
+    }
+
+    public void setFolderType(String folderType) {
+        this.folderType = folderType;
     }
 
     public int getId() {

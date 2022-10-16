@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/movieCard"
+    app:cardBackgroundColor="#00000000"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/posterInMediaItem"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/dummyposter" />
+
+        <TextView
+            android:id="@+id/nameInMediaItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/posterInMediaItem"
+            android:layout_alignStart="@+id/posterInMediaItem"
+            android:layout_alignEnd="@+id/posterInMediaItem"
+            android:paddingTop="5dp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/jost_regular"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@+id/posterInMediaItem" />
+
+        <TextView
+            android:id="@+id/yearInMediaItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameInMediaItem"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/jost_regular"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#cccccc"
+            android:visibility="gone"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/posterInMediaItem" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fileItemCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#00000000"
+    style="@style/Widget.Material3.CardView.Filled"
+    app:cardCornerRadius="15dp">
+
+    <eightbitlab.com.blurview.BlurView
+
+        android:id="@+id/blurView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#00000000"
+        android:clipChildren="false"
+        android:elevation="8dp"
+        layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:padding="10dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playInFileItem"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="133dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sizeTextInFileItem"
+                android:layout_alignParentStart="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="5dp"
+                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:iconGravity="textStart"
+                app:iconSize="35sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/downloadInFileItem"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="133dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sizeTextInFileItem"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="5dp"
+                app:icon="@drawable/ic_baseline_save_alt_24"
+                app:iconGravity="textStart"
+                app:iconSize="35sp" />
+
+            <TextView
+                android:id="@+id/sizeTextInFileItem"
+                style="@style/sizelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fileLinkInFileItem"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/jost_medium"
+                android:paddingHorizontal="20dp"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/videoQualityTextInFileItem"
+                style="@style/sizelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fileLinkInFileItem"
+                android:layout_toEndOf="@id/sizeTextInFileItem"
+                android:fontFamily="@font/jost_medium"
+                android:paddingHorizontal="20dp"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/fileNameInFileItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/jost_regular"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="FileName"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/fileLinkInFileItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fileNameInFileItem"
+                android:fontFamily="@font/jost_regular"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="Winter Has Come"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+
+    </eightbitlab.com.blurview.BlurView>
+
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -28,6 +28,21 @@ public class StringUtils {
         }
         return modified ? new String(buffer) : input;
     }
+
+    public static String runtimeIntegerToString(int runtime){
+
+        StringBuilder sb = new StringBuilder();
+        double f = (double)(runtime)/60;
+        String hour = Integer.toString((int)(Math.floor(f)));
+        String mins = Integer.toString(runtime%60);
+        if(hour.equals("0")){
+            sb.append(mins).append("m");
+        }else {
+            sb.append(hour).append("h ").append(mins).append("m");
+
+        }
+        return sb.toString();
+    }
     private StringUtils() {
     }
 }

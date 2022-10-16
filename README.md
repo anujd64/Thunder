@@ -15,7 +15,7 @@ What you need to do is :
 2. Deploy to Cloudflare (All instructions on the [Google Drive Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index) its super easy)
 3. Add the index link to movies folder link ( and username/password if you configured that for index ) in the settings tab, wait until it's done adding  
 
-There you go you have your media Library which sources files from Drive.
+There you go you have your media Library which sources movies from Drive.
 (Probably will add video demo soon)
 
 ### **📱 Screenshots** :
@@ -48,7 +48,7 @@ There you go you have your media Library which sources files from Drive.
 
 ### **📋 Notes** :
 
-- Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if files aren't added)
+- Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if movies aren't added)
 
 - Currently video is only hardware decoded (I think) That's why HEVC content may or nay not play at all
 
@@ -56,18 +56,18 @@ There you go you have your media Library which sources files from Drive.
 
 - Sub-folders of current folder are searched now but if the folder has too many sub folders it will take longer to scan
 
-- Even if your files aren't correctly named there is an alternative algorithm which might just extract necessary info
+- Even if your movies aren't correctly named there is an alternative algorithm which might just extract necessary info
 
-- Media files with no TMDB info are also shown in the library
+- Media movies with no TMDB info are also shown in the library
 
-- Rarely some files may be mislabled if there is another movie of same name on TMDB
+- Rarely some movies may be mislabled if there is another movie of same name on TMDB
 
-- Naming of the files does matter it's better if your files are named like this
+- Naming of the movies does matter it's better if your movies are named like this
 	```
 	movie.2049.2160p.whatever
 	movie.returns.2099.2160p.whatever
 
-- Ideally your folder should contain movie files only like
+- Ideally your folder should contain movie movies only like
 
 	``` 
 	📂Movies

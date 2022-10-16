@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tvShowBackdrop"
+            android:layout_width="match_parent"
+            android:layout_height="475dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/dummyposter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/gradient_top_bottom_bg" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+
+
+            <ImageView
+                android:id="@+id/tvShowPosterInDetails"
+                android:layout_width="133dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummyposter" />
+
+            <TextView
+                android:id="@+id/tvShowTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/labelsTvShow"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/tvShowPosterInDetails"
+                android:fontFamily="@font/jost_medium"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="ShowTitle" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/labelsTvShow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/playInTVShowDetails"
+                android:layout_toEndOf="@id/tvShowPosterInDetails">
+
+                <TextView
+                    android:id="@+id/noOfSeasons"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/ratingsTV"
+                    app:layout_constraintEnd_toStartOf="@+id/noOfEpisodes"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2099" />
+
+                <TextView
+                    android:id="@+id/noOfEpisodes"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/noOfSeasons"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/ratingsTV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/noOfSeasons"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/ratingsTV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/tmdb"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.4"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/ratingsTVText"
+                    style="@style/sizelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_medium"
+                    android:gravity="center_horizontal"
+                    android:textColor="#CCCCCC"
+                    android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ratingsTV"
+                    tools:text="86 %" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playInTVShowDetails"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="133dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/tvShowPosterInDetails"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/jost_regular"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:text="@string/play"
+                android:textColor="@color/white"
+                app:backgroundTint="#111111"
+                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:iconGravity="textStart" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="70dp"
+                android:layout_below="@id/playInTVShowDetails">
+                <TextView
+                    android:id="@+id/overviewTextTvShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="@string/overview"
+                    android:textColor="@color/white"
+                    android:textSize="18sp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/overviewDescTVShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/jost_regular"
+                    android:textSize="14sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:text="Basically the whole plot of movie" />
+
+                <TableLayout
+                    android:id="@+id/detailsTableTV"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:id="@+id/tvShowGenres"
+                        android:visibility="gone"
+                        android:padding="5dp">
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight=".4"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/jost_regular"
+                            android:textSize="14sp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="Genres :" />
+                        <TextView
+                            android:id="@+id/tvShowGenresText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:layout_marginTop="5dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </TableRow>
+                    <TableRow
+                        android:id="@+id/tvShowStatus"
+                        android:padding="5dp"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".4"
+                            android:layout_marginTop="5dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:text="Status :" />
+
+                        <TextView
+                            android:id="@+id/tvShowStatusText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:layout_marginTop="5dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </TableRow>
+                    <TableRow
+                        android:visibility="gone"
+                        android:id="@+id/tvShowType"
+                        android:padding="5dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight=".4"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/jost_regular"
+                            android:textSize="14sp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="Type :" />
+                        <TextView
+                            android:id="@+id/tvShowtypeText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight=".6"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/jost_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/SeasonRecyclerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/jost_medium"
+                    android:text="Seasons"
+                    android:textColor="@color/white"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSeasons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:clipToPadding="false"
+                    android:paddingBottom="85dp"
+                    android:scrollbars="horizontal"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

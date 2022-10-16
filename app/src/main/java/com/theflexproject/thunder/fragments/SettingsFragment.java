@@ -1,10 +1,15 @@
 package com.theflexproject.thunder.fragments;
 
+import static com.theflexproject.thunder.utils.StorageUtils.verifyStoragePermissions;
+
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.theflexproject.thunder.R;
@@ -21,15 +27,19 @@ import com.theflexproject.thunder.model.GitHubResponse;
 import com.theflexproject.thunder.utils.CheckForUpdates;
 import com.theflexproject.thunder.utils.SettingsManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.concurrent.Executors;
 
 public class SettingsFragment extends BaseFragment {
 
     Button addIndex;
     Button viewIndexes;
-    Button importIndex;
-    Button export;
+    Button importDatabase;
+    Button exportDatabase;
     Button checkForUpdate;
 
     ImageButton discord;
@@ -66,8 +76,8 @@ public class SettingsFragment extends BaseFragment {
     private void initWidgets() {
         addIndex = mActivity.findViewById(R.id.addIndexButton);
         viewIndexes = mActivity.findViewById(R.id.viewIndexes);
-//        importIndex = mActivity.findViewById(R.id.importIndex);
-//        export = mActivity.findViewById(R.id.export);
+        importDatabase = mActivity.findViewById(R.id.importDatabase);
+        exportDatabase = mActivity.findViewById(R.id.exportDatabase);
         checkForUpdate = mActivity.findViewById(R.id.checkforUpdates);
 
         discord = mActivity.findViewById(R.id.discordImageButton);
@@ -96,6 +106,36 @@ public class SettingsFragment extends BaseFragment {
             mActivity.getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
                     .replace(R.id.newsettingscontainer, manageIndexesFragment).addToBackStack(null).commit();
+        });
+
+
+        exportDatabase.setOnClickListener(v -> {
+
+            verifyStoragePermissions((Activity)mActivity);
+
+            int EXTERNAL_STORAGE_PERMISSION_CODE = 23;
+            // Requesting Permission to access External Storage
+            ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION_CODE);
+
+            File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
+            File backupDB = new File(folder +"/Thunder", "ThunderBackup.db");
+            File currentDB = new File(mActivity.getDatabasePath("MyToDos").toString());
+
+            try {
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src , 0 , src.size());
+                    src.close();
+                    dst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Toast.makeText(mActivity,"Export Successful",Toast.LENGTH_LONG).show();
+
         });
 
         externalPlayerToggle.setOnCheckedChangeListener(
@@ -160,5 +200,9 @@ public class SettingsFragment extends BaseFragment {
 //        castButtonToggle.setChecked(savedCAST);
 //        refreshPeriodicallyToggle.setChecked(savedREF);
     }
+
+
+
+
 
 }

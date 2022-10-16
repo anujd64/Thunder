@@ -53,7 +53,7 @@ public class ResFormat{
         return "ResFormat{" +
                 "nextPageToken='" + nextPageToken + '\'' +
                 ", curPageIndex='" + curPageIndex + '\'' +
-                ", data=" + data.files.toString() +
+                ", data=" + data.getFiles().toString() +
                 '}';
     }
 }

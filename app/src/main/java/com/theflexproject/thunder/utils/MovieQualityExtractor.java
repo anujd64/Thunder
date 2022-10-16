@@ -18,6 +18,6 @@ public class MovieQualityExtractor {
         if(name.contains("480")) return "480p";
         if(name.contains("XviD")||name.contains("XVID")) return "XVID";
         if(name.contains("ION10")) return "ION10";
-        return "N/A";
+        return null;
     }
 }
