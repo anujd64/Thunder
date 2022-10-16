@@ -2,14 +2,13 @@
 
 An Android app to stream and download your media stored in Google Drive in an Awesome way !!
 
-(Just Movies for now)
 <p align="center">
 <a href="https://github.com/anujd64/Thunder/releases"><img src="https://img.shields.io/github/downloads/anujd64/Thunder/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
 </p>
 
 ### **🔘 Getting Started** :
 
-Let's say you have a bunch of movies lying around in your Drive 
+Let's say you have a bunch of movies or tv shows lying around in your Drive 
 What you need to do is : 
 1. Generate an index for the shared drive/folder
 2. Deploy to Cloudflare (All instructions on the [Google Drive Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index) its super easy)
@@ -28,6 +27,8 @@ There you go you have your media Library which sources movies from Drive.
 ### **🔥 Features** :
 
 - Stream and Download media directly
+- Now Supports adding tv show folders too!!
+- Supports Google Drive Index (Recommended) , GO Index , MapleIndex
 - No Ads whatsoever
 - Cool UI
 - You can change Subtitle & Audio tracks while streaming 
@@ -38,12 +39,12 @@ There you go you have your media Library which sources movies from Drive.
 
 ### **🛠️ To Do** :
 
-- [ ] Add support for Shows
+- [x] Add support for Shows
 - [ ] Better Player UI
 - [ ] Remember Playback Position 
 - [ ] Add Sort to Library
 - [ ] Browse by genre 
-- [ ] Add animations
+- [x] Add animations
  
 
 ### **📋 Notes** :
@@ -66,6 +67,10 @@ There you go you have your media Library which sources movies from Drive.
 	```
 	movie.2049.2160p.whatever
 	movie.returns.2099.2160p.whatever
+- TV show are recognized based on the naming of an episode file so every episode must be named like this (probably will work if naming follows Scene naming conventions):
+	```
+	Show Name S01 E01
+	Show.Name.S01.E01.2160p.whatever
 
 - Ideally your folder should contain movie movies only like
 
