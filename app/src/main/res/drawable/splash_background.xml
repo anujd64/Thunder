@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/splash_bg_gradient"/>
+    <item>
+        <bitmap android:gravity="center"
+            android:mipMap="true"
+            android:src="@drawable/ic_launcher_round"/>
+    </item>
+</layer-list>
