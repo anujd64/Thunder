@@ -7,6 +7,10 @@ An Android app to stream and download your media stored in Google Drive in an Aw
 <a href="https://github.com/anujd64/Thunder/releases"><img src="https://img.shields.io/github/downloads/anujd64/Thunder/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
 </p>
 
+If you feel like supporting me :
+
+<a href="https://www.buymeacoffee.com/anujd"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=anujd&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+
 ### **🔘 Getting Started** :
 
 Let's say you have a bunch of movies lying around in your Drive 
