@@ -19,9 +19,17 @@ There you go you have your media Library which sources movies from Drive.
 
 ### **📱 Screenshots** :
 
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Home1.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails1.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Home.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Home2.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library-Movies.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Library-TV.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVDetails.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVDetailsBottom.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVSeasonDetails.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeList.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeDetails.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Settings.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 
 ### **🔥 Features** :
@@ -40,12 +48,12 @@ There you go you have your media Library which sources movies from Drive.
 ### **🛠️ To Do** :
 
 - [x] Add support for Shows
+- [x] Add animations
 - [ ] Better Player UI
 - [ ] Remember Playback Position 
 - [ ] Add Sort to Library
 - [ ] Browse by genre 
-- [x] Add animations
- 
+
 
 ### **📋 Notes** :
 
