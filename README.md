@@ -33,8 +33,7 @@ There you go you have your media Library which sources movies from Drive.
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVSeasonDetails.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeList.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeDetails.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Settings.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+
 
 ### **🔥 Features** :
 
