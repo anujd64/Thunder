@@ -8,7 +8,7 @@ An Android app to stream and download your media stored in Google Drive in an Aw
 
 If you feel like supporting me :
 
-<a href="https://www.buymeacoffee.com/anujd"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=anujd&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+<a href="https://www.buymeacoffee.com/anujd"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=anujd&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
 
 ### **🔘 Getting Started** :
 
