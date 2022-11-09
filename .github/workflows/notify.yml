@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Notify the commit on Telegram.
-        uses: EverythingSuckz/github-telegram-notify@main
+        uses: dishapatel010/github-telegram-notify@V1.1.3
         with:
           bot_token: '${{ secrets.BOT_TOKEN }}'
           chat_id: '${{ secrets.CHAT_ID }}'
