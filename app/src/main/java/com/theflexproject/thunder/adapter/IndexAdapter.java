@@ -1,12 +1,12 @@
 package com.theflexproject.thunder.adapter;
 
-import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndex;
-import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndexTVShow;
-import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGoIndex;
-import static com.theflexproject.thunder.utils.SendPostRequest.postRequestMapleIndex;
+import static com.theflexproject.thunder.utils.IndexUtils.deleteIndex;
+import static com.theflexproject.thunder.utils.IndexUtils.disableIndex;
+import static com.theflexproject.thunder.utils.IndexUtils.enableIndex;
+import static com.theflexproject.thunder.utils.IndexUtils.getNoOfMedia;
+import static com.theflexproject.thunder.utils.IndexUtils.refreshIndex;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +14,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theflexproject.thunder.R;
-import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.IndexLink;
-import com.theflexproject.thunder.model.TVShowInfo.Episode;
-import com.theflexproject.thunder.model.TVShowInfo.TVShow;
-import com.theflexproject.thunder.model.TVShowInfo.TVShowSeasonDetails;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.List;
 
 public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHolder> {
@@ -41,7 +34,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
 
     @Override
     public IndexViewHolder onCreateViewHolder(ViewGroup parent , int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.activity_recycler_view_layout , parent , false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.index_item , parent , false);
         return new IndexViewHolder(view);
     }
 
@@ -49,28 +42,94 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     public void onBindViewHolder(IndexViewHolder holder , int position) {
         IndexLink t = indexLinkList.get(position);
         holder.textViewLink.setText(t.getLink());
-        holder.textViewUsername.setText(t.getUsername());
-        holder.textViewPassword.setText(t.getPassword());
+//        holder.textViewUsername.setText(t.getUsername());
+//        holder.textViewPassword.setText(t.getPassword());
+
+        holder.indexType.setText(t.getIndexType());
+        holder.folderType.setText(t.getFolderType());
+
+        int noOfMedia = getNoOfMedia(holder.itemView.getContext(), t);
+        String s = noOfMedia+" "+t.getFolderType();
+        holder.noOfMedia.setText(s);
 
 
-        if (t.getUsername().length() > 0 && t.getPassword().length() > 0) {
-            holder.textViewUsername.setVisibility(View.VISIBLE);
-            holder.textViewPassword.setVisibility(View.VISIBLE);
-        }
+
+//        if (t.getUsername().length() > 0 && t.getPassword().length() > 0) {
+//            holder.textViewUsername.setVisibility(View.VISIBLE);
+//            holder.textViewPassword.setVisibility(View.VISIBLE);
+//        }
 
         holder.refreshIndex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.refreshIndexMovies(t);
+                Toast.makeText(view.getContext() , "Refreshing...",Toast.LENGTH_LONG).show();
+                refreshIndex(holder.itemView.getContext() , t);
+
             }
         });
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                holder.deleteIndex(t);
+            public void onClick(View view) {
+                if(!deleteIndex(holder.itemView.getContext(), t)){
+                    Toast.makeText(view.getContext() , "Deleted",Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+        if(t.getDisabled()==1){
+            holder.enableIndex.setChecked(false);
+        }
+        holder.enableIndex.setOnCheckedChangeListener((buttonView , isChecked) -> {
+            if(!isChecked){
+                System.out.println("disable index pressed");
+                disableIndex(holder.itemView.getContext(), t);
+            }
+            if(isChecked){
+                enableIndex(holder.itemView.getContext(), t);
+            }
+        });
+
+
+//        holder.actv.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String changeTo =s.toString();
+//                 new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if(changeTo.equals("GDIndex")){
+//                            deleteIndex(t);
+//                            postRequestGDIndex(t.getLink(),t.getUsername(),t.getPassword(), !t.folderType.equals("Movies"));
+//                        }if(changeTo.equals("GoIndex")){
+//                            deleteIndex(t);
+//                            postRequestGoIndex(t.getLink(),t.getUsername(),t.getPassword(), !t.folderType.equals("Movies"));
+//                        }if(changeTo.equals("Maple")){
+//                            deleteIndex(t);
+//                            postRequestMapleIndex(t.getLink(),t.getUsername(),t.getPassword(), !t.folderType.equals("Movies"));
+//                        }
+//                        if(changeTo.equals("SimpleProgram")){
+//                            deleteIndex(t);
+//                            postRequestSimpleProgramIndex(t.getLink(),t.getUsername(),t.getPassword(), !t.folderType.equals("Movies"));
+//                        }
+//                    }
+//                }).start();
+//
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -81,151 +140,31 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.IndexViewHol
     }
 
 
-    class IndexViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    protected class IndexViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewLink, textViewUsername, textViewPassword;
+        TextView textViewLink, textViewUsername, textViewPassword, indexType, folderType, noOfMedia;
         ImageButton refreshIndex;
         ImageButton delete;
+        SwitchCompat enableIndex;
+
+
 
         public IndexViewHolder(View itemView) {
             super(itemView);
-
             textViewLink = itemView.findViewById(R.id.textViewLink);
-            textViewUsername = itemView.findViewById(R.id.textViewUsername);
-            textViewPassword = itemView.findViewById(R.id.textViewPassword);
+            indexType = itemView.findViewById(R.id.indexTypeInIndexAdapter);
+            folderType = itemView.findViewById(R.id.folderTypeInIndexAdapter);
+            noOfMedia = itemView.findViewById(R.id.noOfMedia);
             refreshIndex = itemView.findViewById(R.id.refreshButton);
             delete = itemView.findViewById(R.id.deletebutton);
-
+            enableIndex = itemView.findViewById(R.id.enableIndexToggle);
             itemView.setOnClickListener(this);
         }
 
+
         @Override
-        public void onClick(View view) {
+        public void onClick(View v) {
 
-        }
-
-        void refreshIndexMovies(IndexLink indexLink) {
-            Toast.makeText(itemView.getContext() , "Refreshing..." , Toast.LENGTH_LONG).show();
-            Thread thread = new Thread(new Runnable() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void run() {
-//
-                    if (indexLink.getFolderType().equals("Movies")) {
-                        DatabaseClient.getInstance(null).getAppDatabase().movieDao().deleteAllFromthisIndex(indexLink.getLink());
-                        if (indexLink.getIndexType().equals("GDIndex")) {
-                            try {
-                                postRequestGDIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (indexLink.getIndexType().equals("GoIndex")) {
-                            try {
-                                postRequestGoIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                            } catch (IOException | JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (indexLink.getIndexType().equals("MapleIndex")) {
-                            try {
-                                postRequestMapleIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } else if (indexLink.getFolderType().equals("TVShows")) {
-                        DatabaseClient.getInstance(null).getAppDatabase().episodeDao().deleteAllFromthisIndex(indexLink.getLink());
-                        if ("GDIndex".equals(indexLink.getIndexType())) {
-                            try {
-                                postRequestGDIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        //                                            case "GoIndex":
-//                                                try {
-//                                                    postRequestGoIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-//                                                } catch (IOException | JSONException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                                break;
-//                                            case "MapleIndex":
-//                                                try {
-//                                                    postRequestMapleIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-//                                                } catch (IOException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                                break;
-
-                    }
-                }
-            });
-            thread.start();
-            Toast.makeText(itemView.getContext() , "Done" , Toast.LENGTH_LONG).show();
-        }
-
-        public void deleteIndex(IndexLink indexLink) {
-            Thread thread = new Thread(new Runnable() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void run() {
-                    if (indexLink.getFolderType().equals("Movies")) {
-                        DatabaseClient.getInstance(itemView.getContext())
-                                .getAppDatabase()
-                                .movieDao()
-                                .deleteAllFromthisIndex(indexLink.getLink());
-                    }
-                    if (indexLink.getFolderType().equals("TVShows")) {
-                        DatabaseClient.getInstance(itemView.getContext())
-                                .getAppDatabase()
-                                .episodeDao()
-                                .deleteAllFromthisIndex(indexLink.getLink());
-
-
-                        List<TVShowSeasonDetails> seasonsList = DatabaseClient
-                                .getInstance(itemView.getContext())
-                                .getAppDatabase()
-                                .tvShowSeasonDetailsDao()
-                                .getAll();
-
-                        for(TVShowSeasonDetails season : seasonsList) {
-                            List<Episode> episodeList = DatabaseClient
-                                    .getInstance(itemView.getContext())
-                                    .getAppDatabase()
-                                    .episodeDao()
-                                    .getFromSeasonOnly(season.getId());
-                            if(episodeList==null || episodeList.size()==0){
-                                DatabaseClient.getInstance(itemView.getContext()).getAppDatabase().tvShowSeasonDetailsDao().deleteById(season.getId());
-                            }
-                        }
-
-                        List<TVShow> tvShowList = DatabaseClient
-                                .getInstance(itemView.getContext())
-                                .getAppDatabase()
-                                .tvShowDao().getAll();
-
-                        for(TVShow tvShow : tvShowList) {
-                            List<TVShowSeasonDetails> seasonsInThisShow = DatabaseClient
-                                    .getInstance(itemView.getContext())
-                                    .getAppDatabase()
-                                    .tvShowSeasonDetailsDao()
-                                    .findByShowId(tvShow.getId());
-                            if(seasonsInThisShow==null|| seasonsInThisShow.size()==0){
-                                DatabaseClient.getInstance(itemView.getContext()).getAppDatabase().tvShowDao().deleteById(tvShow.getId());
-                            }
-                        }
-
-                    }
-                    DatabaseClient.getInstance(itemView.getContext())
-                            .getAppDatabase()
-                            .indexLinksDao()
-                            .deleteIndexLink(indexLink.getLink());
-                }
-            });
-            thread.start();
-            Toast.makeText(itemView.getContext() , "Deleted" , Toast.LENGTH_LONG).show();
         }
     }
 

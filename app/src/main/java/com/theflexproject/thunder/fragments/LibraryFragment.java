@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.adapter.FragmentViewPagerAdapter;
@@ -25,6 +26,9 @@ public class LibraryFragment extends BaseFragment {
     ArrayAdapter<String> arrayAdapter;
 
     TabLayout tabLayout ;
+    TabItem moviesTab;
+    TabItem tvTab;
+    TabItem filesTab;
     ViewPager2 viewPagerLibrary;
     FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
@@ -48,8 +52,13 @@ public class LibraryFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         initWidgets();
         tabLayout = mActivity.findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Movies"));
-        tabLayout.addTab(tabLayout.newTab().setText("TV Shows"));
+        moviesTab = mActivity.findViewById(R.id.movieTab);
+        tvTab = mActivity.findViewById(R.id.tvTab);
+        filesTab = mActivity.findViewById(R.id.filesTab);
+//        tabLayout.addTab(moviesTab);
+//        tabLayout.addTab(tvTab);
+//        tabLayout.addTab(tabLayout.newTab().setText("Movies"));
+//        tabLayout.addTab(tabLayout.newTab().setText("TV Shows"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

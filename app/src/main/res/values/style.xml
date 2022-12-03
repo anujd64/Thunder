@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="sizelabel">
-        <item name="android:minWidth">35dp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tabText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/jost_medium</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+
+    <style name="RoundedTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="android:background">@drawable/tab_layout_bg</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="background">@color/transparent</item>
+        <item name="tabBackground">@drawable/tab_item_selector</item>
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicator">@drawable/tab_indicator_bg</item>
+
+
     </style>
 
 </resources>

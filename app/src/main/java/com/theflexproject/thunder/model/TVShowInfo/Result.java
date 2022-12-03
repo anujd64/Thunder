@@ -6,7 +6,7 @@ public class Result {
     public String backdrop_path;
     public String first_air_date;
     public ArrayList<Integer> genre_ids;
-    public int id;
+    public long id;
     public String name;
     public ArrayList<String> origin_country;
     public String original_language;
@@ -41,7 +41,7 @@ public class Result {
         this.genre_ids = genre_ids;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

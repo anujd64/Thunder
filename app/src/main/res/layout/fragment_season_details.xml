@@ -16,7 +16,7 @@
             android:layout_height="475dp"
             android:background="@color/black"
             android:scaleType="centerCrop"
-            tools:src="@drawable/dummyposter" />
+            tools:src="@color/transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dummyposter" />
+                android:src="@color/transparent" />
 
             <TextView
                 android:id="@+id/tvShowTitleInSeason"
@@ -145,15 +145,15 @@
                 android:text="@string/play"
                 android:textColor="@color/white"
                 app:backgroundTint="#111111"
-                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:iconTint="@color/download_button_bg_color"
+                app:icon="@drawable/ic_play"
                 app:iconGravity="textStart" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/playInSeasonDetails"
-                android:orientation="vertical"
-                android:paddingBottom="70dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/overviewTextInSeason"
@@ -187,19 +187,20 @@
                     android:fontFamily="@font/jost_medium"
                     android:text="Episodes"
                     android:textColor="@color/white"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerEpisodes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="80dp"
+                    android:layout_marginTop="14dp"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="14dp"
+                    android:paddingBottom="80dp"
                     android:scrollbars="vertical"
+                    android:visibility="gone"
                     tools:itemCount="5"
-                    tools:listitem="@layout/episode_item"/>
+                    tools:listitem="@layout/episode_item" />
 
             </LinearLayout>
 

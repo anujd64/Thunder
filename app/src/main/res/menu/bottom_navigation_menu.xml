@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home_fill0_wght300_grad0_opsz24"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_search_fill0_wght300_grad0_opsz24"
+        android:icon="@drawable/ic_search"
         android:title="Search" />
     <item
         android:id="@+id/libraryFragment"
-        android:icon="@drawable/ic_baseline_video_library_24"
+        android:icon="@drawable/ic_library"
         android:title="Library" />
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings_fill0_wght300_grad0_opsz24"
+        android:icon="@drawable/ic_settings"
         android:title="Settings" />
 </menu>

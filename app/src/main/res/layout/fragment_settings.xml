@@ -1,310 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settingsContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/newsettingscontainer"
     android:background="@color/black">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/settingsContainer"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/SettingsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/jost_medium"
-            android:text="Settings"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
+        android:clipToPadding="false"
+        android:paddingBottom="70dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingTop="25dp"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/addIndexButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:background="@color/black"
-                android:fontFamily="@font/jost_regular"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="Add Index"
-                android:letterSpacing="0.001"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:icon="@drawable/ic_baseline_navigate_next_24"
-                app:iconPadding="16dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/white" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
-
-            <Button
-                android:id="@+id/viewIndexes"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:background="@color/black"
-                android:fontFamily="@font/jost_regular"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="Manage Indexes"
-                android:letterSpacing="0.001"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:icon="@drawable/ic_baseline_navigate_next_24"
-                app:iconPadding="16dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/white" />
-
-            <View android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
-
-            <Button android:visibility="gone"
-                android:id="@+id/importDatabase"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:background="@color/black"
-                android:fontFamily="@font/jost_regular"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="Import Database"
-                android:letterSpacing="0.001"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:icon="@drawable/ic_baseline_navigate_next_24"
-                app:iconPadding="16dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/white" />
-
-            <View android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
-
-            <Button android:visibility="gone"
-                android:id="@+id/exportDatabase"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:background="@color/black"
-                android:fontFamily="@font/jost_regular"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="Export Database"
-                android:letterSpacing="0.001"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:icon="@drawable/ic_baseline_navigate_next_24"
-                app:iconPadding="16dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/white" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
-
-<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--                android:id="@+id/castButtonVisibility"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:checked="false"-->
-<!--                android:drawableStart="@drawable/ic_baseline_navigate_next_24"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/jost_regular"-->
-<!--                android:minHeight="64dp"-->
-<!--                android:text="Show Cast Button"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:cornerRadius="0dp"-->
-<!--                app:drawableTint="#fff"-->
-<!--                app:showText="false"-->
-<!--                app:thumbTint="@color/white" />-->
-<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--                android:id="@+id/refreshPeriodicallyToggle"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:checked="false"-->
-<!--                android:drawableStart="@drawable/ic_baseline_navigate_next_24"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/jost_regular"-->
-<!--                android:minHeight="64dp"-->
-<!--                android:text="Refresh Automatically"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textAlignment="viewStart"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:cornerRadius="0dp"-->
-<!--                app:drawableTint="#fff"-->
-<!--                app:showText="false"-->
-<!--                app:thumbTint="@color/white" />-->
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/externalPlayerToggle"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/SettingsTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:drawableStart="@drawable/ic_baseline_navigate_next_24"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/jost_regular"
-                android:minHeight="64dp"
-                android:text="Use External Player"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/jost_medium"
+                android:text="Settings"
                 android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:drawableTint="#fff"
-                app:showText="false"
-                app:thumbTint="@color/white" />
+                android:textSize="25sp" />
 
-            <View
+            <LinearLayout
+                android:id="@+id/buttonContainerSettings"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
 
-            <Button
-                android:id="@+id/checkforUpdates"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="-32dp"
-                android:layout_marginEnd="-32dp"
-                android:background="@color/black"
-                android:fontFamily="@font/jost_regular"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
                 android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="Check for Update"
-                android:letterSpacing="0.001"
-                android:textSize="16sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="0dp"
-                app:icon="@drawable/ic_baseline_navigate_next_24"
-                app:iconPadding="16dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/white" />
+                android:paddingTop="25dp"
+                android:paddingEnd="32dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:background="#393838" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/addIndexButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="-32dp"
+                    android:layout_marginEnd="-32dp"
+                    android:background="@color/black"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_add"
+                    android:drawableEnd="@drawable/ic_next"
+                    android:drawablePadding="16dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:letterSpacing="0.001"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="Add Index"
+                    android:textAlignment="viewStart"
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:textAllCaps="false"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    app:icon="@drawable/ic_add"
+                    app:iconPadding="16dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/white" />
 
-                <ImageButton
-                    android:id="@+id/discordImageButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="30dp"
-                    android:background="#00000000"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/discord"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/githubImageButton"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
 
-                <ImageButton
-                    android:id="@+id/githubImageButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_toStartOf="@id/telegramImageButton"
-                    android:layout_toEndOf="@id/discordImageButton"
-                    android:background="#00000000"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/github"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/telegramImageButton"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/discordImageButton"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/viewIndexes"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="-32dp"
+                    android:layout_marginEnd="-32dp"
+                    android:background="@color/black"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_list"
+                    android:drawableEnd="@drawable/ic_next"
+                    android:drawablePadding="16dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:letterSpacing="0.001"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="Manage Indexes"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    app:cornerRadius="0dp"
+                    app:icon="@drawable/ic_list"
+                    app:iconPadding="16dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/white" />
 
-                <ImageButton
-                    android:id="@+id/telegramImageButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="30dp"
-                    android:background="#00000000"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/telegram"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/githubImageButton"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/importExportDatabase"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="-32dp"
+                    android:layout_marginEnd="-32dp"
+                    android:background="@color/black"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_import_export"
+                    android:drawableEnd="@drawable/ic_next"
+                    android:drawablePadding="16dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:letterSpacing="0.001"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="Import/Export Database"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    app:cornerRadius="0dp"
+                    app:icon="@drawable/ic_import_export"
+                    app:iconPadding="16dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
+
+                <!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
+                <!--                android:id="@+id/castButtonVisibility"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:checked="false"-->
+                <!--                android:drawableStart="@drawable/ic_baseline_navigate_next_24"-->
+                <!--                android:drawablePadding="16dp"-->
+                <!--                android:fontFamily="@font/jost_regular"-->
+                <!--                android:minHeight="64dp"-->
+                <!--                android:text="Show Cast Button"-->
+                <!--                android:textSize="16sp"-->
+                <!--                android:textAlignment="viewStart"-->
+                <!--                android:textColor="@color/white"-->
+                <!--                app:cornerRadius="0dp"-->
+                <!--                app:drawableTint="#fff"-->
+                <!--                app:showText="false"-->
+                <!--                app:thumbTint="@color/white" />-->
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/refreshPeriodicallyToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:checked="false"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_refresh"
+                    android:drawablePadding="16dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:minHeight="64dp"
+                    android:text="Refresh Everday at"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    android:thumb="@drawable/switch_ios_selector"
+                    app:track="@drawable/switch_ios_track"
+                    app:trackTint="@color/switch_bg_color" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/externalPlayerToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:checked="false"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_play"
+                    android:drawablePadding="16dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:minHeight="64dp"
+                    android:text="Use External Player"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    android:thumb="@drawable/switch_ios_selector"
+                    app:cornerRadius="0dp"
+                    app:track="@drawable/switch_ios_track"
+                    app:trackTint="@color/switch_bg_color" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
+
+                <Button
+                    android:id="@+id/checkforUpdates"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="-32dp"
+                    android:layout_marginEnd="-32dp"
+                    android:background="@color/black"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:letterSpacing="0.001"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:text="Check for Update"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/download_button_bg_color"
+                    android:textSize="16sp"
+                    app:cornerRadius="0dp"
+                    app:icon="@drawable/ic_update"
+                    app:iconPadding="16dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"
+                    android:background="#20ffffff" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
-    </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nestedContainer"
+        android:layout_gravity="bottom">
+
+        <ImageButton
+            android:id="@+id/githubImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="25dp"
+            android:layout_toStartOf="@id/telegramImageButton"
+            android:layout_toEndOf="@id/discordImageButton"
+            android:background="@drawable/tab_item_selector"
+            android:clickable="true"
+            android:focusable="true"
+            android:nextFocusRight="@id/telegramImageButton"
+            android:nextFocusDown="@id/telegramImageButton"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_github"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/telegramImageButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#80ffffff" />
+
+        <!--                    android:background="@drawable/tab_bg_color"-->
+
+
+        <!--                    android:background="@drawable/tab_bg_color"-->
+
+
+        <ImageButton
+            android:id="@+id/telegramImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/tab_item_selector"
+            android:clickable="true"
+            android:focusable="true"
+            android:nextFocusLeft="@id/githubImageButton"
+            android:nextFocusRight="@id/discordImageButton"
+            android:nextFocusUp="@id/githubImageButton"
+            android:nextFocusDown="@id/discordImageButton"
+            android:scaleType="centerInside"
+            android:src="@drawable/telegram"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#80ffffff" />
+
+        <ImageButton
+            android:id="@+id/discordImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/tab_item_selector"
+            android:clickable="true"
+            android:contentDescription="discord"
+            android:focusable="true"
+            android:nextFocusLeft="@id/telegramImageButton"
+            android:nextFocusUp="@id/telegramImageButton"
+            android:scaleType="centerInside"
+            android:src="@drawable/discord"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/telegramImageButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#80ffffff" />
+        <!--                    android:background="@drawable/tab_bg_color"-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/versionNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_below="@id/imageButtonContainer"
+        android:fontFamily="@font/jost_regular"
+        android:text="Version 1.0.6"
+        android:textAlignment="center"
+        android:textColor="#50ffffff" />
 </RelativeLayout>

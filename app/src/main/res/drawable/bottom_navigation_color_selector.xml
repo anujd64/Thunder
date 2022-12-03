@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:color="#F92415" android:state_pressed="true" />
-        <item android:color="#ff2020" android:state_checked="true" />
+        <item android:color="@color/blue" android:state_pressed="true" />
+        <item  android:color="@color/white" android:state_focused="true"/>
+        <item android:color="@color/blue" android:state_checked="true" >
+                <layer-list>
+                        <item android:gravity="bottom|center_horizontal">
+                                <shape android:shape="rectangle">
+                                        <size android:width="10dp" android:height="55dp" />
+                                        <solid android:color="@color/red" />
+                                        <corners android:bottomLeftRadius="3dp" android:bottomRightRadius="3dp" />
+                                </shape>
+                        </item>
+                </layer-list>
+        </item>
         <item android:color="#E1E1E1" />
+
 </selector>

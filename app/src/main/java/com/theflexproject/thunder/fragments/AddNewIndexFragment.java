@@ -1,57 +1,54 @@
 package com.theflexproject.thunder.fragments;
 
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndex;
-import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGDIndexTVShow;
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestGoIndex;
 import static com.theflexproject.thunder.utils.SendPostRequest.postRequestMapleIndex;
+import static com.theflexproject.thunder.utils.SendPostRequest.postRequestSimpleProgramIndex;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.IndexLink;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-
 
 public class AddNewIndexFragment extends BaseFragment {
 
-    public static final String TAG = "ActionBottomDialog";
     private EditText indexLinkView;
     private EditText userNameView;
     private EditText passWordView;
     private Button save;
+    private ProgressBar progress_circular;
     private TextView refreshSuggest;
 
-    private RadioGroup radioIndexTypeGroup;
-    private RadioButton radioIndexTypeButton;
-
-    private RadioGroup radioFolderTypeGroup;
-    private RadioButton radioFolderTypeButton;
-
-    public static AddNewIndexFragment newInstance(){
-        return new AddNewIndexFragment();
-    }
+//    private MaterialButtonToggleGroup toggleIndexTypeGroup;
+//    private MaterialButton toggleIndexTypeButton;
+//
+//    private MaterialButtonToggleGroup toggleFolderTypeGroup;
+//    private MaterialButton toggleFolderTypeButton;
 
 
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private AutoCompleteTextView actv1;
+    private AutoCompleteTextView actv2;
+
+//    private RadioGroup radioIndexTypeGroup;
+//    private RadioButton radioIndexTypeButton;
+//
+//    private RadioGroup radioFolderTypeGroup;
+//    private RadioButton radioFolderTypeButton;
+
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -67,48 +64,74 @@ public class AddNewIndexFragment extends BaseFragment {
         userNameView = view.findViewById(R.id.username);
         passWordView = view.findViewById(R.id.password);
         save = view.findViewById(R.id.save);
+        progress_circular = view.findViewById(R.id.progress_circular);
         refreshSuggest = view.findViewById(R.id.suggestRefresh);
 
-        radioIndexTypeGroup=(RadioGroup)mActivity.findViewById(R.id.rb_group);
-        radioFolderTypeGroup=(RadioGroup)mActivity.findViewById(R.id.folderTypeRadioGroup);
+//        toggleIndexTypeGroup = view.findViewById(R.id.index_type_group);
+//        toggleFolderTypeGroup = view.findViewById(R.id.folder_type_group);
+
+
+        actv1 = view.findViewById(R.id.actv);
+        actv2 = view.findViewById(R.id.actv2);
+
+        String[] index_types = mActivity.getResources().getStringArray(R.array.index_types);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<>(mActivity , R.layout.item_index_type , index_types);
+        actv1.setAdapter(arrayAdapter1);
+
+
+        String[] folder_types = mActivity.getResources().getStringArray(R.array.folder_types);
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<>(mActivity , R.layout.item_folder_type , folder_types);
+        actv2.setAdapter(arrayAdapter2);
 
 
 
 
+
+//        radioIndexTypeGroup=(RadioGroup)view.findViewById(R.id.rb_group);
+//        radioFolderTypeGroup=(RadioGroup)view.findViewById(R.id.folderTypeRadioGroup);
 
         save.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 IndexLink indexLink = new IndexLink();
-                indexLink.setLink(indexLinkView.getText().toString());
+                if(indexLinkView.getText().toString().equals("")){
+                    indexLinkView.setError("Enter index link");
+                }else{
+                    indexLink.setLink(indexLinkView.getText().toString());
+                }
                 indexLink.setUsername(userNameView.getText().toString());
                 indexLink.setPassword(passWordView.getText().toString());
+                indexLink.setIndexType(actv1.getText().toString());
+                indexLink.setFolderType(actv2.getText().toString());
 
 
 
-                int indexTypeButtonSelectedId=radioIndexTypeGroup.getCheckedRadioButtonId();
-                int folderTypeButtonSelectedId=radioFolderTypeGroup.getCheckedRadioButtonId();
-                radioIndexTypeButton= mActivity.findViewById(indexTypeButtonSelectedId);
-                radioFolderTypeButton= mActivity.findViewById(folderTypeButtonSelectedId);
+//                int IndexTypeCheckedButtonId = toggleIndexTypeGroup.getCheckedButtonId();
+//                toggleIndexTypeButton  = view.findViewById(IndexTypeCheckedButtonId);
+//                int FolderTypeCheckedButtonId = toggleFolderTypeGroup.getCheckedButtonId();
+//                toggleFolderTypeButton = view.findViewById(FolderTypeCheckedButtonId);
+
+//                int indexTypeButtonSelectedId=radioIndexTypeGroup.getCheckedRadioButtonId();
+//                int folderTypeButtonSelectedId=radioFolderTypeGroup.getCheckedRadioButtonId();
+//                radioIndexTypeButton= mActivity.findViewById(indexTypeButtonSelectedId);
+//                radioFolderTypeButton= mActivity.findViewById(folderTypeButtonSelectedId);
 
 
                 try{
                     if(indexLink.getLink().length()<1){
-                        refreshSuggest.setVisibility(View.VISIBLE);
-                        refreshSuggest.setText("Enter Index Link");
+                       indexLinkView.setError("Invalid Link");
                     }
-                    if(radioIndexTypeButton ==null || radioFolderTypeButton == null){
-                    refreshSuggest.setVisibility(View.VISIBLE);
-                    refreshSuggest.setText("Select Index and Folder Type");
-                    }
-                    if(indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
-                            userNameView.setVisibility(View.GONE);
-                            passWordView.setVisibility(View.GONE);
-                    }
+//                    if(toggleIndexTypeButton == null || toggleFolderTypeButton == null){
+//                    refreshSuggest.setVisibility(View.VISIBLE);
+//                    refreshSuggest.setText("Select Index and Folder Type");
+//                    }
+//                    if(toggleIndexTypeButton != null || toggleFolderTypeButton != null && indexLink.getUsername().length()<1 && indexLink.getPassword().length()<1){
+//                            userNameView.setVisibility(View.GONE);
+//                            passWordView.setVisibility(View.GONE);
+//                        indexLink.setIndexType(toggleIndexTypeButton.getText().toString());
+//                        indexLink.setFolderType(toggleFolderTypeButton.getText().toString());
+//                    }
 
-                    indexLink.setIndexType(radioIndexTypeButton.getText().toString());
-                    indexLink.setFolderType(radioFolderTypeButton.getText().toString());
 
                     Thread thread = new Thread(new Runnable() {
                         @Override
@@ -121,66 +144,73 @@ public class AddNewIndexFragment extends BaseFragment {
                                         refreshSuggest.setVisibility(View.VISIBLE);
                                     }
                                 });
-                            }else {
-                                DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().insert(indexLink);
-                                save.setText("Adding");
-                                if(radioFolderTypeButton.getText().toString().equals("Movies")) {
-                                    switch (radioIndexTypeButton.getText().toString()) {
-                                        //Case statements
-                                        case "GDIndex":
-                                            try {
-                                                postRequestGDIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
-                                        case "GoIndex":
-                                            try {
-                                                postRequestGoIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                                            } catch (IOException | JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
-                                        case "MapleIndex":
-                                            try {
-                                                postRequestMapleIndex(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
+                            }
+                            else if(indexLink.getLink()!=null) { DatabaseClient.getInstance(mActivity).getAppDatabase().indexLinksDao().insert(indexLink);
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        save.setText("Adding");
+                                        progress_circular.setVisibility(View.VISIBLE);
                                     }
-                                    save.setText("Done");
-                                }else {
-                                        switch (radioIndexTypeButton.getText().toString()) {
-                                            //Case statements
-                                            case "GDIndex":
-                                                try {
-                                                    postRequestGDIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                break;
-//                                            case "GoIndex":
-//                                                try {
-//                                                    postRequestGoIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-//                                                } catch (IOException | JSONException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                                break;
-//                                            case "MapleIndex":
-//                                                try {
-//                                                    postRequestMapleIndexTVShow(indexLink.getLink() , indexLink.getUsername() , indexLink.getPassword());
-//                                                } catch (IOException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                                break;
-                                        }
-                                        save.setText("Done");
+                                });
+
+
+
+                                String folderType = indexLink.getFolderType();
+                                String indexType = indexLink.getIndexType();
+
+                                String link =indexLink.getLink();
+                                String user =indexLink.getUsername();
+                                String pass =indexLink.getPassword();
+
+                                System.out.println("Before setting id"+ indexLink.getId());
+
+                                IndexLink indexLinkAgain = DatabaseClient.getInstance(mActivity)
+                                        .getAppDatabase()
+                                        .indexLinksDao()
+                                        .find(link);
+
+                                int index_id = indexLinkAgain.getId();
+
+                                System.out.println("After setting id"+ indexLinkAgain.getId());
+
+                                if(folderType.equals("Movies")) {
+                                    if(indexType.equals("GDIndex")) {
+                                        postRequestGDIndex(link,user,pass,false,index_id);
+                                    }
+                                    if(indexType.equals("GoIndex")) {
+                                        postRequestGoIndex(link,user,pass,false,index_id);
+                                    }
+                                    if(indexType.equals("Maple")){
+                                        postRequestMapleIndex(link,user,pass,false,index_id);
+                                    }
+                                    if(indexType.equals("SimpleProgram")){
+                                        postRequestSimpleProgramIndex(link,user,pass,false,index_id);
+                                    }
                                 }
 
-
+                                if(folderType.equals("TVShows")){
+                                    if(indexType.equals("GDIndex")) {
+                                        postRequestGDIndex(link,user,pass,true,index_id);
+                                    }
+                                    if(indexType.equals("GoIndex")) {
+                                        postRequestGoIndex(link,user,pass,true,index_id);
+                                    }
+                                    if(indexType.equals("MapleIndex")){
+                                        postRequestMapleIndex(link,user,pass,true,index_id);
+                                    }
+                                    if(indexType.equals("SimpleProgram")){
+                                        postRequestSimpleProgramIndex(link,user,pass,true,index_id);
+                                    }
+                                }
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        save.setText("Done");
+                                        progress_circular.setVisibility(View.GONE);
+                                    }
+                                });
                             }
-
                         }
                     });
                     thread.start();
@@ -190,8 +220,7 @@ public class AddNewIndexFragment extends BaseFragment {
 
                 if(save.getText().equals("Done")){
                         mActivity.getSupportFragmentManager().popBackStack();
-                    }
-
+                }
             }
         });
     }

@@ -2,6 +2,7 @@ package com.theflexproject.thunder.adapter;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -22,10 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.database.DatabaseClient;
+import com.theflexproject.thunder.fragments.ChangeTMDBFragment;
 import com.theflexproject.thunder.model.Movie;
 import com.theflexproject.thunder.model.MyMedia;
 import com.theflexproject.thunder.model.TVShowInfo.Episode;
@@ -43,12 +46,12 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
 
     Context context;
     List<MyMedia> mediaList;
-    private FileItemAdapter.OnItemClickListener listener;
+//    private FileItemAdapter.OnItemClickListener listener;
 
-    public FileItemAdapter(Context context, List<MyMedia> mediaList, FileItemAdapter.OnItemClickListener listener) {
+    public FileItemAdapter(Context context, List<MyMedia> mediaList) {
         this.context = context;
         this.mediaList = mediaList;
-        this.listener= listener;
+//        this.listener= listener;
     }
 
     @NonNull
@@ -59,13 +62,17 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FileItemAdapterHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FileItemAdapterHolder holder, @SuppressLint("RecyclerView") int position) {
 
         if (mediaList.get(position) instanceof Movie) {
             if (((Movie)mediaList.get(position)).getUrlString() != null) {
-                holder.link.setText(((Movie)mediaList.get(position)).getUrlString());
+                String link = ((Movie) mediaList.get(position)).getUrlString();
+                if(!link.contains("proxy")){
+                    holder.link.setText(link);
+                }
+
                 holder.fileName.setText(((Movie)mediaList.get(position)).getFileName());
-                holder.size.setText(new sizetoReadablesize().humanReadableByteCountBin(Long.parseLong(((Movie)mediaList.get(position)).getSize())));
+                holder.size.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(((Movie)mediaList.get(position)).getSize())));
             }
             String qualityStr = MovieQualityExtractor.extractQualtiy(((Movie)mediaList.get(position)).getFileName());
             if(qualityStr!=null){
@@ -100,15 +107,20 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
                 }
             });
 
+            holder.changeTMDB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    holder.changeTMDBFragmet(mediaList.get(position));
 
-
+                }
+            });
         }
 
         if (mediaList.get(position) instanceof Episode) {
             if (((Episode)mediaList.get(position)).getUrlString() != null) {
                 holder.link.setText(((Episode)mediaList.get(position)).getUrlString());
                 holder.fileName.setText(((Episode)mediaList.get(position)).getFileName());
-                holder.size.setText(new sizetoReadablesize().humanReadableByteCountBin(Long.parseLong(((Episode)mediaList.get(position)).getSize())));
+                holder.size.setText(sizetoReadablesize.humanReadableByteCountBin(Long.parseLong(((Episode)mediaList.get(position)).getSize())));
             }
             String qualityStr = MovieQualityExtractor.extractQualtiy(((Episode)mediaList.get(position)).getFileName());
             if(qualityStr!=null){
@@ -139,7 +151,19 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
                     holder.downloadMedia(((Episode)mediaList.get(position)).getUrlString());
                 }
             });
+
+            holder.changeTMDB.setVisibility(View.GONE);
+//            holder.changeTMDB.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    holder.changeTMDBFragmet(mediaList.get(position));
+//
+//                }
+//            });
         }
+
+
+
 
         setAnimation(holder.itemView , position);
 
@@ -165,6 +189,7 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
             TextView quality;
             Button play;
             Button download;
+            Button changeTMDB;
             SharedPreferences sharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
             boolean savedEXT = sharedPreferences.getBoolean("EXTERNAL_SETTING", false);
 
@@ -181,6 +206,7 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
                 quality = itemView.findViewById(R.id.videoQualityTextInFileItem);
                 play = itemView.findViewById(R.id.playInFileItem);
                 download = itemView.findViewById(R.id.downloadInFileItem);
+                changeTMDB = itemView.findViewById(R.id.changeTMDBIdInFileItem);
 
                 blurBottom();
 //                itemView.setOnClickListener(this);
@@ -215,7 +241,7 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
 
                 ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
                 ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
-                final float radius = 14f;
+                final float radius = 5f;
                 final Drawable windowBackground = ((Activity) context).getWindow().getDecorView().getBackground();
 
                 blurView.setupWith(rootView, new RenderScriptBlur(context))
@@ -223,6 +249,16 @@ public class FileItemAdapter extends RecyclerView.Adapter<FileItemAdapter.FileIt
                         .setBlurRadius(radius);
                 blurView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
                 blurView.setClipToOutline(true);
+            }
+
+            public void changeTMDBFragmet(MyMedia myMedia) {
+                AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
+                ChangeTMDBFragment changeTMDBFragment = new ChangeTMDBFragment(myMedia);
+
+                activity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                        .add(R.id.container,changeTMDBFragment).addToBackStack(null).commit();
+
             }
         }
         public interface OnItemClickListener {

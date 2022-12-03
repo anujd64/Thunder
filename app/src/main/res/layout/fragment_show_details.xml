@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/black">
 
     <RelativeLayout
@@ -13,14 +14,13 @@
         <ImageView
             android:id="@+id/tvShowBackdrop"
             android:layout_width="match_parent"
-            android:layout_height="475dp"
-            android:background="@color/black"
+            android:layout_height="450dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/dummyposter" />
+            tools:src="@color/transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="460dp"
             android:orientation="vertical">
             <View
                 android:layout_width="match_parent"
@@ -50,7 +50,19 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dummyposter" />
+                android:src="@color/transparent" />
+
+            <ImageView
+                android:id="@+id/tvLogo"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_margin="15dp"
+                android:layout_above="@+id/labelsTvShow"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/tvShowPosterInDetails"
+                android:scaleType="fitCenter"
+                android:src="@color/transparent"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvShowTitle"
@@ -61,6 +73,7 @@
                 android:layout_toEndOf="@+id/tvShowPosterInDetails"
                 android:fontFamily="@font/jost_medium"
                 android:gravity="center"
+                android:visibility="gone"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -116,9 +129,10 @@
                     android:layout_height="30dp"
                     android:src="@drawable/tmdb"
                     android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.4"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -131,6 +145,7 @@
                     android:textColor="#CCCCCC"
                     android:textSize="13sp"
                     android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/ratingsTV"
@@ -154,8 +169,25 @@
                 android:text="@string/play"
                 android:textColor="@color/white"
                 app:backgroundTint="#111111"
-                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:icon="@drawable/ic_play"
+                app:iconGravity="textStart"
+                app:iconTint="@color/download_button_bg_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/changeShowTMDBId"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="50dp"
+                android:layout_height="48dp"
+                app:iconTint="#626161"
+                android:layout_below="@id/tvShowPosterInDetails"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:icon="@drawable/ic_change"
                 app:iconGravity="textStart" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,8 +213,6 @@
                     android:textColor="@color/white"
                     android:fontFamily="@font/jost_regular"
                     android:textSize="14sp"
-                    android:clickable="true"
-                    android:focusable="true"
                     tools:text="Basically the whole plot of movie" />
 
                 <TableLayout
@@ -195,7 +225,6 @@
                         android:visibility="gone"
                         android:padding="5dp">
                         <TextView
-
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -203,8 +232,6 @@
                             android:textColor="@color/white"
                             android:fontFamily="@font/jost_regular"
                             android:textSize="14sp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:text="Genres :" />
                         <TextView
                             android:id="@+id/tvShowGenresText"
@@ -212,8 +239,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".6"
                             android:layout_marginTop="5dp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:fontFamily="@font/jost_regular"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -228,8 +253,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".4"
                             android:layout_marginTop="5dp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:fontFamily="@font/jost_regular"
                             android:textColor="@color/white"
                             android:textSize="14sp"
@@ -241,8 +264,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".6"
                             android:layout_marginTop="5dp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:fontFamily="@font/jost_regular"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -260,8 +281,6 @@
                             android:textColor="@color/white"
                             android:fontFamily="@font/jost_regular"
                             android:textSize="14sp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:text="Type :" />
                         <TextView
                             android:id="@+id/tvShowtypeText"
@@ -269,8 +288,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_weight=".6"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:fontFamily="@font/jost_regular"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -296,7 +313,7 @@
                     android:layout_marginTop="14dp"
                     android:clipToPadding="false"
                     android:paddingBottom="85dp"
-                    android:scrollbars="horizontal"
+                    android:nestedScrollingEnabled="false"
                     />
 
             </LinearLayout>

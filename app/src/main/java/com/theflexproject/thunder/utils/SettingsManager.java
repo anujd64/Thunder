@@ -13,9 +13,16 @@ public class SettingsManager {
         this.context = context;
     }
 
-    public void saveRefresh(Boolean REFRESH_PERIODICALLY_BUTTON) {
+//    public void firstTimeLaunch(Boolean isFirstTime) {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putBoolean("RESTORE_DATABASE", isFirstTime);
+//        editor.commit();
+//    }
+
+    public void saveRefresh(Boolean REFRESH_PERIODICALLY_BUTTON,Integer timeToRefresh) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("REFRESH_SETTING", REFRESH_PERIODICALLY_BUTTON);
+        editor.putInt("REFRESH_TIME", timeToRefresh);
         editor.commit();
     }
     public void saveCast(Boolean CAST_BUTTON) {

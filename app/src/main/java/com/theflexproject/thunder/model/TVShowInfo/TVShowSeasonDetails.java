@@ -23,7 +23,7 @@ public class TVShowSeasonDetails implements MyMedia {
     public String poster_path;
     public int season_number;
 
-    public int show_id;
+    public long show_id;
 
     @NonNull
     public String get_id() {
@@ -117,11 +117,11 @@ public class TVShowSeasonDetails implements MyMedia {
                 '}';
     }
 
-    public int getShow_id() {
+    public long getShow_id() {
         return show_id;
     }
 
-    public void setShow_id(int show_id) {
+    public void setShow_id(long show_id) {
         this.show_id = show_id;
     }
 }

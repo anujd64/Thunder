@@ -53,6 +53,7 @@ public class MovieLibraryFragment extends BaseFragment {
             public void run() {
                 Log.i(" " , "in thread");
                 if(movieList ==null){
+
                     movieList = DatabaseClient
                             .getInstance(mActivity)
                             .getAppDatabase()
@@ -69,13 +70,15 @@ public class MovieLibraryFragment extends BaseFragment {
             DisplayMetrics displayMetrics = mActivity.getResources().getDisplayMetrics();
             float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
             int noOfItems;
-            if (dpWidth < 600f) {
-                noOfItems = 3;
-            } else if (dpWidth < 840f) {
-                noOfItems = 6;
-            } else {
-                noOfItems = 8;
-            }
+
+            noOfItems = (int) (dpWidth/120);
+//            if (dpWidth < 600f) {
+//                noOfItems = 3;
+//            } else if (dpWidth < 840f) {
+//                noOfItems = 6;
+//            } else {
+//                noOfItems = 8;
+//            }
             Log.i(" " , newmediaList.toString());
             recyclerViewMovies = mActivity.findViewById(R.id.recyclerLibraryMovies);
             if(recyclerViewMovies!=null){
@@ -92,8 +95,8 @@ public class MovieLibraryFragment extends BaseFragment {
         listenerMovie = (view , position) -> {
             MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(movieList.get(position).getId());
             mActivity.getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.fade_in , R.anim.fade_out , R.anim.fade_in , R.anim.fade_out)
-                    .replace(R.id.container , movieDetailsFragment).addToBackStack(null).commit();
+                    .setCustomAnimations(R.anim.fade_in , R.anim.fade_out)
+                    .add(R.id.container , movieDetailsFragment).addToBackStack(null).commit();
         };
     }
 }

@@ -4,19 +4,33 @@ import android.util.Log;
 
 import androidx.room.TypeConverter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.theflexproject.thunder.model.Data;
 import com.theflexproject.thunder.model.Genre;
 import com.theflexproject.thunder.model.TVShowInfo.Episode;
 import com.theflexproject.thunder.model.TVShowInfo.Season;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class Converters {
+
+    @TypeConverter
+    public static Date fromTimestamp(Long value) {
+        return value == null ? null : new Date(value);
+    }
+
+    @TypeConverter
+    public static Long dateToTimestamp(Date date) {
+        return date == null ? null : date.getTime();
+    }
+
+
     @TypeConverter
     public static String fromData(Data data) {
         return data.toString();
@@ -29,17 +43,17 @@ public class Converters {
         return data;
     }
 
-    @TypeConverter
-    public static Long fromModifiedTime(Date date) {
-        if(date==null) return null;
-        return date.getTime();
-    }
-
-    @TypeConverter
-    public static Date fromLong(Long date) {
-        if(date==null) return null;
-        return new Date(date);
-    }
+//    @TypeConverter
+//    public static Long fromModifiedTime(Date date) {
+//        if(date==null) return null;
+//        return date.getTime();
+//    }
+//
+//    @TypeConverter
+//    public static Date fromLong(Long date) {
+//        if(date==null) return null;
+//        return new Date(date);
+//    }
 
     @TypeConverter
     public static String fromEpisodes(ArrayList<Episode> episodes) {
@@ -63,25 +77,34 @@ public class Converters {
         }
 //        Gson gson = new Gson();
 //        "Mon Oct 10 22:07:31 GMT+05:30 2022"
-        Gson gson = new GsonBuilder().setDateFormat("DDD MMM dd, yyyy HH:mm:ss").create();
-
+//        Gson gson = new GsonBuilder().setDateFormat("E MMM dd HH:mm:ss 'Z' yyyy").create();
+//        SimpleDateFormat df = new SimpleDateFormat("EE MMM dd HH:mm:ss zzzz yyyy");
+//        Gson gson = new GsonBuilder().setDateFormat("DDD MMM dd HH:mm:ss z yyyy").create();
 //        ObjectMapper om = new ObjectMapper();
+
+        ObjectMapper gson = new ObjectMapper();
+        SimpleDateFormat df=new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
+        gson.setDateFormat(df);
+
         String[] arr = episodesString.split("\t");
         ArrayList<Episode> episodes = new ArrayList<>();
         try {
             for (String s : arr) {
+
 //                Episode episode = om.readValue(s ,Episode.class);
-                Episode episode = gson.fromJson(s , Episode.class);
-                System.out.println("Episode inside For Loop" + episode);
+                Episode episode = gson.readValue(s , Episode.class);
+//                System.out.println("Episode inside For Loop" + episode);
                 episodes.add(episode);
             }
         } catch (Exception e) {
-            System.out.println("episodesArr in Converter" + episodes);
+            System.out.println("episodesArr exception" + e);
         }
-        System.out.println("episodesString in Converter" + episodesString);
-        System.out.println("episodesList in Converter" + episodes);
+//        System.out.println("episodesString in Converter" + episodesString);
+//        System.out.println("episodesList in Converter" + episodes);
         return episodes;
     }
+
+
 
     @TypeConverter
     public static String fromSeasons(ArrayList<Season> seasons) {
@@ -110,16 +133,16 @@ public class Converters {
         ArrayList<Season> seasons = new ArrayList<>();
         try {
             for (String s : arr) {
-                System.out.println("arr element inside For Loop" + s);
+//                System.out.println("arr element inside For Loop" + s);
                 Season season = gson.fromJson(s , Season.class);
-                System.out.println("Season inside For Loop" + season);
+//                System.out.println("Season inside For Loop" + season);
                 seasons.add(season);
             }
         } catch (Exception e) {
             Log.i("SeasonJson" , Arrays.toString(arr));
         }
         System.out.println(seasons);
-        System.out.println("seasonString in Converter" + seasonsString);
+//        System.out.println("seasonString in Converter" + seasonsString);
         return seasons;
     }
 
@@ -135,7 +158,7 @@ public class Converters {
             sb.append("\t");
         }
 
-        System.out.println("StringBuilder op" + sb.toString());
+
 
         return sb.toString();
     }
@@ -151,12 +174,9 @@ public class Converters {
 
         for (String s : arr) {
             Genre genre = gson.fromJson(s , Genre.class);
-            System.out.println("Genres inside For Loop" + genre);
-            System.out.println("element from array of genres" + s);
             genres.add(genre);
         }
         System.out.println(genres);
-        System.out.println("genreString in Converter" + genresString);
         return genres;
     }
 }

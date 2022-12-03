@@ -3,16 +3,16 @@ package com.theflexproject.thunder.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MovieTitleExtractor {
+public class SceneMovieTitleExtractor {
 
-    public static MovieTitleExtractor instance() {
+    public static SceneMovieTitleExtractor instance() {
         return INSTANCE;
     }
 
-    static final MovieTitleExtractor INSTANCE =
-            new MovieTitleExtractor();
+    static final SceneMovieTitleExtractor INSTANCE =
+            new SceneMovieTitleExtractor();
 
-    MovieTitleExtractor() {
+    SceneMovieTitleExtractor() {
         // singleton
     }
 
@@ -49,6 +49,7 @@ public class MovieTitleExtractor {
     private static final String REMAINING_JUNK = "(?:" + NON_CHARACTER + CHARACTER_GROUP + ")+";
     // matches "Movie.Name.2011.JUNK.JUNK.avi"
     private static final String MOVIENAME_YEAR_JUNK = MOVIENAME_GROUP + YEAR_GROUP + REMAINING_JUNK;
+
     private static final Pattern NAME_YEAR_SCENE_PATTERN = Pattern.compile(MOVIENAME_YEAR_JUNK);
 
 }

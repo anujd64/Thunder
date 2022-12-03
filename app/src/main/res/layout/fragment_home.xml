@@ -116,13 +116,33 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/watchListMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_medium"
+                android:paddingStart="20dp"
+                android:text="Watchlist"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/watchListMediaRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="14dp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/newSeason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/jost_medium"
                 android:paddingStart="20dp"
-                android:text="New Season"
+                android:text="New Episodes"
                 android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="16sp"

@@ -54,7 +54,7 @@ public class TvShowsLibraryFragment extends BaseFragment {
                     tvShowList = DatabaseClient
                             .getInstance(mActivity)
                             .getAppDatabase()
-                            .tvShowDao().getAll();
+                            .tvShowDao().getAllByTitles();
 
 //                    List<TVShow> emptyTVShows = new ArrayList<>();
 //                    for(TVShow tvShow : tvShowList) {
@@ -80,13 +80,14 @@ public class TvShowsLibraryFragment extends BaseFragment {
             DisplayMetrics displayMetrics = mActivity.getResources().getDisplayMetrics();
             float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
             int noOfItems;
-            if (dpWidth < 600f) {
-                noOfItems = 3;
-            } else if (dpWidth < 840f) {
-                noOfItems = 6;
-            } else {
-                noOfItems = 8;
-            }
+            noOfItems = (int) (dpWidth/120);
+//            if (dpWidth < 600f) {
+//                noOfItems = 3;
+//            } else if (dpWidth < 840f) {
+//                noOfItems = 6;
+//            } else {
+//                noOfItems = 8;
+//            }
             Log.i(" " , tvShowList.toString());
             recyclerViewTVShows = mActivity.findViewById(R.id.recyclerLibraryTVShows);
             if(recyclerViewTVShows!=null){
@@ -103,8 +104,10 @@ public class TvShowsLibraryFragment extends BaseFragment {
         listenerTVShow = (view , position) -> {
             TvShowDetailsFragment tvShowDetailsFragment = new TvShowDetailsFragment(tvShowList.get(position).getId());
             mActivity.getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.fade_in , R.anim.fade_out , R.anim.fade_in , R.anim.fade_out)
-                    .replace(R.id.container , tvShowDetailsFragment).addToBackStack(null).commit();
+                    .setCustomAnimations(R.anim.fade_in , R.anim.fade_out)
+                    .add(R.id.container , tvShowDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
         };
     }
 

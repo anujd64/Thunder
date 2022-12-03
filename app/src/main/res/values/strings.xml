@@ -10,7 +10,7 @@
     <string name="overview">Overview</string>
     <string name="download">Download</string>
     <string name="play">Play</string>
-    <string name="available_files">Link</string>
+    <string name="available_files">Available Files</string>
 
     <string-array name="sort_methods">
         <item>FileName</item>
@@ -20,6 +20,18 @@
         <item>Size</item>
         <item>IndexLink</item>
     </string-array>
+
+    <string-array name="index_types">
+        <item>GDIndex</item>
+        <item>GoIndex</item>
+        <item>MapleIndex</item>
+        <item>SimpleProgram</item>
+    </string-array>
+
+    <string-array name="folder_types">
+        <item>Movies</item>
+        <item>TVShows</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_available">Update Available</string>
@@ -28,4 +40,11 @@
     <string name="sort_by">Sort By</string>
     <string name="movies">Movies</string>
     <string name="tv_shows">TV Shows</string>
+    <string name="import_export_instructions">When permission is asked for storage allow and restart the app \n Exported Database is stored in Download/Thunder \n (Check if the file \"ThunderBackup.db\" is present in the device after export)\n To import previously exported Database: \n Click Import Database and restart the app</string>
+    <string name="search_for_a_movie_or_a_show">Search for a movie or a show</string>
+    <string name="gdindex">GDIndex</string>
+    <string name="goindex">GoIndex</string>
+    <string name="mapleindex">Maple</string>
+    <string name="simpleprogram">SimpleProgram</string>
+    <string name="enter_link_msg">Enter Index Link</string>
 </resources>
