@@ -27,13 +27,6 @@ public class ManageIndexesFragment extends BaseFragment{
         // Required empty public constructor
     }
 
-    public static ManageIndexesFragment newInstance(String param1, String param2) {
-        ManageIndexesFragment fragment = new ManageIndexesFragment();
-        Bundle args = new Bundle();
-
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

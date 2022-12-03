@@ -20,7 +20,7 @@ public class StorageUtils {
      *
      * @param activity
      */
-    public static void verifyStoragePermissions(Activity activity) {
+    public static boolean verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -31,6 +31,8 @@ public class StorageUtils {
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
+            return true;
         }
+        return false;
     }
 }

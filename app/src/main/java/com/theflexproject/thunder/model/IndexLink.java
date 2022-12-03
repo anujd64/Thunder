@@ -1,6 +1,7 @@
 package com.theflexproject.thunder.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -15,6 +16,17 @@ public class IndexLink{
     public String password;
     public String indexType;
     public String folderType;
+
+    public int getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(int disabled) {
+        this.disabled = disabled;
+    }
+
+    @ColumnInfo(name = "disabled", defaultValue = "0")
+    public int disabled;
 
     public String getIndexType() {
         return indexType;

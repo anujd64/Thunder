@@ -1,19 +1,21 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fillAfter="true" >
+    android:ordering="together"
+    android:fillAfter="false" >
 
-    <scale
-        android:duration="300"
-        android:fromXScale="0.9"
-        android:fromYScale="0.9"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:toXScale="1"
-        android:toYScale="1" >
-        <alpha
-            android:duration="300"
-            android:fromAlpha="0.35"
-            android:interpolator="@android:anim/accelerate_interpolator"
-            android:toAlpha="1.0" />
-    </scale>
+<!--    <scale-->
+<!--        android:startOffset="300"-->
+<!--        android:duration="400"-->
+<!--        android:fromXScale="0.9"-->
+<!--        android:fromYScale="0.9"-->
+<!--        android:pivotX="50%"-->
+<!--        android:pivotY="50%"-->
+<!--        android:toXScale="1"-->
+<!--        android:toYScale="1"-->
+<!--        android:interpolator="@android:interpolator/accelerate_decelerate"/>-->
+    <alpha
+        android:duration="500"
+        android:fromAlpha="0.0"
+        android:interpolator="@android:interpolator/accelerate_decelerate"
+        android:toAlpha="1.0" />
 
 </set>

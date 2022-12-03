@@ -1,9 +1,11 @@
 package com.theflexproject.thunder.model.TVShowInfo;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.theflexproject.thunder.model.MyMedia;
 
 import java.util.Date;
@@ -15,9 +17,38 @@ public class Episode implements MyMedia {
     public int idForDB;
     public String fileName;
     public String mimeType;
+
+
+    @JsonFormat(pattern="E MMM dd HH:mm:ss z yyyy")
     public Date modifiedTime;
     public String size;
     public String urlString;
+
+
+    public int getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(int disabled) {
+        this.disabled = disabled;
+    }
+
+    @ColumnInfo(name = "index_id", defaultValue = "0")
+    public int index_id;
+
+    public int getIndex_id() {
+        return index_id;
+    }
+
+    public void setIndex_id(int index_id) {
+        this.index_id = index_id;
+    }
+
+    @ColumnInfo(name = "disabled", defaultValue = "0")
+    public int disabled;
+
+    @ColumnInfo(name = "gd_id", defaultValue = "")
+    public String gd_id;
 
     public int Played;
 
@@ -31,7 +62,7 @@ public class Episode implements MyMedia {
     public String production_code;
     public int runtime;
     public int season_number;
-    public int show_id;
+    public long show_id;
     public String still_path;
     public double vote_average;
     public int vote_count;
@@ -66,6 +97,14 @@ public class Episode implements MyMedia {
                 ", \"show_id\"" + ':' + '\"' + show_id + '\"'  +
                 '}' ;
 //                        +"}" ;
+    }
+
+    public String getGd_id() {
+        return gd_id;
+    }
+
+    public void setGd_id(String gd_id) {
+        this.gd_id = gd_id;
     }
 
     public String getAir_date() {
@@ -132,11 +171,11 @@ public class Episode implements MyMedia {
         this.season_number = season_number;
     }
 
-    public int getShow_id() {
+    public long getShow_id() {
         return show_id;
     }
 
-    public void setShow_id(int show_id) {
+    public void setShow_id(long show_id) {
         this.show_id = show_id;
     }
 

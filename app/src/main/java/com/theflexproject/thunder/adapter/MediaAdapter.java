@@ -51,16 +51,16 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaAdapter
         
         if(mediaList.get(position) instanceof Movie) {
             Movie movie = ((Movie)mediaList.get(position));
-            holder.name.setText(movie.getTitle());
+            if(movie.getTitle()==null){
+                holder.name.setText(movie.getFileName());
+            } else holder.name.setText(movie.getTitle());
+
             if(movie.getPoster_path()!=null){
                 Glide.with(context)
                         .load(Constants.TMDB_IMAGE_BASE_URL+movie.getPoster_path())
                         .placeholder(new ColorDrawable(Color.BLACK))
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(14)))
                         .into(holder.poster);
-            }else{
-                holder.name.setText(movie.getFileName());
-                Glide.with(context).clear(holder.poster);
             }
 
             String year = movie.getRelease_date();
@@ -92,9 +92,8 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaAdapter
             TVShowSeasonDetails tvShowSeason = ((TVShowSeasonDetails)mediaList.get(position));
             if(tvShowSeason.getName()!=null){
                 holder.name.setText(tvShowSeason.getName());
-                String poster_path =null;
-                if(tvShowSeason.getPoster_path()!=null){
-                    poster_path = tvShowSeason.getPoster_path();
+                String poster_path = tvShowSeason.getPoster_path();
+                if(poster_path!=null){
                     Glide.with(context)
                             .load(Constants.TMDB_IMAGE_BASE_URL+poster_path)
                             .placeholder(new ColorDrawable(Color.BLACK))
@@ -139,10 +138,11 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaAdapter
             listener.onClick(v,getAbsoluteAdapterPosition());
         }
     }
+
+    
     public interface OnItemClickListener {
         public void onClick(View view, int position);
     }
-
 
     private void setAnimation(View itemView , int position){
         Animation popIn = AnimationUtils.loadAnimation(context,R.anim.pop_in);

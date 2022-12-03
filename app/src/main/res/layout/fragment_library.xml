@@ -20,11 +20,42 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
         android:id="@+id/tabLayout"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="#FE2222"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/libraryTitle"/>
+        app:tabTextAppearance="@style/tabText"
+        style="@style/RoundedTabLayoutStyle"
+        app:layout_constraintTop_toBottomOf="@id/libraryTitle">
+
+
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movies"
+            android:id="@+id/movieTab"
+            android:focusable="true"
+            android:clickable="true"
+            android:nextFocusRight="@id/tvTab"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TV Shows"
+            android:id="@+id/tvTab"
+            android:focusable="true"
+            android:clickable="true"
+            android:nextFocusLeft="@id/movieTab"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Files"
+            android:id="@+id/filesTab"
+            android:focusable="true"
+            android:clickable="true"
+            android:nextFocusLeft="@id/movieTab"/>
+
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerLibrary"

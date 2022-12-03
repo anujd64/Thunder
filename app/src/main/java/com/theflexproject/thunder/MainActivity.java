@@ -1,18 +1,23 @@
 package com.theflexproject.thunder;
 
+import static com.theflexproject.thunder.utils.UpdateUtils.checkForUpdates;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.theflexproject.thunder.database.AppDatabase;
@@ -20,12 +25,10 @@ import com.theflexproject.thunder.fragments.HomeFragment;
 import com.theflexproject.thunder.fragments.LibraryFragment;
 import com.theflexproject.thunder.fragments.SearchFragment;
 import com.theflexproject.thunder.fragments.SettingsFragment;
-import com.theflexproject.thunder.fragments.UpdateAppFragment;
-import com.theflexproject.thunder.model.GitHubResponse;
-import com.theflexproject.thunder.utils.CheckForUpdates;
+import com.theflexproject.thunder.utils.RefreshWorker;
 
-import java.io.IOException;
-import java.util.concurrent.Executors;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -45,134 +48,106 @@ public class MainActivity extends AppCompatActivity {
 
     public static Context context;
 
-    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);
         setContentView(R.layout.activity_main);
-
-        blurView = findViewById(R.id.blurView);
-        decorView = getWindow().getDecorView();
-        rootView = decorView.findViewById(android.R.id.content);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
         context = getApplicationContext();
 
-        blurBottom();
-//        verifyStoragePermissions(this);
+        initWidgets();
+
+        setUpBottomNavigationView();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container , homeFragment).commit();
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homeFragment:
-                    getSupportFragmentManager()
-                            .beginTransaction()
-//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container , homeFragment)
-                            .commit();
-                    return true;
-                case R.id.searchFragment:
-                    getSupportFragmentManager()
-                            .beginTransaction()
-//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container , searchFragment)
-                            .commit();
-                    return true;
-                case R.id.libraryFragment:
-                    getSupportFragmentManager()
-                            .beginTransaction()
-//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container , libraryFragment)
-                            .commit();
-                    return true;
-                case R.id.settingsFragment:
-                    getSupportFragmentManager()
-                            .beginTransaction()
-//                            .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
-                            .replace(R.id.container , settingsFragment)
-                            .commit();
-                    return true;
-            }
-            return false;
-        });
-
-
-//        //if backup exists
-//        verifyStoragePermissions(this);
-//
-//        File backup = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Thunder" , "ThunderBackup.db");
-//        File database = getDatabasePath("MyToDos");
-//
-//        System.out.println("paths" + backup + "\npath2 " + database);
-//
-//        try {
-//            if (backup.exists()) {
-//                System.out.println("backup exists true");
-//
-//                FileChannel src = new FileInputStream(backup).getChannel();
-//                FileChannel dst = new FileOutputStream(database).getChannel();
-//                dst.transferFrom(src , 0 , src.size());
-//                src.close();
-//                dst.close();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        checkForUpdates(this);
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext() ,
-                        AppDatabase.class , "ResDB")
-                .fallbackToDestructiveMigration()
+                        AppDatabase.class , "MyToDos")
+//                .fallbackToDestructiveMigration()
                 .build();
 
 
-//                AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-//                                AppDatabase.class, "ResDB")
-//                        .createFromFile(backup)
-//                        .fallbackToDestructiveMigration()
-//                        .build();
-//            }
-//        else {
-//                AppDatabase.buildDatabase(this);
-//
-//                //Build Database
-////                Executors.newSingleThreadExecutor().execute(() -> {
-////                    AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-////                            AppDatabase.class, "ResDB").fallbackToDestructiveMigration().build();
-////                });
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        //refresh index if set
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        boolean savedREF = sharedPreferences.getBoolean("REFRESH_SETTING", false);
+        int savedTime = sharedPreferences.getInt("REFRESH_TIME", 0);
+        if(savedREF){
+            scheduleWork(savedTime,0);
+//            WorkManager.getInstance(context).cancelAllWork();
+//            OneTimeWorkRequest impWork = new OneTimeWorkRequest.Builder(RefreshWorker.class)
+//                    .setInitialDelay(8,TimeUnit.HOURS)
+//                    .build();
+//            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(RefreshWorker.class, 24, TimeUnit.HOURS)
+//                    .setInitialDelay(24,TimeUnit.HOURS)
+//                    .build();
+//            WorkManager.getInstance(this).enqueue(impWork);
+        }
 
 
-        //Check For Update
-
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    GitHubResponse[] gitHubResponses = new CheckForUpdates().checkForUpdates();
-                    if (gitHubResponses != null) {
-                        UpdateAppFragment updateAppFragment = new UpdateAppFragment(gitHubResponses);
-                        getSupportFragmentManager().beginTransaction().add(R.id.container , updateAppFragment).addToBackStack(null).commit();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
 
     }
 
 
-    //Blur BottomViewNavigation
-    void blurBottom() {
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+            getSupportFragmentManager().popBackStackImmediate();
+        else super.onBackPressed();
+    }
+
+    private void initWidgets() {
+        blurView = findViewById(R.id.blurView);
+        decorView = getWindow().getDecorView();
+        rootView = decorView.findViewById(android.R.id.content);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        blurBottom();
+    }
+
+    private void setUpBottomNavigationView() {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if(item.getItemId()==R.id.homeFragment){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                        .replace(R.id.container , homeFragment)
+                        .commit();
+                return true;
+            }else if(item.getItemId()==R.id.searchFragment){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                        .replace(R.id.container , searchFragment)
+                        .commit();
+                return true;
+            }else if(item.getItemId()==R.id.libraryFragment){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                        .replace(R.id.container , libraryFragment)
+                        .commit();
+                return true;
+            }else if(item.getItemId()==R.id.settingsFragment){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.from_right,R.anim.to_left,R.anim.from_left,R.anim.to_right)
+                        .replace(R.id.container , settingsFragment)
+                        .commit();
+                return true;
+            }
+            return false;
+        });
+
+    }
+
+    private void blurBottom() {
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS , WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        final float radius = 14f;
+        final float radius = 12f;
         final Drawable windowBackground = getWindow().getDecorView().getBackground();
 
         blurView.setupWith(rootView , new RenderScriptBlur(this))
@@ -180,38 +155,39 @@ public class MainActivity extends AppCompatActivity {
                 .setBlurRadius(radius);
         blurView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         blurView.setClipToOutline(true);
+
+
     }
 
-    // Storage Permissions
-//    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-//    private static String[] PERMISSIONS_STORAGE = {
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE
-//    };
-//
-//    public static void verifyStoragePermissions(Activity activity) {
-//        // Check if we have write permission
-//        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//
-//        if (permission != PackageManager.PERMISSION_GRANTED) {
-//            // We don't have permission so prompt the user
-//            ActivityCompat.requestPermissions(
-//                    activity,
-//                    PERMISSIONS_STORAGE,
-//                    REQUEST_EXTERNAL_STORAGE
-//            );
-//        }
-//    }
-//
-//    public static void addToRealm(TVShowSeasonDetails tvShowSeasonDetails) {
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(@NonNull Realm realm) {
-//
-//                realm.copyToRealm(tvShowSeasonDetails);
-//            }
-//        });
-//    }
+    private void scheduleWork(int hour, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        long nowMillis = calendar.getTimeInMillis();
+
+        if(calendar.get(Calendar.HOUR_OF_DAY) > hour ||
+                (calendar.get(Calendar.HOUR_OF_DAY) == hour && calendar.get(Calendar.MINUTE)+1 >= minute)) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,minute);
+
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        long diff = calendar.getTimeInMillis() - nowMillis;
+
+        WorkManager mWorkManager = WorkManager.getInstance(context);
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+        mWorkManager.cancelAllWork();
+        OneTimeWorkRequest mRequest = new OneTimeWorkRequest.Builder(RefreshWorker.class)
+                .setConstraints(constraints)
+                .setInitialDelay(diff,TimeUnit.MILLISECONDS)
+                .build();
+        mWorkManager.enqueue(mRequest);
+
+    }
+
 }
 
 

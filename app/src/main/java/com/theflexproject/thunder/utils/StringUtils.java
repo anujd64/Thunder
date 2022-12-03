@@ -1,5 +1,6 @@
 package com.theflexproject.thunder.utils;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
@@ -44,6 +45,32 @@ public class StringUtils {
         return sb.toString();
     }
     private StringUtils() {
+    }
+
+    final public static Pattern TMDB_LINK_PATTERN_MOVIE = Pattern.compile("(.*)(themoviedb\\.org\\/movie\\/(\\d+))");
+    public static long tmdbIdExtractor_FromLink(String input) {
+        long id = 0;
+        System.out.println("input to change tmdb"+input);
+        Matcher m = TMDB_LINK_PATTERN_MOVIE.matcher(input);
+        if (m.matches()) {
+            id = Long.parseLong(m.group(3));
+            System.out.println("input to change tmdb"+id);
+            return id;
+        }
+        return id;
+    }
+    final public static Pattern TMDB_LINK_PATTERN_TV = Pattern.compile("(.*)(themoviedb\\.org\\/tv\\/(\\d+))");
+
+    public static long tmdbIdExtractor_FromLink_TV(String input) {
+        long id = 0;
+        System.out.println("input to change tmdb"+input);
+        Matcher m = TMDB_LINK_PATTERN_TV.matcher(input);
+        if (m.matches()) {
+            id = Long.parseLong(m.group(3));
+            System.out.println("input to change tmdb"+input);
+            return id;
+        }
+        return id;
     }
 }
 

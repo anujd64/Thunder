@@ -1,0 +1,223 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    android:focusable="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardMaxElevation="10dp"
+    android:backgroundTint="#1f1f1f"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/enableIndexToggle"
+            android:layout_width="42dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:checked="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/jost_regular"
+            android:gravity="center_vertical"
+            android:textColor="@color/download_button_bg_color"
+            android:textSize="16sp"
+            android:thumb="@drawable/switch_ios_selector"
+            app:track="@drawable/switch_ios_track"
+            app:trackTint="@color/switch_bg_color" />
+
+
+        <TextView
+            android:id="@+id/textViewLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/index_link_bg"
+            android:focusable="false"
+            android:padding="10dp"
+            android:text="https://linkmastershared.thelinkmaster111.workers.dev/0:/25/Movies/"
+            android:textColor="#70FFFFFF"
+            android:textIsSelectable="true" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/typeContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="70dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentStart="true"-->
+            <!--                android:layout_alignParentTop="true"-->
+            <!--                android:layout_centerHorizontal="true"-->
+            <!--                app:boxBackgroundColor="@color/black"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/folderTypeInIndexAdapter"-->
+            <!--                app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent">-->
+
+            <!--                <AutoCompleteTextView-->
+            <!--                    android:id="@+id/actv"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:background="@drawable/search_bg"-->
+            <!--                    android:inputType="none"-->
+            <!--                    android:padding="15dp"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:textColor="@color/white" />-->
+
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+
+            <TextView
+                android:id="@+id/indexTypeInIndexAdapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:fontFamily="@font/jost_medium"
+                android:text="Index Type"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/folderTypeInIndexAdapter"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/folderTypeInIndexAdapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_toEndOf="@id/indexTypeInIndexAdapter"
+                android:focusable="false"
+                android:fontFamily="@font/jost_medium"
+                android:text="Folder Type"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indexTypeInIndexAdapter"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/mediaDetected"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/filesDetected"-->
+<!--            android:text="Media Detected :"-->
+<!--            android:focusable="false"-->
+<!--            android:textColor="@color/white" />-->
+<!--        -->
+<!--        <TextView-->
+<!--            android:id="@+id/filesDetected"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/folderTypeInIndexAdapter"-->
+<!--            android:text="Total Files Detected :"-->
+<!--            android:focusable="false"-->
+<!--            android:textColor="@color/white" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewLink"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="false"
+            android:background="#121212"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/noOfMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:layout_toStartOf="@id/refreshButton"
+                android:fontFamily="@font/jost_medium"
+                android:text="69 Movies"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+            <ImageButton
+                android:id="@+id/refreshButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toStartOf="@id/deletebutton"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_refresh"
+                app:tint="@color/download_button_bg_color" />
+            <!--    android:background="@drawable/tab_bg_color"-->
+
+            <ImageButton
+                android:id="@+id/deletebutton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/delete_button_color" />
+            <!--    android:background="@drawable/tab_bg_color"-->
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

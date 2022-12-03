@@ -1,7 +1,6 @@
 package com.theflexproject.thunder.fragments;
 
 import static com.theflexproject.thunder.Constants.TMDB_BACKDROP_IMAGE_BASE_URL;
-import static com.theflexproject.thunder.Constants.TMDB_IMAGE_BASE_URL;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -26,8 +25,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.theflexproject.thunder.Constants;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.adapter.FileItemAdapter;
@@ -60,10 +61,17 @@ public class EpisodeDetailsFragment extends BaseFragment {
     TextView overviewText;
     ImageView ratings;
     TextView ratingsText;
-    Button play;
+    ImageButton play;
 
     TableRow air_date;
     TextView air_date_text;
+
+    ImageView logo;
+    TextView continueWatching;
+    ImageView dot1;
+    ImageView dot2;
+    ImageView dot3;
+    TextView episodeTitle;
 
     TVShow tvShow;
     TVShowSeasonDetails tvShowSeasonDetails;
@@ -74,7 +82,6 @@ public class EpisodeDetailsFragment extends BaseFragment {
     RecyclerView recyclerViewEpisodeFiles;
     List<Episode> episodeFileList;
     FileItemAdapter fileAdapter;
-    FileItemAdapter.OnItemClickListener listenerFileItem;
 
     public EpisodeDetailsFragment() {
         // Required empty public constructor
@@ -95,62 +102,104 @@ public class EpisodeDetailsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container ,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_episode_details , container , false);
+        return inflater.inflate(R.layout.fragment_episode_details_new , container , false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view , @Nullable Bundle savedInstanceState) {
 
-        initWidgets();
+        initWidgets(view);
         loadDetails();
 
         super.onViewCreated(view , savedInstanceState);
     }
 
-    private void initWidgets() {
-        showName = mActivity.findViewById(R.id.tvShowTitleInEpisodeDetails);
-        episodeName = mActivity.findViewById(R.id.episodeNameInEpisodeDetails);
-        poster = mActivity.findViewById(R.id.tvShowPosterInEpisodeDetails);
-        episodeStill = mActivity.findViewById(R.id.stillInEpisodeDetails);
-        seasonNumber = mActivity.findViewById(R.id.seasonNumberInEpisodeDetails);
-        runtime = mActivity.findViewById(R.id.runtimeInEpisodeDetails);
-        ratings = mActivity.findViewById(R.id.ratingsInEpisodeDetails);
-        ratingsText = mActivity.findViewById(R.id.ratingsTextInEpisodeDetails);
-        overview = mActivity.findViewById(R.id.overviewInEpisodeDetails);
-        overviewText = mActivity.findViewById(R.id.overviewDescInEpisodeDetails);
+    private void initWidgets(View view) {
+        showName = view.findViewById(R.id.tvShowTitleInEpisodeDetails);
+        logo = view.findViewById(R.id.tvLogoInEp);
+        episodeName = view.findViewById(R.id.episodeNameInEpisodeDetails);
+        poster = view.findViewById(R.id.tvShowPosterInEpisodeDetails);
+        episodeStill = view.findViewById(R.id.stillInEpisodeDetails);
+        seasonNumber = view.findViewById(R.id.seasonNumberInEpisodeDetails);
+        runtime = view.findViewById(R.id.runtimeInEpisodeDetails);
+//        ratings = view.findViewById(R.id.ratingsInEpisodeDetails);
+        ratingsText = view.findViewById(R.id.ratingsTextInEpisodeDetails);
+        overview = view.findViewById(R.id.overviewInEpisodeDetails);
+        overviewText = view.findViewById(R.id.overviewDescInEpisodeDetails);
 
-        air_date = mActivity.findViewById(R.id.episodeAirDate);
-        air_date_text = mActivity.findViewById(R.id.episodeAirDateText);
+        air_date = view.findViewById(R.id.episodeAirDate);
+        air_date_text = view.findViewById(R.id.episodeAirDateText);
 
-        play = mActivity.findViewById(R.id.playInEpisodeDetails);
+        continueWatching = view.findViewById(R.id.continueWatchingText);
+        dot1 = view.findViewById(R.id.dot);
+        dot2 = view.findViewById(R.id.dot2);
+        dot3 = view.findViewById(R.id.dot3);
+
+
+        play = view.findViewById(R.id.playInEpisodeDetails);
 
     }
 
     private void loadDetails() {
-        if (episode.getName() != null) {
+
+
+        String logoLink = tvShow.getLogo_path();
+        System.out.println("Logo Link"+logoLink);
+
+        if(!logoLink.equals("")){
+            logo.setVisibility(View.VISIBLE);
+            Glide.with(mActivity)
+                    .load(logoLink)
+                    .apply(new RequestOptions()
+                            .fitCenter()
+                            .override(Target.SIZE_ORIGINAL))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(new ColorDrawable(Color.TRANSPARENT))
+                    .into(logo);
+        }
+        if(logoLink.equals("")&&tvShow.getName()!=null){
+            showName.setVisibility(View.VISIBLE);
+            showName.setText(tvShow.getName());
+        }
+
+
+        String buttonText = "S" + episode.getSeason_number() + " E" + episode.getEpisode_number();
+        System.out.println(buttonText);
+        continueWatching.setText(buttonText);
+//                            play.setText(buttonText);
+        if(episode.getName()!=null){
+            dot3.setVisibility(View.VISIBLE);
+            episodeName.setVisibility(View.VISIBLE);
             episodeName.setText(episode.getName());
-        } else {
-            episodeName.setText("Episose" + episode.getEpisode_number());
+        }
+
+//        if (episode.getName() != null) {
+//            episodeName.setText(episode.getName());
+//        }
+        else {
+            String name = "Episode" + episode.getEpisode_number();
+            episodeName.setText(name);
         }
         if (episode.getVote_average() > 0) {
-            ratings.setVisibility(View.VISIBLE);
+//            ratings.setVisibility(View.VISIBLE);
+            dot1.setVisibility(View.VISIBLE);
             ratingsText.setVisibility(View.VISIBLE);
-            ratingsText.setText((int) (episode.getVote_average() * 10) + "%");
+            String rating =(int) (episode.getVote_average() * 10) + "%";
+            ratingsText.setText(rating);
         }
-        if (tvShowSeasonDetails.getPoster_path() != null) {
-            Glide.with(mActivity)
-                    .load(TMDB_IMAGE_BASE_URL + tvShowSeasonDetails.getPoster_path())
-                    .placeholder(new ColorDrawable(Color.BLACK))
-                    .into(poster);
-        } else {
-            if (tvShow.getPoster_path() != null) {
-                Glide.with(mActivity)
-                        .load(TMDB_IMAGE_BASE_URL + tvShow.getPoster_path())
-                        .placeholder(new ColorDrawable(Color.BLACK))
-                        .into(poster);
-            }
-
-        }
+//        if (tvShowSeasonDetails.getPoster_path() != null) {
+//            Glide.with(mActivity)
+//                    .load(TMDB_IMAGE_BASE_URL + tvShowSeasonDetails.getPoster_path())
+//                    .placeholder(new ColorDrawable(Color.BLACK))
+//                    .into(poster);
+//        } else {
+//            if (tvShow.getPoster_path() != null) {
+//                Glide.with(mActivity)
+//                        .load(TMDB_IMAGE_BASE_URL + tvShow.getPoster_path())
+//                        .placeholder(new ColorDrawable(Color.BLACK))
+//                        .into(poster);
+//            }
+//        }
         if (episode.getStill_path() != null) {
             Glide.with(mActivity.getApplicationContext())
                     .load(Constants.TMDB_BACKDROP_IMAGE_BASE_URL + episode.getStill_path())
@@ -166,7 +215,8 @@ public class EpisodeDetailsFragment extends BaseFragment {
             }
         }
         if (episode.getOverview() != null) {
-            overview.setVisibility(View.VISIBLE);
+//            overview.setVisibility(View.VISIBLE);
+            overviewText.setVisibility(View.VISIBLE);
             overviewText.setText(episode.getOverview());
         }
         if (episode.getAir_date() != null) {
@@ -186,11 +236,9 @@ public class EpisodeDetailsFragment extends BaseFragment {
             runtime.setVisibility(View.VISIBLE);
             runtime.setText(result);
         }
-        if (tvShow.getName() != null) {
-            showName.setText(tvShow.getName());
-        }
         if (!(tvShowSeasonDetails.getSeason_number() < 0)) {
-            seasonNumber.setText("Season " + tvShowSeasonDetails.getSeason_number());
+            String season = "Season " + tvShowSeasonDetails.getSeason_number();
+            seasonNumber.setText(season);
         }
         loadEpisodeFilesRecycler();
 
@@ -216,7 +264,7 @@ public class EpisodeDetailsFragment extends BaseFragment {
 //                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
                         recyclerViewEpisodeFiles.setLayoutManager(linearLayoutManager);
                         recyclerViewEpisodeFiles.setHasFixedSize(true);
-                        fileAdapter = new FileItemAdapter(getContext() ,(List<MyMedia>)(List<?>) episodeFileList , listenerFileItem);
+                        fileAdapter = new FileItemAdapter(getContext() ,(List<MyMedia>)(List<?>) episodeFileList);
                         recyclerViewEpisodeFiles.setAdapter(fileAdapter);
                         fileAdapter.notifyDataSetChanged();
                     }

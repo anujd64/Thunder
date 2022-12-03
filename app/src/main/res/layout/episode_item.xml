@@ -6,9 +6,12 @@
     android:id="@+id/tvEpisodeCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginVertical="10dp"
+    android:nextFocusLeft="@id/playInEpisodeItem"
     app:cardCornerRadius="15dp"
-    app:cardBackgroundColor="#00000000">
+    android:focusable="true"
+    android:clickable="true"
+    app:cardBackgroundColor="@color/episode_item_bg_color">
 
     <eightbitlab.com.blurview.BlurView
 
@@ -30,13 +33,13 @@
             android:layout_height="75dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/dummyposter" />
+            app:srcCompat="@color/black85" />
 
         <RelativeLayout
             android:layout_width="133dp"
             android:layout_height="75dp"
-            android:paddingHorizontal="5dp"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="5dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/playInEpisodeItem"
@@ -46,10 +49,12 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
+                android:nextFocusDown="@id/tvEpisodeCard"
                 android:orientation="horizontal"
-                app:icon="@drawable/ic_baseline_play_arrow_24"
+                app:icon="@drawable/ic_play"
                 app:iconGravity="textStart"
-                app:iconSize="45sp" />
+                app:iconSize="45sp"
+                app:iconTint="@color/download_button_bg_color" />
         </RelativeLayout>
 
         <TableLayout
@@ -59,11 +64,13 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/episodeStill"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp">
 
             <TableRow
                 android:id="@+id/sXXeYY"
                 android:layout_weight="1"
+                android:padding="5dp"
                 android:visibility="visible">
 
                 <TextView
@@ -73,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jost_medium"
                     android:text="S01"
+                    android:layout_weight="0.3"
                     android:textColor="#CCCCCC"
                     android:textSize="10sp"
                     android:visibility="visible" />
@@ -87,6 +95,7 @@
                     android:text="E01"
                     android:textColor="#CCCCCC"
                     android:textSize="10sp"
+                    android:layout_weight="0.3"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/ratingsTV"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jost_medium"
                     android:text="48min"
+                    android:layout_weight="0.3"
                     android:textAlignment="viewEnd"
                     android:textColor="#CCCCCC"
                     android:textSize="10sp"
@@ -112,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jost_regular"
-                android:paddingHorizontal="10dp"
                 android:text="Winter Has Come"
                 android:textAlignment="viewStart"
                 android:textColor="@color/white"
@@ -124,7 +133,6 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/jost_regular"
                 android:maxLines="2"
-                android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 tools:text="Basically the whole plot of movie Basically the whole plot of movie Basically the whole plot of movie" />

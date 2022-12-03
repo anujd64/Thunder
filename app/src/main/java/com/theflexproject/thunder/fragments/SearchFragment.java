@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.adapter.MediaAdapter;
 import com.theflexproject.thunder.database.DatabaseClient;
@@ -42,7 +42,7 @@ public class SearchFragment extends BaseFragment {
     List<MyMedia> matchesFound;
     MediaAdapter.OnItemClickListener listener;
 
-    EditText searchBox;
+    TextInputEditText searchBox;
     Button search;
     ScrollView scrollview;
 
@@ -66,17 +66,17 @@ public class SearchFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         searchBox = view.findViewById(R.id.search_input);
-        search = view.findViewById(R.id.search_button);
-        scrollview= view.findViewById(R.id.scrollview);
+//        search = view.findViewById(R.id.search_button);
+//        scrollview= view.findViewById(R.id.scrollview);
         recyclerView = mActivity.findViewById(R.id.recyclersearch);
-        scrollview.setVisibility(View.VISIBLE);
+//        scrollview.setVisibility(View.VISIBLE);
         showSearchResults();
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showSearchResults();
-            }
-        });
+//        search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showSearchResults();
+//            }
+//        });
 
 
 
@@ -101,6 +101,7 @@ public class SearchFragment extends BaseFragment {
                                     new TimerTask() {
                                         @Override
                                         public void run() {
+                                            if(!s.toString().equals("")){
                                             Thread thread = new Thread(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -139,6 +140,7 @@ public class SearchFragment extends BaseFragment {
                                                     });
                                                 }});
                                             thread.start();
+                                            }
                                         }
                                     },
                                     DELAY
@@ -182,16 +184,23 @@ public class SearchFragment extends BaseFragment {
     private void setOnClickListner() {
         listener = (view , position) -> {
             if(matchesFound.get(position) instanceof Movie){
-                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(((Movie)matchesFound.get(position)).getId());
+                MovieDetailsFragment movieDetailsFragment;
+                if(((Movie)matchesFound.get(position)).getId()==0){
+                    movieDetailsFragment = new MovieDetailsFragment(((Movie)matchesFound.get(position)).getFileName());
+
+                }else {
+                    movieDetailsFragment = new MovieDetailsFragment(((Movie)matchesFound.get(position)).getId());
+                }
+
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
             if(matchesFound.get(position) instanceof TVShow){
                 TvShowDetailsFragment tvShowDetailsFragment = new TvShowDetailsFragment(((TVShow)matchesFound.get(position)).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
             }
 
         };

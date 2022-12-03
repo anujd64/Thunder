@@ -1,6 +1,7 @@
 package com.theflexproject.thunder.model.TVShowInfo;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -16,6 +17,21 @@ public class TVShow implements MyMedia {
     public int idForDB;
     public boolean adult;
     public String backdrop_path;
+
+    public int getAddToList() {
+        return addToList;
+    }
+
+    public void setAddToList(int addToList) {
+        this.addToList = addToList;
+    }
+
+    @ColumnInfo(name = "addToList", defaultValue = "0")
+    public int addToList;
+
+    @ColumnInfo(name = "logo_path", defaultValue = "")
+    public String logo_path;
+
     public String homepage;
     public String first_air_date;
     public int id;
@@ -46,6 +62,7 @@ public class TVShow implements MyMedia {
 //    public ArrayList<String> origin_country;
 //    public Object next_episode_to_air;
 //    public LastEpisodeToAir last_episode_to_air;
+//
 //    public ArrayList<String> languages;
 
     public boolean isAdult() {
@@ -64,6 +81,14 @@ public class TVShow implements MyMedia {
         this.backdrop_path = backdrop_path;
     }
 
+
+    public String getLogo_path() {
+        return logo_path;
+    }
+
+    public void setLogo_path(String logo_path) {
+        this.logo_path = logo_path;
+    }
 //    public ArrayList<CreatedBy> getCreated_by() {
 //        return created_by;
 //    }
@@ -335,6 +360,7 @@ public class TVShow implements MyMedia {
                 ", status='" + status + '\'' +
                 ", tagline='" + tagline + '\'' +
                 ", type='" + type + '\'' +
+                ", logo_path=" + logo_path +
                 ", vote_average=" + vote_average +
                 ", vote_count=" + vote_count +
                 '}';

@@ -1,7 +1,6 @@
 package com.theflexproject.thunder.fragments;
 
 import static com.theflexproject.thunder.Constants.TMDB_BACKDROP_IMAGE_BASE_URL;
-import static com.theflexproject.thunder.Constants.TMDB_IMAGE_BASE_URL;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +24,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.theflexproject.thunder.R;
 import com.theflexproject.thunder.adapter.EpisodeAdapter;
 import com.theflexproject.thunder.adapter.ScaleCenterItemLayoutManager;
@@ -43,14 +45,19 @@ public class SeasonDetailsFragment extends BaseFragment {
     String tvShowName;
     TextView tvShowTitleText;
     TextView seasonName;
-    TextView seasonNumber;
+//    TextView seasonNumber;
     TextView numberOfEpisodes;
 
     TextView overview;
     TextView overviewText;
-    Button play;
+    ImageButton play;
 
-    ImageView poster;
+    ImageView logo;
+    TextView continueWatching;
+    ImageView dot3;
+    TextView episodeTitle;
+
+//    ImageView poster;
     ImageView backdrop;
 
     TVShowSeasonDetails tvShowSeasonDetails;
@@ -85,7 +92,7 @@ public class SeasonDetailsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater , ViewGroup container ,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_season_details , container , false);
+        return inflater.inflate(R.layout.fragment_season_details_new , container , false);
     }
 
     @Override
@@ -98,14 +105,21 @@ public class SeasonDetailsFragment extends BaseFragment {
     }
 
     private void initWidgets(View view) {
-        tvShowTitleText = view.findViewById(R.id.tvShowTitleInSeason);
+        tvShowTitleText = view.findViewById(R.id.showTitle);
         seasonName = view.findViewById(R.id.seasonTitle);
-        seasonNumber = view.findViewById(R.id.seasonNumber);
+//        seasonNumber = view.findViewById(R.id.seasonNumber);
         numberOfEpisodes = view.findViewById(R.id.noOfEpisodesInSeason);
-        overview = view.findViewById(R.id.overviewDescSeason);
-        overviewText = view.findViewById(R.id.overviewTextInSeason);
-        poster = view.findViewById(R.id.seasonPosterInDetails);
+        overview = view.findViewById(R.id.overviewDescTVShowSeason);
+//        overviewText = view.findViewById(R.id.overviewTextInSeason);
+//        poster = view.findViewById(R.id.seasonPosterInDetails);
         backdrop = view.findViewById(R.id.tvShowBackdropInSeason);
+
+
+        logo = view.findViewById(R.id.tvLogoInSeason);
+        continueWatching = view.findViewById(R.id.continueWatchingText);
+        episodeTitle = view.findViewById(R.id.episodeNameInTvSeason);
+        dot3 = view.findViewById(R.id.dot3);
+
 
         play = view.findViewById(R.id.playInSeasonDetails);
 
@@ -141,8 +155,24 @@ public class SeasonDetailsFragment extends BaseFragment {
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (tvShowSeasonDetails.getName() != null) {
-                                tvShowTitleText.setText(tvShowSeasonDetails.getName());
+
+                            String logoLink = tvShow.getLogo_path();
+                            System.out.println("Logo Link"+logoLink);
+
+                            if(!logoLink.equals("")){
+                                logo.setVisibility(View.VISIBLE);
+                                Glide.with(mActivity)
+                                        .load(logoLink)
+                                        .apply(new RequestOptions()
+                                                .fitCenter()
+                                                .override(Target.SIZE_ORIGINAL))
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .placeholder(new ColorDrawable(Color.TRANSPARENT))
+                                        .into(logo);
+                            }
+                            if(logoLink.equals("")&&tvShow.getName()!=null){
+                                tvShowTitleText.setVisibility(View.VISIBLE);
+                                tvShowTitleText.setText(tvShow.getName());
                             }
                             if (tvShowSeasonDetails.getName() != null) {
                                 seasonName.setVisibility(View.VISIBLE);
@@ -155,31 +185,41 @@ public class SeasonDetailsFragment extends BaseFragment {
                             int season_number = tvShowSeasonDetails.getSeason_number();
                             int number_of_episodes = episodes.size();
                             if (number_of_episodes > 0) {
-                                seasonNumber.setVisibility(View.VISIBLE);
-                                seasonNumber.setText("Season " + season_number);
+//                                seasonNumber.setVisibility(View.VISIBLE);
+//                                seasonNumber.setText("Season " + season_number);
                                 numberOfEpisodes.setVisibility(View.VISIBLE);
                                 numberOfEpisodes.setText(number_of_episodes + " Episodes");
                             }
-                            if (tvShow.getName() != null) {
-                                tvShowTitleText.setText(tvShow.getName());
-                            }
+//                            if (tvShow.getName() != null) {
+//                                tvShowTitleText.setText(tvShow.getName());
+//                            }
                             if (tvShowSeasonDetails.getOverview().length() > 1) {
-                                overviewText.setVisibility(View.VISIBLE);
-                                overview.setVisibility(View.VISIBLE);
+//                                overviewText.setVisibility(View.VISIBLE);
+//                                overview.setVisibility(View.VISIBLE);
                                 overview.setText(tvShowSeasonDetails.getOverview());
                             }
-                            if (tvShowSeasonDetails.getPoster_path() != null) {
+//                            if (tvShowSeasonDetails.getPoster_path() != null) {
+//                                Glide.with(mActivity)
+//                                        .load(TMDB_IMAGE_BASE_URL + tvShowSeasonDetails.getPoster_path())
+//                                        .placeholder(new ColorDrawable(Color.BLACK))
+//                                        .into(poster);
+//                            } else {
+//                                Glide.with(mActivity)
+//                                        .load(TMDB_IMAGE_BASE_URL + tvShow.getPoster_path())
+//                                        .placeholder(new ColorDrawable(Color.BLACK))
+//                                        .into(poster);
+//                            }
+                            if (nextEpisode != null && nextEpisode.getStill_path() != null) {
                                 Glide.with(mActivity)
-                                        .load(TMDB_IMAGE_BASE_URL + tvShowSeasonDetails.getPoster_path())
+                                        .load(TMDB_BACKDROP_IMAGE_BASE_URL + nextEpisode.getStill_path())
                                         .placeholder(new ColorDrawable(Color.BLACK))
-                                        .into(poster);
-                            } else {
+                                        .into(backdrop);
+                            }else if (tvShowSeasonDetails.getPoster_path() != null) {
                                 Glide.with(mActivity)
-                                        .load(TMDB_IMAGE_BASE_URL + tvShow.getPoster_path())
+                                        .load(TMDB_BACKDROP_IMAGE_BASE_URL + tvShowSeasonDetails.getPoster_path())
                                         .placeholder(new ColorDrawable(Color.BLACK))
-                                        .into(poster);
-                            }
-                            if (tvShow.getBackdrop_path() != null) {
+                                        .into(backdrop);
+                            }else if (tvShow.getBackdrop_path() != null) {
                                 Glide.with(mActivity)
                                         .load(TMDB_BACKDROP_IMAGE_BASE_URL + tvShow.getBackdrop_path())
                                         .placeholder(new ColorDrawable(Color.BLACK))
@@ -196,10 +236,17 @@ public class SeasonDetailsFragment extends BaseFragment {
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        play.setText("S" + nextEpisode.getSeason_number() + " E" + nextEpisode.getEpisode_number());
+                                        continueWatching.setText("S" + nextEpisode.getSeason_number() + " E" + nextEpisode.getEpisode_number());
+//                                        play.setText("S" + nextEpisode.getSeason_number() + " E" + nextEpisode.getEpisode_number());
                                     }
                                 });
+                                if(nextEpisode.getName()!=null){
+                                    dot3.setVisibility(View.VISIBLE);
+                                    episodeTitle.setVisibility(View.VISIBLE);
+                                    episodeTitle.setText(nextEpisode.getName());
+                                }
                             }
+
 
                             loadEpisodesRecycler();
                         }
@@ -223,12 +270,14 @@ public class SeasonDetailsFragment extends BaseFragment {
                     @Override
                     public void run() {
                         Log.i(" " , episodes.toString());
+
                         episodesRecycler = mActivity.findViewById(R.id.recyclerEpisodes);
+                        episodesRecycler.setVisibility(View.VISIBLE);
                         ScaleCenterItemLayoutManager linearLayoutManager = new ScaleCenterItemLayoutManager(getContext() , LinearLayoutManager.VERTICAL , false);
 //                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
                         episodesRecycler.setLayoutManager(linearLayoutManager);
                         episodesRecycler.setHasFixedSize(true);
-                        episodeAdapter = new EpisodeAdapter(getContext() , episodes , listener);
+                        episodeAdapter = new EpisodeAdapter(mActivity, episodes , listener);
                         episodesRecycler.setAdapter(episodeAdapter);
                         episodeAdapter.notifyDataSetChanged();
                     }
@@ -278,7 +327,7 @@ public class SeasonDetailsFragment extends BaseFragment {
                 EpisodeDetailsFragment episodeDetailsFragment = new EpisodeDetailsFragment(tvShow , tvShowSeasonDetails , episodes.get(position));
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in , R.anim.fade_out , R.anim.fade_in , R.anim.fade_out)
-                        .replace(R.id.container , episodeDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container , episodeDetailsFragment).addToBackStack(null).commit();
             }
         };
     }

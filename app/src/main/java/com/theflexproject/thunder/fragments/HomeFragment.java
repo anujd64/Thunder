@@ -20,6 +20,7 @@ import com.theflexproject.thunder.model.Movie;
 import com.theflexproject.thunder.model.MyMedia;
 import com.theflexproject.thunder.model.TVShowInfo.TVShow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,6 +30,7 @@ public class HomeFragment extends BaseFragment {
     MediaAdapter recentlyReleasedRecyclerViewAdapter;
     MediaAdapter topRatedMoviesRecyclerViewAdapter;
     MediaAdapter lastPlayedMoviesRecyclerViewAdapter;
+    MediaAdapter watchlistRecyclerViewAdapter;
 
     MediaAdapter topRatedShowsRecyclerAdapter;
     MediaAdapter newSeasonRecyclerAdapter;
@@ -47,6 +49,9 @@ public class HomeFragment extends BaseFragment {
     TextView lastPlayedMoviesRecyclerViewTitle;
     RecyclerView lastPlayedMoviesRecyclerView;
 
+    TextView watchlistRecyclerViewTitle;
+    RecyclerView watchlistRecyclerView;
+
     TextView topRatedShowsRecyclerViewTitle;
     RecyclerView topRatedShowsRecyclerView;
 
@@ -57,6 +62,7 @@ public class HomeFragment extends BaseFragment {
     List<Movie> recentlyReleasedMovies;
     List<Movie> topRatedMovies;
     List<Movie> lastPlayedList;
+    List<MyMedia> watchlist;
     List<TVShow> newSeason;
     List<TVShow> topRatedShows;
 
@@ -64,7 +70,7 @@ public class HomeFragment extends BaseFragment {
     MediaAdapter.OnItemClickListener recentlyReleasedListener;
     MediaAdapter.OnItemClickListener topRatedMoviesListener;
     MediaAdapter.OnItemClickListener lastPlayedListener;
-
+    MediaAdapter.OnItemClickListener watchlistListener;
     MediaAdapter.OnItemClickListener topRatedShowsListener;
     MediaAdapter.OnItemClickListener newSeasonListener;
 
@@ -72,11 +78,6 @@ public class HomeFragment extends BaseFragment {
 //    List<PairTvShows> pairTvShowsList;
 
     public HomeFragment() {
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -89,18 +90,60 @@ public class HomeFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setOnClickListner();
 
         loadRecentlyAddedMovies();
         loadRecentlyReleasedMovies();
         loadTopRatedMovies();
         loadLastPlayedMovies();
+        loadWatchlist();
         loadNewSeason();
         loadTopRatedShows();
+        setOnClickListner();
+
 
 //        getLists();
 //        loadRecyclerViews();
 
+    }
+
+    private void loadWatchlist() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Movie> watchlistMovies = DatabaseClient
+                        .getInstance(mActivity)
+                        .getAppDatabase()
+                        .movieDao()
+                        .getWatchlisted();
+
+                List<TVShow> watchlistShows = DatabaseClient
+                        .getInstance(mActivity)
+                        .getAppDatabase()
+                        .tvShowDao()
+                        .getWatchlisted();
+
+                watchlist = new ArrayList<>();
+                watchlist.addAll(watchlistMovies);
+                watchlist.addAll(watchlistShows);
+                if(watchlist!=null && watchlist.size()>0){
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ScaleCenterItemLayoutManager linearLayoutManager3 = new ScaleCenterItemLayoutManager(getContext() , LinearLayoutManager.HORIZONTAL , false);
+                            watchlistRecyclerViewTitle = mActivity.findViewById(R.id.watchListMedia);
+                            watchlistRecyclerViewTitle.setVisibility(View.VISIBLE);
+                            watchlistRecyclerView = mActivity.findViewById(R.id.watchListMediaRecycler);
+                            watchlistRecyclerView.setVisibility(View.VISIBLE);
+                            watchlistRecyclerView.setLayoutManager(linearLayoutManager3);
+                            watchlistRecyclerView.setHasFixedSize(true);
+                            watchlistRecyclerViewAdapter = new MediaAdapter(getContext() ,(List<MyMedia>)(List<?>) watchlist , watchlistListener);
+                            watchlistRecyclerView.setAdapter(watchlistRecyclerViewAdapter);
+                        }
+                    });
+
+                }
+            }});
+        thread.start();
     }
 
     private void  loadRecentlyAddedMovies() {
@@ -277,6 +320,8 @@ public class HomeFragment extends BaseFragment {
         thread.start();
     }
 
+
+
     private void setOnClickListner() {
         recentlyAddedListener = new BannerRecyclerAdapter.OnItemClickListener() {
             @Override
@@ -284,7 +329,7 @@ public class HomeFragment extends BaseFragment {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(recentlyAddedMovies.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
         recentlyReleasedListener = new MediaAdapter.OnItemClickListener() {
@@ -293,7 +338,8 @@ public class HomeFragment extends BaseFragment {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(recentlyReleasedMovies.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+
             }
         };
         topRatedMoviesListener = new MediaAdapter.OnItemClickListener() {
@@ -302,7 +348,7 @@ public class HomeFragment extends BaseFragment {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(topRatedMovies.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
         lastPlayedListener = new MediaAdapter.OnItemClickListener() {
@@ -311,16 +357,38 @@ public class HomeFragment extends BaseFragment {
                 MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(lastPlayedList.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                        .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
             }
         };
+
+        watchlistListener = new MediaAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view , int position) {
+                int id =0;
+                if(watchlist.get(position) instanceof Movie){
+                    id = ((Movie) watchlist.get(position)).getId();
+                    MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment(id);
+                    mActivity.getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                            .add(R.id.container,movieDetailsFragment).addToBackStack(null).commit();
+                }else{
+                    id = ((TVShow)(watchlist.get(position))).getId();
+                    TvShowDetailsFragment tvShowDetailsFragment = new TvShowDetailsFragment(id);
+                    mActivity.getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+                            .add(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
+                }
+
+            }
+        };
+
         newSeasonListener = new MediaAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 TvShowDetailsFragment tvShowDetailsFragment = new TvShowDetailsFragment(newSeason.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
+                        .add(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
             }
         };
         topRatedShowsListener = new MediaAdapter.OnItemClickListener() {
@@ -328,8 +396,8 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View view, int position) {
                 TvShowDetailsFragment tvShowDetailsFragment = new TvShowDetailsFragment(topRatedShows.get(position).getId());
                 mActivity.getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-                        .replace(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
+                        .setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
+                        .add(R.id.container,tvShowDetailsFragment).addToBackStack(null).commit();
             }
         };
     }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.theflexproject.thunder.fragments.FilesLibraryFragment;
 import com.theflexproject.thunder.fragments.MovieLibraryFragment;
 import com.theflexproject.thunder.fragments.TvShowsLibraryFragment;
 
@@ -19,8 +20,10 @@ public class FragmentViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         if(position==0){
                 return new MovieLibraryFragment();
-        }else {
+        }else if(position==1){
                 return new TvShowsLibraryFragment();
+        }else {
+                return new FilesLibraryFragment();
         }
     }
 
@@ -28,7 +31,7 @@ public class FragmentViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
 

@@ -2,10 +2,11 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#000000"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/media_item_bg_color"
+    android:focusable="true"
     android:layout_margin="12dp">
 
     <RelativeLayout
@@ -14,16 +15,16 @@
 
         <ImageView
             android:id="@+id/moviePoster"
-            android:layout_width="266dp"
-            android:layout_height="150dp"
+            android:layout_width="260dp"
+            android:layout_height="146dp"
             android:layout_centerInParent="false"
             android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dummyposter" />
+            app:srcCompat="@color/transparent" />
 
         <TextView
             android:id="@+id/textView4"
@@ -36,6 +37,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/jost_regular"
             android:text="TextView"
             android:textAlignment="center"

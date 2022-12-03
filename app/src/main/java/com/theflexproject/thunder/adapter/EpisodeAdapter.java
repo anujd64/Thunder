@@ -186,7 +186,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeA
 
             ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
-            final float radius = 14f;
+            final float radius = 5f;
             final Drawable windowBackground = ((Activity) context).getWindow().getDecorView().getBackground();
 
             blurView.setupWith(rootView, new RenderScriptBlur(context))

@@ -14,9 +14,6 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 
-
-
-
 import java.io.File;
 import java.net.CookieHandler;
 import java.net.CookieManager;
