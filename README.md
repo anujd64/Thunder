@@ -6,6 +6,10 @@ An Android app to stream and download your media stored in Google Drive in an Aw
 <a href="https://github.com/anujd64/Thunder/releases"><img src="https://img.shields.io/github/downloads/anujd64/Thunder/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
 </p>
 
+If you feel like supporting me :
+
+<a href="https://www.buymeacoffee.com/anujd"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=anujd&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
 ### **🔘 Getting Started** :
 
 Let's say you have a bunch of movies or tv shows lying around in your Drive 
@@ -29,8 +33,7 @@ There you go you have your media Library which sources movies from Drive.
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVSeasonDetails.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeList.jpg?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
 <img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/TVEpisodeDetails.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/Settings.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
-<img src="https://github.com/anujd64/Thunder/blob/main/Screenshots/MovieDetails2.png?raw=true" style="width: 23%;margin:16px;" />&nbsp;&nbsp;
+
 
 ### **🔥 Features** :
 
