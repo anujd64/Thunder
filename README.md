@@ -62,7 +62,7 @@ There you go you have your media Library which sources movies from Drive.
 
 - Added support GOIndex and Maple's GDindex (GOIndex is unreliable try refreshing if movies aren't added)
 
-- Currently video is only hardware decoded (I think) That's why HEVC content may or nay not play at all
+- Currently video is only hardware decoded (I think) That's why HEVC content may or may not play at all
 
 - Does not directly interact with Drive rather scrapes the index for movies. The index does the talking to the Drive api
 
