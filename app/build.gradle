@@ -77,6 +77,9 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
     implementation "androidx.work:work-runtime:2.7.1"
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+
+    implementation 'org.apache.commons:commons-text:1.9'
+
 
 }

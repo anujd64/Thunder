@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/tvShowBackdropInSeason"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/dummyposter" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:background="@drawable/gradient_top_bottom_bg" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+
+                <ImageButton
+                    android:id="@+id/playInSeasonDetails"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/play_shape"
+                    android:backgroundTint="@color/download_button_bg_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/jost_regular"
+                    android:orientation="horizontal"
+                    android:src="@drawable/ic_play"
+                    app:cornerRadius="100dp" />
+
+                <TextView
+                    android:id="@+id/showTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:autoSizeMaxTextSize="28sp"
+                    android:autoSizeMinTextSize="16sp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/jost_medium"
+                    android:maxHeight="80dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:text="Movie Title" />
+
+                <ImageView
+                    android:id="@+id/tvLogoInSeason"
+                    android:layout_width="175dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dummyposter"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="300dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/labelsTvShowSeason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:gravity="center_horizontal">
+
+
+                    <TextView
+                        android:id="@+id/seasonTitle"
+                        style="@style/sizelabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp"
+                        android:visibility="visible"
+                        tools:text="Season 6" />
+
+
+                    <ImageView
+                        android:id="@+id/dot2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_toEndOf="@id/seasonTitle"
+                        android:src="@drawable/oval" />
+
+                    <TextView
+                        android:id="@+id/noOfEpisodesInSeason"
+                        style="@style/sizelabel"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/dot2"
+                        android:fontFamily="@font/jost_regular"
+                        android:text="36 Episodes"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/genresRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelsTvShowSeason"
+                    android:layout_marginHorizontal="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/continueWatching"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/genresRow"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="5dp"
+                    android:gravity="start"
+                    android:orientation="horizontal"
+                    android:paddingVertical="5dp"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:id="@+id/continueWatchingText"
+                        style="@style/sizelabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/jost_medium"
+                        android:gravity="start"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:text="S01 E05 "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/dot3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_toEndOf="@id/ratingsTVText"
+                        android:src="@drawable/oval" />
+
+                    <TextView
+                        android:id="@+id/episodeNameInTvSeason"
+                        style="@style/sizelabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/jost_medium"
+                        android:gravity="start"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:text="Episode Title"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/continueWatching"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical">
+
+
+
+
+                    <TextView
+                        android:id="@+id/overviewtext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/jost_medium"
+                        android:text="@string/overview"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:visibility="gone">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/overviewDescTVShowSeason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+
+                        android:fontFamily="@font/jost_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        tools:text="In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization." />
+
+                    <!--                    <TableLayout-->
+                    <!--                        android:id="@+id/detailsTable"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="15dp"-->
+                    <!--                        android:visibility="gone">-->
+
+                    <!--                        <TableRow-->
+                    <!--                            android:id="@+id/Director"-->
+                    <!--                            android:padding="5dp"-->
+                    <!--                            android:visibility="visible">-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight=".4"-->
+                    <!--                                android:fontFamily="@font/jost_regular"-->
+                    <!--                                android:text="Director :"-->
+                    <!--                                android:textColor="@color/white"-->
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:id="@+id/DirectorText"-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight=".6"-->
+                    <!--                                android:fontFamily="@font/jost_regular"-->
+                    <!--                                android:textColor="@color/white"-->
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                        </TableRow>-->
+
+                    <!--                        <TableRow-->
+                    <!--                            android:id="@+id/WrittenBy"-->
+                    <!--                            android:padding="5dp"-->
+                    <!--                            android:visibility="visible">-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight=".4"-->
+                    <!--                                android:fontFamily="@font/jost_regular"-->
+                    <!--                                android:text="Written By :"-->
+                    <!--                                android:textColor="@color/white"-->
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:id="@+id/WrittenByText"-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight=".6"-->
+
+                    <!--                                android:fontFamily="@font/jost_regular"-->
+                    <!--                                android:textColor="@color/white"-->
+                    <!--                                android:textSize="14sp" />-->
+
+
+                    <!--                        </TableRow>-->
+
+                    <!--                        <TableRow-->
+                    <!--                            android:id="@+id/Genres"-->
+                    <!--                            android:padding="5dp"-->
+                    <!--                            android:visibility="visible">-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight=".4"-->
+                    <!--                                android:fontFamily="@font/jost_regular"-->
+                    <!--                                android:text="Genres :"-->
+                    <!--                                android:textColor="@color/white"-->
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                            &lt;!&ndash;                    <TextView&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:id="@+id/GenresText"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:layout_weight=".6"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:fontFamily="@font/jost_regular"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
+                    <!--                            &lt;!&ndash;                        android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--                        </TableRow>-->
+
+                    <!--                        &lt;!&ndash;                <TableRow&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:padding="5dp">&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    <TextView&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:id="@+id/Budget"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:layout_below="@id/videoQualityText"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:fontFamily="@font/jost_regular"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:textColor="@color/white"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:textSize="14sp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    tools:text="Budget :" />&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    <TextView&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:id="@+id/BudgetText"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_below="@id/videoQualityText"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_toEndOf="@id/Budget"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:fontFamily="@font/jost_regular"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textSize="14sp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        tools:text="THE DIRECTOR" />&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                </TableRow>&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                <TableRow&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    android:padding="5dp">&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                    <TextView&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:id="@+id/Revenue"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_below="@id/Budget"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:fontFamily="@font/jost_regular"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textSize="14sp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        tools:text="Revenue :" />&ndash;&gt;-->
+
+                    <!--                        &lt;!&ndash;                    <TextView&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:id="@+id/RevenueText"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_below="@id/Budget"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:layout_toEndOf="@id/Revenue"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:fontFamily="@font/jost_regular"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        android:textSize="14sp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                        tools:text="THE DIRECTOR" />&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                </TableRow>&ndash;&gt;-->
+
+                    <!--                    </TableLayout>-->
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/jost_medium"
+                        android:text="Episodes"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerEpisodes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingBottom="80dp"
+                        android:scrollbars="vertical"
+                        android:visibility="gone"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/episode_item" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <!--<androidx.core.widget.NestedScrollView-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_below="@id/frame">-->
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="500dp"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <eightbitlab.com.blurview.BlurView-->
+    <!--            android:id="@+id/blurView5"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#00000000"-->
+    <!--            android:clipChildren="false"-->
+    <!--            android:elevation="8dp"-->
+    <!--            android:fadingEdge="vertical"-->
+    <!--            android:fadingEdgeLength="240dp"-->
+    <!--            android:requiresFadingEdge="vertical">-->
+
+
+    <!--        </eightbitlab.com.blurview.BlurView>-->
+
+
+    <!--    </RelativeLayout>-->
+
+
+    <!--    <eightbitlab.com.blurview.BlurView-->
+    <!--        android:id="@+id/blurView4"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="#00000000"-->
+    <!--        android:clipChildren="false"-->
+    <!--        android:elevation="8dp"-->
+    <!--        android:layout_marginTop="80dp"-->
+    <!--        android:fadingEdge="vertical"-->
+    <!--        android:fadingEdgeLength="240dp"-->
+    <!--        android:requiresFadingEdge="vertical">-->
+
+
+    <!--    </eightbitlab.com.blurview.BlurView>-->
+
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/download"-->
+    <!--        style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="48dp"-->
+    <!--        android:layout_below="@id/GenresText"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:clickable="true"-->
+    <!--        android:focusable="true"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:icon="@drawable/ic_download"-->
+    <!--        app:iconGravity="textStart"-->
+    <!--        app:iconTint="@color/download_button_bg_color" />-->
+
+    <!--    &lt;!&ndash;        <com.google.android.material.button.MaterialButton&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:id="@+id/changeTMDBId"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            style="@style/Widget.AppCompat.Button.Borderless.Colored"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:layout_width="50dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:layout_height="48dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:layout_below="@id/labels"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:layout_alignParentEnd="true"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:layout_marginTop="15dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:clickable="true"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:focusable="true"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            android:orientation="horizontal"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            app:icon="@drawable/ic_change"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            app:iconGravity="textStart"&ndash;&gt;-->
+    <!--    &lt;!&ndash;            app:iconTint="#626161" />&ndash;&gt;-->
+
+
+    <!--</androidx.core.widget.NestedScrollView>-->
+
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/moviePosterInDetails"-->
+    <!--                android:layout_width="133dp"-->
+    <!--                android:layout_height="200dp"-->
+    <!--                android:layout_marginTop="150dp"-->
+    <!--                android:scaleType="centerCrop"-->
+    <!--                android:src="@color/transparent" />-->
+
+
+</RelativeLayout>

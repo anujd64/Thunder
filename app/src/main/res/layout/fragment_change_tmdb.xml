@@ -1,0 +1,78 @@
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="15dp"
+    android:layout_gravity="center_vertical"
+    app:cardUseCompatPadding="true"
+    android:layout_centerVertical="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#111111"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="60dp"
+            android:fontFamily="@font/jost_regular"
+            android:text="Enter TMDB Link"
+            android:textColor="@color/white" />
+
+
+        <EditText
+            android:id="@+id/tmdbLinkText"
+            android:layout_width="275dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:backgroundTint="#FE3232"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:fontFamily="@font/jost_regular"
+            android:hint="TMDB LINK or ID"
+            android:textColor="@color/white"
+            android:textColorHint="#878787"
+            android:textColorLink="#A3A3A3" />
+
+
+
+
+        <Button
+            android:id="@+id/changeTMDBIdButton"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/rounded_corner_labels"
+            android:text="@string/save"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/jost_regular"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+        <TextView
+            android:id="@+id/invalidTMDBLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="60dp"
+            android:visibility="gone"
+            android:fontFamily="@font/jost_regular"
+            android:text="Invalid Input"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,11 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="14dp"
+    android:textSize="14sp"
+    android:gravity="start"
+    android:fontFamily="@font/jost_medium"
+    android:background="#90000000"
+    android:textColor="@color/white"
+    android:text="GDIndex">
+</TextView>

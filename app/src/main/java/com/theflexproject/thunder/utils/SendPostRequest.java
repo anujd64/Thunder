@@ -10,6 +10,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.theflexproject.thunder.database.DatabaseClient;
 import com.theflexproject.thunder.model.File;
 import com.theflexproject.thunder.model.Movie;
@@ -21,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -593,18 +595,31 @@ public class SendPostRequest {
                             } else {
                                 file.setUrlstring(urlString + file.getName());
                             }
-                            Movie movie = gson.fromJson(file.toString() , Movie.class);
-                            movie.setFileName(file.getName());
-                            movie.setGd_id(file.getId());
-                            movie.setIndex_id(index_id);
+
+
+                            System.out.println("File to string" +file.toString());
+
+
+                            try {
+                                JsonReader reader = new JsonReader(new StringReader(file.toString()));
+                                reader.setLenient(true);
+                                Movie movie = gson.fromJson(reader, Movie.class);
+
+//                            Movie movie = gson.fromJson(file.toString() , Movie.class);
+                                movie.setFileName(file.getName());
+                                movie.setGd_id(file.getId());
+                                movie.setIndex_id(index_id);
 
 //                            long modifiedTimeLong = dateToLong(file.getModifiedTime());
 
-                            movie.setModifiedTime(file.getModifiedTime());
+                                movie.setModifiedTime(file.getModifiedTime());
 //                            movie.setModifiedTime(modifiedTimeLong);
 
-                            sendGet2(movie);//tmdbrequest
-                            Log.i("Movie" , movie.toString());
+                                sendGet2(movie);//tmdbrequest
+                                Log.i("Movie" , movie.toString());
+                            }catch (Exception e){
+                                System.out.println("Malformed Json in checkFilesAndSendToTMDBMovie"+e.toString());
+                            }
                         }
 
                     } else if (file.getMimeType().equals("application/vnd.google-apps.folder")) {
