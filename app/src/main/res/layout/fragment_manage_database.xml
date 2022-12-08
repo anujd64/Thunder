@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerDbManager"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.theflexproject.thunder.fragments.ManageIndexesFragment">
+
+    <TextView
+        android:id="@+id/DBTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/jost_medium"
+        android:text="Manage Database"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/importDatabase"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/black"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/jost_regular"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:letterSpacing="0.001"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:text="Import Database"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:nextFocusDown="@id/exportDatabase"
+        android:textColor="@color/download_button_bg_color"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_import"
+        app:iconPadding="16dp"
+        app:iconSize="24dp"
+        app:iconTint="@color/white" />
+
+    <View android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="-16dp"
+        android:layout_marginEnd="-16dp"
+        android:background="#393838" />
+
+    <Button android:visibility="visible"
+        android:id="@+id/exportDatabase"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/black"
+        android:fontFamily="@font/jost_regular"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:text="Export Database"
+        android:nextFocusUp="@id/importDatabase"
+        android:letterSpacing="0.001"
+        android:textSize="16sp"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/download_button_bg_color"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_export"
+        app:iconPadding="16dp"
+        app:iconSize="24dp"
+        app:iconTint="@color/white" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="-16dp"
+        android:layout_marginEnd="-16dp"
+        android:background="#393838" />
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:fontFamily="@font/jost_regular"
+    android:gravity="center"
+    android:textAlignment="gravity"
+    android:text="@string/import_export_instructions"
+    android:textColor="#858484"
+    android:textSize="14sp" />
+
+</LinearLayout>

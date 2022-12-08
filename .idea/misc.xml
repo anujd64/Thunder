@@ -8,14 +8,17 @@
         <entry key="..\:/Users/Dharurkar/.gradle/caches/transforms-3/7d41eb0fdd2514ef525c52d7d95226d6/transformed/exoplayer-ui-2.18.1/res/layout/exo_styled_player_view.xml" value="0.19495510902094912" />
         <entry key="..\:/Users/Dharurkar/.gradle/caches/transforms-3/7d41eb0fdd2514ef525c52d7d95226d6/transformed/exoplayer-ui-2.18.1/res/layout/exo_styled_settings_list.xml" value="0.19495510902094912" />
         <entry key="..\:/Users/Dharurkar/.gradle/caches/transforms-3/7d41eb0fdd2514ef525c52d7d95226d6/transformed/exoplayer-ui-2.18.1/res/layout/exo_styled_settings_list_item.xml" value="0.19495510902094912" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/color/episode_item_bg_color.xml" value="0.1555" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/gradient_bottom_top_bg.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/home-48px.xml" value="0.2015" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2015" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/search-48px.xml" value="0.1525" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/settings-48px.xml" value="0.1525" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable-v24/tab_bg_color.xml" value="0.1555" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/bottom_navigation_background.xml" value="0.1525" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/bottom_navigation_bottom_selector.xml" value="0.2015" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.1525" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/bottom_navigation_item_background.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2015" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/controls_gradient.xml" value="0.2255" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/discord.xml" value="0.2305" />
@@ -24,20 +27,44 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/gradient_bottom_top_bg.xml" value="0.2255" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/gradient_top_bottom_bg.xml" value="0.2255" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic__7279a.xml" value="0.189" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_add.xml" value="0.2475" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_add_fill0_wght400_grad0_opsz48.xml" value="0.234" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_crop_free_24.xml" value="0.197" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.2305" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.2305" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.1385" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.209" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.2305" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_save_alt_24.xml" value="0.167" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_baseline_video_library_24.xml" value="0.1385" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_download.xml" value="0.1385" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_edit.xml" value="0.235" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_github.xml" value="0.217" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1525" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_list.xml" value="0.2475" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_next.xml" value="0.2185" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_outline_change_circle_24.xml" value="0.2475" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_play.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/ic_play_rounded.xml" value="0.1395" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/index_link_bg.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/media_item_selector.xml" value="0.152" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/outline_bolt_24.xml" value="0.2305" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/oval.xml" value="0.131" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/play_button.xml" value="0.209" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/play_shape.xml" value="0.2185" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/rounded_controls_background.xml" value="0.215" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/rounded_corner_labels.xml" value="0.215" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/rounded_corners.xml" value="0.215" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/search_bg.xml" value="0.129" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/splash_bg_gradient.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/splash_logo_round.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/switch_ios_selector.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/switch_ios_track.xml" value="0.131" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/tab_indicator_bg.xml" value="0.2475" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/tab_item_selector.xml" value="0.1555" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/tab_layout_bg.xml" value="0.2465" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/tabs_selector.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/telegram.xml" value="0.2305" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/tmdb.xml" value="0.109" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/drawable/toptobottomgradient.xml" value="0.1" />
@@ -45,13 +72,13 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_home.xml" value="0.6" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_home2.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_index_layout.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_main.xml" value="0.136" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_main2.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_new_player.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_player.xml" value="0.20625" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_player2.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_player_textureview.xml" value="0.2234375" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_recycler_view_layout.xml" value="0.536" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_recycler_view_layout.xml" value="0.44510978043912175" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_settings.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/activity_video_playing.xml" value="0.176" />
@@ -61,50 +88,65 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/custom_exo_player_controls.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/custom_exo_styled_player_control_view.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/custom_player_activity.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/dialog_filename_item.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/dialog_source_selection.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/dropdown_item.xml" value="0.4" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/episode_item.xml" value="0.4" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/episode_item.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_player_control_view.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_player_controller.xml" value="0.29270833333333335" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_player_styled_view.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_styled_player_control_view.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_styled_player_view.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/exo_styled_settings_list.xml" value="0.2234375" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/file_item.xml" value="0.4" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/file_item.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_about.xml" value="0.4" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index.xml" value="0.264" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index.xml" value="0.4" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_add_index2.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_episode_details.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_change_tmdb.xml" value="0.264" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_custom_file_list_dialog.xml" value="0.176" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_episode_details.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_episode_details_new.xml" value="0.3787375415282392" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_files_library.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_first.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_home.xml" value="0.18244013683010263" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_library.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_main.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_manage_indexes.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_manage_database.xml" value="0.40390243902439027" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_manage_indexes.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_details.xml" value="0.2" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_library.xml" value="0.19495510902094912" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_details_new.xml" value="0.4" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_movie_library.xml" value="0.16782006920415224" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_new_settings.xml" value="0.2" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_search.xml" value="0.264" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_search.xml" value="0.1612576064908722" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_season_details.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_season_details_new.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_second.xml" value="0.2234375" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_settings.xml" value="0.4" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_settings_new.xml" value="0.264" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_show_details_new.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_src.xml" value="0.18084651560495937" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_t_v_shows_library.xml" value="0.18084651560495937" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_tv_show_details.xml" value="0.264" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_tv_shows_library.xml" value="0.19495510902094912" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_tv_show_details.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_tv_shows_library.xml" value="0.22453703703703703" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_update_app.xml" value="0.4" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/fragment_video_player.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/genreforsearch.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/header_media_details.xml" value="0.4" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/home_item.xml" value="0.2" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/index_item.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/item_feed_header.xml" value="0.2234375" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/media_item.xml" value="0.4" />
-        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_banner.xml" value="0.2375" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/item_folder_type.xml" value="0.6" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/item_index.xml" value="0.4" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/item_index_type.xml" value="0.536" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/media_item.xml" value="0.72" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_banner.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_layout.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_library.xml" value="0.8800000000000001" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/movie_item_recycler.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/my_activity_player.xml" value="0.2375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/player_controller.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/recyclerviewindex.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/refresh_time_dialog.xml" value="0.264" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/settings_activity.xml" value="0.2375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/track_selection_dialog.xml" value="0.22239583333333332" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/tvshow_item.xml" value="0.6" />
@@ -113,6 +155,8 @@
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/layout/yt_seconds_view.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2234375" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.114" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/mipmap-anydpi-v26/splash_logo.xml" value="0.1" />
+        <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/mipmap-anydpi-v26/splash_logo_round.xml" value="0.1" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/xml/root_preferences.xml" value="0.2" />
         <entry key="..\:/Users/Dharurkar/AndroidStudioProjects/MyApplication3/app/src/main/res/xml/selector.xml" value="0.2234375" />
       </map>

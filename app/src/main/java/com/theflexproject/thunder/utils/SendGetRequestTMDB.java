@@ -42,6 +42,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
@@ -114,7 +116,7 @@ public class SendGetRequestTMDB {
             getMovieById(movieId , movie);
         }
 
-        if (movie.getTitle() == null) {
+        else if (movie.getTitle() == null) {
             System.out.println("file with no tmdb info" + movie);
             DatabaseClient.getInstance(context).getAppDatabase().movieDao().insert(movie);
         }
@@ -431,8 +433,8 @@ public class SendGetRequestTMDB {
                     con.setRequestMethod("GET");
                     int responseCode = con.getResponseCode();
                     if (responseCode == HttpURLConnection.HTTP_OK) { // success
-                        BufferedReader in = new BufferedReader(new InputStreamReader(
-                                con.getInputStream()));
+
+                        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
                         String inputLine;
                         responseSeasonDetails = new StringBuilder();
                         while ((inputLine = in.readLine()) != null) {
@@ -445,7 +447,30 @@ public class SendGetRequestTMDB {
 
                     Gson gson = new Gson();
 
-                    tvShowSeasonDetails = gson.fromJson(responseSeasonDetails.toString() , TVShowSeasonDetails.class);
+                    System.out.println("the received string season"+ String.valueOf(responseSeasonDetails));
+
+
+
+
+                    try{
+
+                        String s = responseSeasonDetails.toString();
+                        Pattern pattern = Pattern.compile(Matcher.quoteReplacement("\\\""));
+                        Matcher matcher = pattern.matcher(s);
+                        s = matcher.replaceAll("");
+
+                        System.out.println("changed string"+s);
+
+                        tvShowSeasonDetails = gson.fromJson(s, TVShowSeasonDetails.class);
+
+//
+//                        JSONObject json = (JSONObject) new JSONParser().parse(responseSeasonDetails.toString().replaceAll(Matcher.quoteReplacement("\""),"").replaceAll(Matcher.quoteReplacement("\n"),""));
+//                        tvShowSeasonDetails = gson.fromJson(json.toJSONString(), TVShowSeasonDetails.class);
+//                        tvShowSeasonDetails = gson.fromJson(String.valueOf(responseSeasonDetails), TVShowSeasonDetails.class);
+//                        tvShowSeasonDetails = gson.fromJson(String.valueOf(responseSeasonDetails).replace("\n","\\\n").replace("\"","\\\"") , TVShowSeasonDetails.class);
+                    }catch (Exception e){
+                        System.out.println("MalformedURLException");
+                    }
 
 
                     if (tvShowSeasonDetails != null && tvShowSeasonDetails.getEpisodes() != null) {
@@ -454,6 +479,7 @@ public class SendGetRequestTMDB {
                             tvShowSeasonDetails.setShow_id(tvShowId);
                         }
 
+                        Log.i("tvShowSeasonDetails" , tvShowSeasonDetails.toString());
                         System.out.println("tvShowSeasonDetails in getTVSeasonById2" + tvShowSeasonDetails);
 //                        TVShowSeasonDetails test = DatabaseClient.getInstance(context).getAppDatabase().tvShowSeasonDetailsDao().find(tvShowSeasonDetails.getId());
 //                        if (test == null)
@@ -474,33 +500,40 @@ public class SendGetRequestTMDB {
 
                 try {
                     System.out.println("getTVSeasonById2 tvShowSeasonDetails " + tvShowSeasonDetails.toString());
-                    Episode e = tvShowSeasonDetails.getEpisodes().stream()
-                            .filter(episode1 -> (Integer.parseInt(finalEpisodeNumber) == episode1.getEpisode_number()))
-                            .findAny()
-                            .orElse(null);
+                    for (Episode e: tvShowSeasonDetails.getEpisodes()) {
+                        if(Integer.parseInt(finalEpisodeNumber)== e.getEpisode_number()){
 
+                                System.out.println("Episode before inserting in db found in tvseason details" + e.toString());
+                                e.setFileName(episode.getFileName());
+                                e.setMimeType(episode.getMimeType());
+                                e.setModifiedTime(episode.getModifiedTime());
+                                e.setSize(episode.getSize());
+                                e.setUrlString(episode.getUrlString());
+                                e.setGd_id(episode.getGd_id());
+                                e.setIndex_id(episode.getIndex_id());
 
-                    if (e != null) {
-                        System.out.println("Episode before inserting in db found in tvseason details" + e.toString());
-                        e.setFileName(episode.getFileName());
-                        e.setMimeType(episode.getMimeType());
-                        e.setModifiedTime(episode.getModifiedTime());
-                        e.setSize(episode.getSize());
-                        e.setUrlString(episode.getUrlString());
-                        e.setGd_id(episode.getGd_id());
-                        e.setIndex_id(episode.getIndex_id());
+                                e.setSeason_id(tvShowSeasonDetails.getId());
+                                e.setShow_id(tvShowId);
 
-                        e.setSeason_id(tvShowSeasonDetails.getId());
-                        e.setShow_id(tvShowId);
+                                DatabaseClient.getInstance(context).getAppDatabase().episodeDao().deleteByLink(e.getGd_id());
 
-                        DatabaseClient.getInstance(context).getAppDatabase().episodeDao().deleteByLink(e.getGd_id());
+                                DatabaseClient.getInstance(context).getAppDatabase().episodeDao().insert(e);
+                                System.out.println("Episode after inserting in db" + Integer.parseInt(finalEpisodeNumber) + " Ep from the season details" + e.getEpisode_number());
 
-                        DatabaseClient.getInstance(context).getAppDatabase().episodeDao().insert(e);
-                        System.out.println("Episode after inserting in db" + Integer.parseInt(finalEpisodeNumber) + " Ep from the season details" + e.getEpisode_number());
-                    } else {
-                        episode.setShow_id(tvShowId);
-                        DatabaseClient.getInstance(context).getAppDatabase().episodeDao().insert(episode);
+                        }
+                        else {
+                            episode.setShow_id(tvShowId);
+                            DatabaseClient.getInstance(context).getAppDatabase().episodeDao().insert(episode);
+                        }
+
                     }
+
+//                    Episode e = tvShowSeasonDetails.getEpisodes().stream()
+//                            .filter(episode1 -> (Integer.parseInt(finalEpisodeNumber) == episode1.getEpisode_number()))
+//                            .findAny()
+//                            .orElse(null);
+
+
 
                 } catch (NullPointerException e) {
 

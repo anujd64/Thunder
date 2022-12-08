@@ -4,18 +4,16 @@ import android.util.Log;
 
 import androidx.room.TypeConverter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.theflexproject.thunder.model.Data;
 import com.theflexproject.thunder.model.Genre;
 import com.theflexproject.thunder.model.TVShowInfo.Episode;
 import com.theflexproject.thunder.model.TVShowInfo.Season;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class Converters {
@@ -79,20 +77,21 @@ public class Converters {
 //        "Mon Oct 10 22:07:31 GMT+05:30 2022"
 //        Gson gson = new GsonBuilder().setDateFormat("E MMM dd HH:mm:ss 'Z' yyyy").create();
 //        SimpleDateFormat df = new SimpleDateFormat("EE MMM dd HH:mm:ss zzzz yyyy");
-//        Gson gson = new GsonBuilder().setDateFormat("DDD MMM dd HH:mm:ss z yyyy").create();
+
+        Gson gson = new GsonBuilder().setDateFormat("E MMM dd HH:mm:ss z yyyy").create();
 //        ObjectMapper om = new ObjectMapper();
 
-        ObjectMapper gson = new ObjectMapper();
-        SimpleDateFormat df=new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
-        gson.setDateFormat(df);
+//        ObjectMapper gson = new ObjectMapper();
+//        SimpleDateFormat df=new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
+//        gson.setDateFormat(df);
 
         String[] arr = episodesString.split("\t");
         ArrayList<Episode> episodes = new ArrayList<>();
         try {
             for (String s : arr) {
 
-//                Episode episode = om.readValue(s ,Episode.class);
-                Episode episode = gson.readValue(s , Episode.class);
+                Episode episode = gson.fromJson(s ,Episode.class);
+//                Episode episode = gson.readValue(s , Episode.class);
 //                System.out.println("Episode inside For Loop" + episode);
                 episodes.add(episode);
             }
