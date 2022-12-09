@@ -106,8 +106,11 @@ Special Thanks to:
 [Google Drive Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index)  
 [Bhadoo-Index-Scraper](https://github.com/sanjit-sinha/Bhadoo-Index-Scraper)
 
-To build your Own:
-Set the "TMDB_API_KEY" in Constants class to your key
+###To build your Own:
+
+Set the "TMDB_API_KEY" and put one or more FanArt API keys in the KEYS array inside the Constants class.
+
+Here's a guide to build your own apk using github by [dishapatel1010](https://github.com/dishapatel010) : https://github.com/dishapatel010/Thunder/tree/Build
 
 ### WANT TO CONTRIBUTE ?
 
