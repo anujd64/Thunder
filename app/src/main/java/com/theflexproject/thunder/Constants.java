@@ -1,5 +1,7 @@
 package com.theflexproject.thunder;
 
+import java.util.Random;
+
 public class Constants {
     public static final String TMDB_GET_REQUEST_BASE_URL ="https://api.themoviedb.org/3/search/movie?api_key=";
     public static final String TMDB_BASE_URL = "https://api.themoviedb.org/3/";
