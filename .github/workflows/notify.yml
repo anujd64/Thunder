@@ -23,4 +23,5 @@ jobs:
         uses: EverythingSuckz/github-telegram-notify@v1.1.2
         with:
           bot_token: '${{ secrets.BOT_TOKEN }}'
+          chat_id: '${{ secrets.CHAT_ID}}'
           topic_id: '${{ secrets.TOPIC_ID }}'
