@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph"
+    app:startDestination="@id/homeNewFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.theflexproject.thunder.fragments.HomeFragment"
+        android:label="home_item"
+        tools:layout="@layout/home_item" />
+    <fragment
+        android:id="@+id/episodeDetailsFragment"
+        android:name="com.theflexproject.thunder.fragments.EpisodeDetailsFragment"
+        android:label="EpisodeDetailsFragment" />
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.theflexproject.thunder.fragments.MovieDetailsFragment"
+        android:label="MovieDetailsFragment" >
+        <argument
+            android:name="movie_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/filesLibraryFragment"
+        android:name="com.theflexproject.thunder.fragments.FilesLibraryFragment"
+        android:label="FilesLibraryFragment" />
+    <fragment
+        android:id="@+id/tvShowsLibraryFragment"
+        android:name="com.theflexproject.thunder.fragments.TvShowsLibraryFragment"
+        android:label="TvShowsLibraryFragment" />
+    <fragment
+        android:id="@+id/movieLibraryFragment"
+        android:name="com.theflexproject.thunder.fragments.moviesLibraryFragment.MovieLibraryFragment"
+        android:label="MovieLibraryFragment" />
+    <fragment
+        android:id="@+id/searchFragment2"
+        android:name="com.theflexproject.thunder.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/manageDatabaseFragment"
+        android:name="com.theflexproject.thunder.fragments.ManageDatabaseFragment"
+        android:label="ManageDatabaseFragment" />
+    <fragment
+        android:id="@+id/addNewIndexFragment"
+        android:name="com.theflexproject.thunder.fragments.AddNewIndexFragment"
+        android:label="AddNewIndexFragment" />
+    <fragment
+        android:id="@+id/manageIndexesFragment"
+        android:name="com.theflexproject.thunder.fragments.ManageIndexesFragment"
+        android:label="fragment_manage_indexes"
+        tools:layout="@layout/fragment_manage_indexes" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.theflexproject.thunder.fragments.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment2_to_addNewIndexFragment"
+            app:destination="@id/addNewIndexFragment" />
+        <action
+            android:id="@+id/action_settingsFragment2_to_manageIndexesFragment"
+            app:destination="@id/manageIndexesFragment" />
+        <action
+            android:id="@+id/action_settingsFragment2_to_manageDatabaseFragment"
+            app:destination="@id/manageDatabaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment2"
+        android:name="com.theflexproject.thunder.fragments.LibraryFragment"
+        android:label="LibraryFragment" />
+    <fragment
+        android:id="@+id/homeNewFragment"
+        android:name="com.theflexproject.thunder.fragments.homeNew.HomeNewFragment"
+        android:label="HomeNewFragment" >
+        <action
+            android:id="@+id/action_homeNewFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_homeNewFragment_to_tvShowDetailsFragment"
+            app:destination="@id/tvShowDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailsFragment"
+        android:name="com.theflexproject.thunder.fragments.TvShowDetailsFragment"
+        android:label="TvShowDetailsFragment" >
+        <argument
+            android:name="show_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>
